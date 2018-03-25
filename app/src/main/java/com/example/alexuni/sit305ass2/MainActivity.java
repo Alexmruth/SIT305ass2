@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         if (v.getId() == R.id.newGameBtn) {
             Intent intent = new Intent (this, GameActivity.class);
             startActivity(intent);
+        } else {
         }
     }
 }
