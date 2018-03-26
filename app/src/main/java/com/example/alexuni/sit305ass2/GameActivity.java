@@ -32,19 +32,19 @@ public class GameActivity extends AppCompatActivity {
 // http://www.vogella.com/tutorials/AndroidJSON/article.html
 
         TextView textJSON = findViewById(R.id.textJSON);
-        
-        String jsonString = loadJSONFromAsset();
+
+        /* String jsonString = loadJSONFromAsset();
         try {
             JSONObject json = new JSONObject(jsonString);
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        } */
+
     }
 
-    public String loadJSONFromAsset() {
+    public String loadJSONFromAsset(Context context) {
         String json = null;
         try {
-            Context context = null;
             InputStream is = context.getAssets().open("test.txt");
             int size = is.available();
             byte[] buffer = new byte[size];
@@ -58,7 +58,9 @@ public class GameActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return json;
+
     }
+
 }
 
 
