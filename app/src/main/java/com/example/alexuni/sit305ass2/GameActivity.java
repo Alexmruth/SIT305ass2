@@ -5,20 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONArray;
-import org.json.simple.parser.JSONParser;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.widget.TextView;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
 public class GameActivity extends AppCompatActivity {
@@ -33,19 +23,16 @@ public class GameActivity extends AppCompatActivity {
 
         TextView textJSON = findViewById(R.id.textJSON);
 
-        /* String jsonString = loadJSONFromAsset();
-        try {
-            JSONObject json = new JSONObject(jsonString);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } */
-
+        String jsonString = loadJSONFromAsset();
+        textJSON.setText(jsonString);
     }
 
-    public String loadJSONFromAsset(Context context) {
+    public String loadJSONFromAsset() {
         String json = null;
+       // String jsString;
+        // JSONObject obj = new JSONObject(jsString);
         try {
-            InputStream is = context.getAssets().open("test.txt");
+            InputStream is = getAssets().open("test.json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
