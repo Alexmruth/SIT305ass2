@@ -1,0 +1,3 @@
+20/3/18 - Created game and home activity with UI implementations.
+26/3/18 - Functional buttons on home screen and the beginner stages of functional JSON.
+27/3/18 - Continued progress on JSON.
