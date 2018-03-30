@@ -1,7 +1,20 @@
 {
-Characters:
-{
-	“name”: “Alex”,
-	“salary”: “50000”
+  "Characters": [
+    {
+      "name": "Archer Bones",
+      "nickname": "Mr. Bones",
+      "strength": "1",
+      "defence": "1"
+    },
+    {
+      "name": ""
+    }
+  ]
 }
+  "Storyline":
+[
+  {
+
+  }
+]
 }
