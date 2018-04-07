@@ -13,9 +13,8 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
 public class GameActivity extends AppCompatActivity {
-    int textCase = 0;
-    String jsonString = loadJSONFromAsset();
-    TextView textJSON = findViewById(R.id.textJSON);
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,9 +22,10 @@ public class GameActivity extends AppCompatActivity {
 // https://www.javatpoint.com/android-json-parsing-tutorial
 // http://www.vogella.com/tutorials/AndroidJSON/article.html
 
-
-        //textJSON.setText(jsonString);
-       /* try {
+        String jsonString = loadJSONFromAsset();
+        TextView textJSON = findViewById(R.id.textJSON);
+        textJSON.setText(jsonString);
+       try {
             JSONObject json = new JSONObject(jsonString);
             JSONObject test = json.getJSONObject("Characters");
             String name = test.getString("name");
@@ -33,9 +33,9 @@ public class GameActivity extends AppCompatActivity {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } */
-       textCase = 1;
-       getText();
+        }
+
+       //getText();
 
     }
 
@@ -60,7 +60,7 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    public void getText() {
+    /* public void getText() {
         String name = null;
         switch(textCase) {
             case 1:
@@ -76,7 +76,7 @@ public class GameActivity extends AppCompatActivity {
 
         }
         textJSON.setText(name);
-    }
+    } */
 
 }
 
