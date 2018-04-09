@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -17,7 +18,8 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
 public class GameActivity extends AppCompatActivity {
-
+    int intSwitch = 1;
+    int i = 0;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -58,10 +60,6 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    public void createJSONFile() {
-
-
-    }
     public String loadJSON() {
         String json = null;
        // String jsString;
@@ -82,17 +80,29 @@ public class GameActivity extends AppCompatActivity {
 
 
     }
-
+    public int nextText() { // triggered by clicking on text view
+        i++;
+        return i;
+    }
+    // This method is a working switch statement and JSON reader
     public void getText() throws JSONException {
         TextView textJSON = findViewById(R.id.textJSON);
-        loadJSON();
         JSONObject obj = new JSONObject(loadJSON());
-        if(obj.getString("Name").equals("Name"))
+        JSONArray chars = obj.getJSONArray("Characters");
+        JSONObject c = chars.getJSONObject(i); //THIS number changes which object in the array that is called
+        /* if(obj.getString("Name").equals("Name"))
         {
             String name = obj.getString("Name");
             textJSON.setText(name);
         } else {
             textJSON.setText("banana");
+        } */
+        switch (intSwitch) {
+            case 1:
+                String name = c.getString("character");
+                textJSON.setText(name);
+                break;
+
         }
 
     }
