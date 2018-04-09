@@ -1,20 +1,4 @@
 {
-  "Characters": [
-    {
-      "name": "Archer Bones",
-      "nickname": "Mr. Bones",
-      "strength": "1",
-      "defence": "1"
-    },
-    {
-      "name": ""
-    }
-  ]
+  "Name": "Name"
 }
-  "Storyline":
-[
-  {
 
-  }
-]
-}
