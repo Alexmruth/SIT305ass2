@@ -2,9 +2,6 @@ package com.example.alexuni.sit305ass2;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
-
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,7 +22,7 @@ public class testActivity extends AppCompatActivity {
         // String jsString;
         // JSONObject obj = new JSONObject(jsString);
         try {
-            InputStream is = getAssets().open("test.json");
+            InputStream is = getAssets().open("dialogue.json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);

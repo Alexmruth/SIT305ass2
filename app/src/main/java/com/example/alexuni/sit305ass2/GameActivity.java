@@ -4,6 +4,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -18,7 +19,9 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
 public class GameActivity extends AppCompatActivity {
-    int intSwitch = 1;
+    int intSwitch = 0;
+    int dc = 0; // dialogue counter
+    int counter = 0;
     int i = 0;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -29,14 +32,15 @@ public class GameActivity extends AppCompatActivity {
 // https://www.javatpoint.com/android-json-parsing-tutorial
 // http://www.vogella.com/tutorials/AndroidJSON/article.html
         TextView textJSON = findViewById(R.id.textJSON);
+
         String jsonString = loadJSON();
 
         //textJSON.setText(jsonString);
-        try {
+       /* try {
             getText();
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        } */
 
 
     }
@@ -46,7 +50,7 @@ public class GameActivity extends AppCompatActivity {
         JSONParser parser = new JSONParser();
         textJSON.setText("test");
         try {
-            Object obj = parser.parse(new FileReader("test.json"));
+            Object obj = parser.parse(new FileReader("dialogue.json"));
             JSONObject jsonObject = (JSONObject) obj;
             String name = (String) jsonObject.get("Characters");
             textJSON.setText(name);
@@ -62,10 +66,8 @@ public class GameActivity extends AppCompatActivity {
 
     public String loadJSON() {
         String json = null;
-       // String jsString;
-        // JSONObject obj = new JSONObject(jsString);
         try {
-            InputStream file = getAssets().open("test.json");
+            InputStream file = getAssets().open("dialogue.json");
             int size = file.available();
             byte[] buffer = new byte[size];
             file.read(buffer);
@@ -80,16 +82,26 @@ public class GameActivity extends AppCompatActivity {
 
 
     }
-    public int nextText() { // triggered by clicking on text view
-        i++;
-        return i;
+    public void nextDialogue(View view) {
+        intSwitch++;
+        try {
+            getText();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
+
     // This method is a working switch statement and JSON reader
     public void getText() throws JSONException {
         TextView textJSON = findViewById(R.id.textJSON);
+        TextView nameJSON = findViewById(R.id.nameJSON);
         JSONObject obj = new JSONObject(loadJSON());
         JSONArray chars = obj.getJSONArray("Characters");
         JSONObject c = chars.getJSONObject(i); //THIS number changes which object in the array that is called
+        String dialogue;
+        String charName;
+
+
         /* if(obj.getString("Name").equals("Name"))
         {
             String name = obj.getString("Name");
@@ -99,9 +111,19 @@ public class GameActivity extends AppCompatActivity {
         } */
         switch (intSwitch) {
             case 1:
-                String name = c.getString("character");
-                textJSON.setText(name);
+                    charName = c.getString("character1");
+                    dialogue = c.getString("introText1");
+                    nameJSON.setText(charName);
+                    textJSON.setText(dialogue);
+
                 break;
+            case 2:
+                charName = c.getString("character2");
+                dialogue = c.getString("introText2");
+                nameJSON.setText(charName);
+                textJSON.setText(dialogue);
+                break;
+
 
         }
 
