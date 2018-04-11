@@ -6,40 +6,129 @@
     android:orientation="vertical"
     tools:context="com.example.alexuni.sit305ass2.GameActivity">
 
-    <RelativeLayout
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.3">
-    </RelativeLayout>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/stickfigure"
+                android:layout_weight="1"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/stickfigure"
+                android:layout_weight="1"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/stickfigure"
+                android:layout_weight="1"/>
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/stickfigure"
+                android:layout_weight="1"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/stickfigure"
+                android:layout_weight="1"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/stickfigure"
+                android:layout_weight="1"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/stickfigure"
+            android:layout_weight="1"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/stickfigure"
+            android:layout_weight="1"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/stickfigure"
+            android:layout_weight="1"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/stickfigure"
+                android:layout_weight="1"
+                android:id="@+id/test1"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/test2"
+                android:layout_weight="1"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"/>
+
+        </TableRow>
+    </TableLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.5"
-        android:onClick="nextDialogue">
+        android:layout_weight="0.5">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:id="@+id/nameJSON"
-                />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="9"
-            android:id="@+id/textJSON"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Next"
-            android:layout_weight="0"
-            android:id="@+id/nextBtn"
-            android:onClick="nextDialogue"
-            />
+                android:layout_weight="5"
+                android:id="@+id/nameJSON" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:id="@+id/textJSON" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Next"
+                android:layout_weight="5"
+                android:id="@+id/nextBtn"
+                android:onClick="nextDialogue" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -47,7 +136,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.4">
-
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Up"
+            android:id="@+id/upBtn"/>
 
     </RelativeLayout>
 </LinearLayout>

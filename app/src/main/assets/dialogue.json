@@ -6,9 +6,9 @@
     {
       "character1": "Villager",
       "character2": "Archer Bones",
-      "introText2": "Hello there, are you okay? You seemed to have crashed your plane.",
-      "introText3": "... Ugh, where am I?",
-      "introText4": "You are on ... blahg"
+      "introText1": "Hello there, are you okay? You seemed to have crashed your plane.",
+      "introText2": "... Ugh, where am I?",
+      "introText3": "You are on ... blahg"
     },
     {
       "character": "Farmer Joe",
