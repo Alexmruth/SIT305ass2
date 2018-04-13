@@ -1,14 +1,18 @@
 {
-  //"Name": "Alex",
-  //"gold": 50,
-
   "Characters": [
     {
-      "character1": "Villager",
-      "character2": "Archer Bones",
+      "character1": "Henry the Villager",
+      "character2": "Archer Bones (you)",
       "introText1": "Hello there, are you okay? You seemed to have crashed your plane.",
       "introText2": "... Ugh, where am I?",
-      "introText3": "You are on ... blahg"
+      "introText3": "You have landed on our secluded mountain! You seem to be the only survivor...",
+      "introText4": "How do I get out of here?",
+      "introText5": "Well, the only way off is by defeating Nogard the Dragon, who guards the only exit.",
+      "introText5.1": "The exit lies deep within a maze of caves... where Nogard resides.",
+      "introText6": "Well... how do you suppose I defeat him??",
+      "introText7": "You must fight your way through the caves and face him head-on.",
+      "introText7.1": "Collect gold to purchase equipment from the shop to help you along the way!",
+      "introText7.2": "Good luck! If you have any questions, I'll be nearby!"
     },
     {
       "character": "Farmer Joe",

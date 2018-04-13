@@ -1,7 +1,0 @@
-{
-Characters:
-{
-	“name”: “Alex”,
-	“salary”: “50000”
-}
-}

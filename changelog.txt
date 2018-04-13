@@ -1,3 +1,20 @@
-20/3/18 - Created game and home activity with UI implementations.
-26/3/18 - Functional buttons on home screen and the beginner stages of functional JSON.
-27/3/18 - Continued progress on JSON.
+20/03/18 - 
+- Created game and home activity.
+- UI implementations.
+26/03/18 - 
+- Functional buttons on home screen.
+- Beginner stages of functional JSON.
+27/03/18 - 
+- Continued progress on JSON.
+30/03/18 - 
+- Creating switch cases to handle what text to display when.
+- Working JSON statement to load JSON content.
+- beginning to expand content on JSON file.
+07/04/18 -
+- Fixed crash issue when loading game activity.
+09/04/18 - 
+- UI development for gameActivty.
+- Expansion and minor changes to switch statement.
+11/04/18 -
+- Working function which calls JSON and appends to text view depending on variables
+- A 'next' button that loads the next set of text.
