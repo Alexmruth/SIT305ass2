@@ -1,147 +1,235 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sizeTest1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.alexuni.sit305ass2.GameActivity"
-    android:id="@+id/sizeTest1">
-<!--
-    <RelativeLayout
+    tools:context="com.example.alexuni.sit305ass2.GameActivity">
+
+    <LinearLayout
+        android:id="@+id/fl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.2"
-        android:id="@+id/fl">
+        android:layout_weight="0.3"
+        android:background="#EFF1C5"
+        android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/image1"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:background="@drawable/stickfigure"
-            android:layout_alignParentLeft="true" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"/>
-        <ImageButton
-            android:layout_width="50sp"
-            android:layout_height="50sp"
-            android:background="@drawable/logo"/>
-    </RelativeLayout>
--->
-
-        <TableLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.3"
-            android:id="@+id/sizeTest"
-            android:background="#EFF1C5">
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-
-            <TableRow
+            <Button
                 android:layout_width="match_parent"
-                android:layout_height="100sp"
-                android:layout_weight="1">
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="lvlsActivity"
+                android:text="Caves" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_weight="3"
+                    android:background="@drawable/shop"/>
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:visibility="invisible"/>
+                    android:layout_weight="4"
+                    android:text="Shop" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_weight="3"
+                    android:background="@drawable/sword001"/>
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Caves"
-                    android:layout_weight="1"
-                    android:id="@+id/button1"
-                    android:onClick="lvlsActivity"/>
+                    android:layout_weight="4"
+                    android:text="Inventory" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="3"
+                    android:background="@drawable/c_henryvillager"
+                    android:scaleType="fitXY" />
+
                 <Button
+                    android:id="@+id/henryBtn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:visibility="invisible"/>
+                    android:layout_weight="4"
+                    android:onClick="talkHenry"
+                    android:text="Talk to Henry" />
+            </LinearLayout>
+
+        </LinearLayout>
 
 
-            </TableRow>
+    </LinearLayout>
+    -
+    <!--
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:id="@+id/sizeTest"
+                android:background="#EFF1C5">
 
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-                <Button
+
+                <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Shop"
-                    android:layout_weight="1"
-                    />
-                    <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Inventory"
-                    android:layout_weight="1"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
+                    android:layout_height="100sp"
                     android:layout_weight="1">
 
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_weight="3"
-                        android:background="@drawable/c_henryvillager"
-                        android:scaleType="fitXY" />
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="Talk to Henry"
-                        android:layout_weight="4"
-                        android:onClick="talkHenry"
-                        android:id="@+id/henryBtn"/>
-                </LinearLayout>
+                        android:layout_weight="1"
+                        android:visibility="invisible"/>
 
-            </TableRow>
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Caves"
+                        android:layout_weight="1"
+                        android:id="@+id/button1"
+                        android:onClick="lvlsActivity"/>
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:visibility="invisible"/>
 
-        </TableLayout>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Shop"
+                        android:layout_weight="1"
+                        />
+                        <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Inventory"
+                        android:layout_weight="1"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="3"
+                            android:background="@drawable/c_henryvillager"
+                            android:scaleType="fitXY" />
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Talk to Henry"
+                            android:layout_weight="4"
+                            android:onClick="talkHenry"
+                            android:id="@+id/henryBtn"/>
+                    </LinearLayout>
+
+                </TableRow>
+
+            </TableLayout> -->
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.45">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:background="@drawable/textborders">
+            android:background="@drawable/textborders"
+            android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:layout_marginLeft="10sp"
                 android:layout_weight="6"
-                android:layout_marginLeft="10sp">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/nameJSON"
-                    android:layout_height="match_parent"
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="10sp"
-                    android:textColor="@color/black"
-                    android:layout_weight="3"/>
+                    android:layout_weight="3"
+                    android:textColor="@color/black" />
 
                 <ImageView
                     android:id="@+id/textImage"
                     android:layout_width="40dp"
                     android:layout_height="100dp"
-                    android:layout_weight="2"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="10sp" />
+                    android:layout_marginBottom="10sp"
+                    android:layout_weight="2" />
             </LinearLayout>
 
             <TextView
@@ -153,14 +241,15 @@
                 android:layout_marginTop="10sp"
                 android:layout_weight="4"
                 android:textColor="@color/black" />
+
             <Button
+                android:id="@+id/nextBtn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:text="Next"
                 android:layout_weight="7"
-                android:id="@+id/nextBtn"
-                android:onClick="nextDialogue" />
+                android:onClick="nextDialogue"
+                android:text="Next" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -169,30 +258,36 @@
         android:layout_height="match_parent"
         android:layout_weight="0.4"
         android:background="#A2A77F">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
+
                 <Button
+                    android:id="@+id/row1Btn1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:id="@+id/row1Btn1"/>
+                    android:text="" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
+
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
