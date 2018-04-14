@@ -55,10 +55,10 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Levels"
+                    android:text="Caves"
                     android:layout_weight="1"
                     android:id="@+id/button1"
-                    android:onClick="startActivity"/>
+                    android:onClick="lvlsActivity"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -71,26 +71,40 @@
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                >
+                android:layout_weight="1">
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="Shop"
                     android:layout_weight="1"
                     />
-
-                <Button
+                    <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Test"
+                    android:text="Inventory"
                     android:layout_weight="1"/>
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Test"
-                    android:layout_weight="1"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="3"
+                        android:background="@drawable/c_henryvillager"
+                        android:scaleType="fitXY" />
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Talk to Henry"
+                        android:layout_weight="4"
+                        android:onClick="talkHenry"
+                        android:id="@+id/henryBtn"/>
+                </LinearLayout>
 
             </TableRow>
 
@@ -106,27 +120,45 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:background="@drawable/textborders">
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10sp"
-                android:layout_weight="5"
-                android:id="@+id/nameJSON"
-                android:textColor="@color/black"/>
+                android:orientation="vertical"
+                android:layout_weight="6"
+                android:layout_marginLeft="10sp">
+
+                <TextView
+                    android:id="@+id/nameJSON"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10sp"
+                    android:textColor="@color/black"
+                    android:layout_weight="3"/>
+
+                <ImageView
+                    android:id="@+id/textImage"
+                    android:layout_width="40dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="2"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10sp" />
+            </LinearLayout>
+
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:layout_marginTop="10sp"
-                android:layout_marginLeft="10sp"
                 android:id="@+id/textJSON"
-                android:textColor="@color/black"/>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10sp"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="10sp"
+                android:layout_weight="4"
+                android:textColor="@color/black" />
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:text="Next"
-                android:layout_weight="5"
+                android:layout_weight="7"
                 android:id="@+id/nextBtn"
                 android:onClick="nextDialogue" />
         </LinearLayout>
@@ -137,11 +169,36 @@
         android:layout_height="match_parent"
         android:layout_weight="0.4"
         android:background="#A2A77F">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Up"
-            android:id="@+id/upBtn"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/row1Btn1"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+            </LinearLayout>
+
+        </LinearLayout>
     </RelativeLayout>
 </LinearLayout>
