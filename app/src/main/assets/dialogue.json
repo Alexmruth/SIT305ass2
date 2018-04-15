@@ -12,7 +12,8 @@
       "introText6": "Well... how do you suppose I defeat him??",
       "introText7": "You must fight your way through the caves and face him head-on.",
       "introText7.1": "Collect gold to purchase equipment from the shop to help you along the way!",
-      "introText7.2": "Good luck! If you have any questions, I'll be nearby!"
+      "introText7.2": "Good luck! If you have any questions, I'll be nearby!",
+      "test": "R.drawable.shop.png"
     },
   "HenryText":
     {

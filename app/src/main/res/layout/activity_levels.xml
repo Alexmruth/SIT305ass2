@@ -4,8 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.alexuni.sit305ass2.GameActivity"
-    android:id="@+id/sizeTest1">
+    tools:context="com.example.alexuni.sit305ass2.LevelsActivity"
+    android:id="@+id/sizeTest1"
+    android:background="#EFF1C5">
 
 
     <TableLayout
@@ -26,14 +27,18 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:visibility="visible"
-                android:text="Level 1"/>
+                android:text="Level 1"
+                android:id="@+id/lvlBtn1"
+                android:onClick="lvlHandler"/>
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:visibility="visible"
-                android:text="Level 2"/>
+                android:id="@+id/lvlBtn2"
+                android:text="Level 2"
+                android:onClick="lvlHandler"/>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -115,11 +120,7 @@
         android:layout_height="match_parent"
         android:layout_weight="0.4"
         android:background="#A2A77F">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Up"
-            android:id="@+id/upBtn"/>
+
 
     </RelativeLayout>
 </LinearLayout>

@@ -1,0 +1,17 @@
+{
+  "Enemies": [
+    {
+      "ID": 0,
+      "name": "Monster",
+      "health": 50,
+      "attack": 10,
+      "defence": 5
+    },
+    {
+
+    }
+    ]
+
+}
+
+
