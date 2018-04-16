@@ -9,6 +9,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
     Button newGameBtn;
     Button continueBtn;
+    static int continueGame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent (this, GameActivity.class);
             startActivity(intent);
         } else if (v.getId() == R.id.continueBtn){
-            Intent intent = new Intent (this, testActivity.class);
+            continueGame = 1;
+            Intent intent = new Intent (this, GameActivity.class);
             startActivity(intent);
         }
     }

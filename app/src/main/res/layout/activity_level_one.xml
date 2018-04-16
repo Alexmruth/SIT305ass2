@@ -4,8 +4,8 @@
     android:id="@+id/sizeTest1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#EFF1C5"
+    android:orientation="vertical"
     tools:context="com.example.alexuni.sit305ass2.LevelOne">
 
     <LinearLayout
@@ -15,20 +15,42 @@
         android:layout_weight="0.3"
         android:background="#EFF1C5"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/text1"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/text2"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/text3"/>
 
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/text3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="bottom">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center" />
+
+            <ProgressBar
+                android:id="@+id/healthBar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
 
 
     </LinearLayout>
@@ -95,10 +117,10 @@
         android:background="#A2A77F">
 
         <LinearLayout
+            android:id="@+id/LL3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:id="@+id/LL3">
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -110,14 +132,15 @@
                     android:id="@+id/row1Btn1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Forward"
-                    android:onClick="onForward"/>
+                    android:onClick="onForward"
+                    android:text="Forward" />
+
                 <Button
                     android:id="@+id/row1Btn2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Back"
-                    android:onClick="onBack"/>
+                    android:onClick="onBack"
+                    android:text="Back" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -132,11 +155,11 @@
                 android:orientation="vertical">
 
                 <Button
+                    android:id="@+id/attBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Attack"
-                    android:id="@+id/attBtn"
-                    android:onClick="onAttack"/>
+                    android:onClick="onAttack"
+                    android:text="Attack" />
             </LinearLayout>
 
         </LinearLayout>

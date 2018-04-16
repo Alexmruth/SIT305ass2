@@ -4,6 +4,7 @@
     "baseStrength": 5,
     "baseDefence": 5,
 
+    "currentHealth": 100,
     "weaponEquipped": 1
   }
 }

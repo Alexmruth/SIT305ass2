@@ -24,6 +24,7 @@ public class GameActivity extends AppCompatActivity {
     int henrySwitch = 0;
     int jc = 0; //short for JSON counter
     int LLcount = 0;
+    int continueGame;
     LinearLayout LL1;
     LinearLayout LL3;
     Button nextBtn;
@@ -48,6 +49,15 @@ public class GameActivity extends AppCompatActivity {
         textImage = findViewById(R.id.textImage);
         LL1 = findViewById(R.id.LL1);
         LL3 = findViewById(R.id.LL3);
+        continueGame = MainActivity.continueGame;
+
+        if(continueGame == 1) {
+            LLcount = 1;
+            introSwitch = 1;
+        } else {
+            LLcount = 0;
+            introSwitch = 2;
+        }
 
         if(LLcount == 0) {
             LL1.setVisibility(View.INVISIBLE);
@@ -80,7 +90,8 @@ public class GameActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
+    /* loadJSON() is responsible for grabbing all content from the specified JSON file and converting
+        it into a string to be used as a JSONObject within the getText() method. */
     public String loadJSON() {
         String json = null;
         try {

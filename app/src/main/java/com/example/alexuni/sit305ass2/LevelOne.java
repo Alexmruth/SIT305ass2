@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -26,6 +27,8 @@ public class LevelOne extends AppCompatActivity {
     Boolean enemyDead = false;
     Boolean lvlClear = false;
 
+    ProgressBar healthBar;
+
     String name;
     String enemyName;
     String text1JSON;
@@ -44,6 +47,7 @@ public class LevelOne extends AppCompatActivity {
     Button backBtn;
     Button attBtn;
 
+    int playerHealth = 200;
     int enemyHealth;
     int stepNum;
 
@@ -54,6 +58,10 @@ public class LevelOne extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_one);
 
+        healthBar = findViewById(R.id.healthBar);
+
+        healthBar.setMax(playerHealth);
+        healthBar.setProgress(70);
         forwardBtn = findViewById(R.id.row1Btn1);
         backBtn = findViewById(R.id.row1Btn2);
         attBtn = findViewById(R.id.attBtn);
@@ -73,11 +81,12 @@ public class LevelOne extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
+    /* loadJSON() is responsible for grabbing all content from the specified JSON file and converting
+    it into a string to be used as a JSONObject within the getText() method. */
     public String loadJSON() {
         String json = null;
         try {
-            InputStream file = getAssets().open("levelData.json");
+            InputStream file = getAssets().open("levelData.json"); //JSON file
             int size = file.available();
             byte[] buffer = new byte[size];
             file.read(buffer);
