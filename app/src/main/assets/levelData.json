@@ -12,6 +12,7 @@
     }
     ],
   "Level1": {
+    "character1": "Henry the Villager",
     "text1": "You have ",
     "stepNum": 10,
     "text2": " steps to go before the exit!",

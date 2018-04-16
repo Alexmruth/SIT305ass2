@@ -22,17 +22,23 @@ public class LevelOne extends AppCompatActivity {
     JSONArray ja; //Short for JSON array
     JSONObject jo; //Short for JSON object
     int i = 0; //Counter for JSON object
+
+    Boolean enemyDead = false;
     Boolean lvlClear = false;
 
     String name;
+    String enemyName;
     String text1JSON;
     String text2JSON;
     String exitText;
 
+    TextView nameJSON;
     TextView textJSON;
     TextView text1;
     TextView text2;
     TextView text3;
+
+    ImageView textImage;
 
     Button forwardBtn;
     Button backBtn;
@@ -47,17 +53,18 @@ public class LevelOne extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_one);
-        //test = findViewById(R.id.test);
-
 
         forwardBtn = findViewById(R.id.row1Btn1);
         backBtn = findViewById(R.id.row1Btn2);
         attBtn = findViewById(R.id.attBtn);
 
+        nameJSON = findViewById(R.id.nameJSON);
         textJSON = findViewById(R.id.textJSON);
         text1 = findViewById(R.id.text1);
         text2 = findViewById(R.id.text2);
         text3 = findViewById(R.id.text3);
+
+        textImage = findViewById(R.id.textImage);
 
         try {
             getEnemy();
@@ -92,9 +99,12 @@ public class LevelOne extends AppCompatActivity {
         text1JSON = jo.getString("text1");
         text2JSON = jo.getString("text2");
         exitText = jo.getString("exitText");
+        name = jo.getString("character1");
         updateText();
     }
     public void updateText() {
+        textImage.setBackgroundResource(R.drawable.c_henryvillager);
+        nameJSON.setText(name);
         if(stepNum >= 1) {
             textJSON.setText(text1JSON + String.valueOf(stepNum) + text2JSON);
         } else {
@@ -107,10 +117,10 @@ public class LevelOne extends AppCompatActivity {
         ja = obj.getJSONArray("Enemies");
         jo = ja.getJSONObject(i);
 
-        name = jo.getString("name");
+        enemyName = jo.getString("name");
         enemyHealth = jo.getInt("health");
 
-        text1.setText(name);
+        text1.setText(enemyName);
         text2.setText(String.valueOf(enemyHealth));
 
     }
@@ -118,7 +128,8 @@ public class LevelOne extends AppCompatActivity {
     public void updateEnemy() {
         text2.setText(String.valueOf(enemyHealth));
         if(enemyHealth <= 0) {
-            text1.setText("You have defeated " + name +"!!");
+            text1.setText("You have defeated " + enemyName +"!!");
+            enemyDead = true;
         }
 
     }

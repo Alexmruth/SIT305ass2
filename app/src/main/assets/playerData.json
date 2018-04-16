@@ -1,0 +1,11 @@
+{
+  "PlayerData": {
+    "baseHealth": 100,
+    "baseStrength": 5,
+    "baseDefence": 5,
+
+    "weaponEquipped": 1
+  }
+}
+
+
