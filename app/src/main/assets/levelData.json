@@ -10,7 +10,13 @@
     {
 
     }
-    ]
+    ],
+  "Level1": {
+    "text1": "You have ",
+    "stepNum": 10,
+    "text2": " steps to go before the exit!",
+    "exitText": "You have reached the exit! Click the exit button to return to main screen."
+  }
 
 }
 

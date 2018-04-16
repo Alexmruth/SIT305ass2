@@ -4,6 +4,8 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,19 +21,46 @@ public class LevelOne extends AppCompatActivity {
 
     JSONArray ja; //Short for JSON array
     JSONObject jo; //Short for JSON object
+    int i = 0; //Counter for JSON object
+    Boolean lvlClear = false;
 
-    String text;
-    TextView test;
-    ImageView testImage;
+    String name;
+    String text1JSON;
+    String text2JSON;
+    String exitText;
+
+    TextView textJSON;
+    TextView text1;
+    TextView text2;
+    TextView text3;
+
+    Button forwardBtn;
+    Button backBtn;
+    Button attBtn;
+
+    int enemyHealth;
+    int stepNum;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_one);
         //test = findViewById(R.id.test);
-        testImage = findViewById(R.id.imageTest);
+
+
+        forwardBtn = findViewById(R.id.row1Btn1);
+        backBtn = findViewById(R.id.row1Btn2);
+        attBtn = findViewById(R.id.attBtn);
+
+        textJSON = findViewById(R.id.textJSON);
+        text1 = findViewById(R.id.text1);
+        text2 = findViewById(R.id.text2);
+        text3 = findViewById(R.id.text3);
 
         try {
+            getEnemy();
             getText();
         } catch (JSONException e) {
             e.printStackTrace();
@@ -57,12 +86,57 @@ public class LevelOne extends AppCompatActivity {
 
     public void getText() throws JSONException {
         JSONObject obj = new JSONObject(loadJSON());
+        jo = obj.getJSONObject("Level1");
+
+        stepNum = jo.getInt("stepNum");
+        text1JSON = jo.getString("text1");
+        text2JSON = jo.getString("text2");
+        exitText = jo.getString("exitText");
+        updateText();
+    }
+    public void updateText() {
+        if(stepNum >= 1) {
+            textJSON.setText(text1JSON + String.valueOf(stepNum) + text2JSON);
+        } else {
+            textJSON.setText(exitText);
+        }
+    }
+
+    public void getEnemy() throws JSONException {
+        JSONObject obj = new JSONObject(loadJSON());
         ja = obj.getJSONArray("Enemies");
-        jo = ja.getJSONObject(0);
-        text = jo.getString("name");
+        jo = ja.getJSONObject(i);
 
-        //testImage.setBackground(Drawable.createFromPath(text));
+        name = jo.getString("name");
+        enemyHealth = jo.getInt("health");
 
+        text1.setText(name);
+        text2.setText(String.valueOf(enemyHealth));
+
+    }
+
+    public void updateEnemy() {
+        text2.setText(String.valueOf(enemyHealth));
+        if(enemyHealth <= 0) {
+            text1.setText("You have defeated " + name +"!!");
+        }
+
+    }
+
+    public void onForward(View view) {
+        stepNum--;
+
+        updateText();
+    }
+    public void onBack(View view) {
+
+        updateText();
+
+    }
+
+    public void onAttack(View view) {
+        enemyHealth = enemyHealth - 10;
+        updateEnemy();
 
     }
 }
