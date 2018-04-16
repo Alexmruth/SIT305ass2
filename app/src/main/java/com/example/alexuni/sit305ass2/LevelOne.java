@@ -1,7 +1,5 @@
 package com.example.alexuni.sit305ass2;
 
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -37,8 +35,8 @@ public class LevelOne extends AppCompatActivity {
 
     TextView nameJSON;
     TextView textJSON;
-    TextView text1;
-    TextView text2;
+    TextView enemyNameText;
+    TextView enemyHealthText;
     TextView text3;
 
     ImageView textImage;
@@ -68,8 +66,8 @@ public class LevelOne extends AppCompatActivity {
 
         nameJSON = findViewById(R.id.nameJSON);
         textJSON = findViewById(R.id.textJSON);
-        text1 = findViewById(R.id.text1);
-        text2 = findViewById(R.id.text2);
+        enemyNameText = findViewById(R.id.enemyNameText);
+        enemyHealthText = findViewById(R.id.enemyHealthText);
         text3 = findViewById(R.id.text3);
 
         textImage = findViewById(R.id.textImage);
@@ -105,8 +103,8 @@ public class LevelOne extends AppCompatActivity {
         jo = obj.getJSONObject("Level1");
 
         stepNum = jo.getInt("stepNum");
-        text1JSON = jo.getString("text1");
-        text2JSON = jo.getString("text2");
+        text1JSON = jo.getString("enemyNameText");
+        text2JSON = jo.getString("enemyHealthText");
         exitText = jo.getString("exitText");
         name = jo.getString("character1");
         updateText();
@@ -129,15 +127,15 @@ public class LevelOne extends AppCompatActivity {
         enemyName = jo.getString("name");
         enemyHealth = jo.getInt("health");
 
-        text1.setText(enemyName);
-        text2.setText(String.valueOf(enemyHealth));
+        enemyNameText.setText(enemyName);
+        enemyHealthText.setText(String.valueOf(enemyHealth));
 
     }
 
     public void updateEnemy() {
-        text2.setText(String.valueOf(enemyHealth));
+        enemyHealthText.setText(String.valueOf(enemyHealth));
         if(enemyHealth <= 0) {
-            text1.setText("You have defeated " + enemyName +"!!");
+            enemyNameText.setText("You have defeated " + enemyName +"!!");
             enemyDead = true;
         }
 

@@ -221,7 +221,7 @@ public class GameActivity extends AppCompatActivity {
                     break;
                 case 1:
                     charName = o.getString("character2");
-                    dialogue = o.getString("text1");
+                    dialogue = o.getString("enemyNameText");
                     textImage.setBackgroundResource(R.drawable.c_henryvillager);
                     nameJSON.setText(charName);
                     textJSON.setText(dialogue);
