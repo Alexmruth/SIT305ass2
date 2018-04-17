@@ -16,6 +16,7 @@ Directory structure:
 - Not enough commits + changelog items to pass at this frequency.
 - You're still missing a licenses.txt file.
 
+## Thanks Henry! I appreciate the suggestions! I plan on implementing it.
 # Henry comments 17/April
 - Great fixes. May I make one suggestion. When doing conversations, if you want them to be in order, use an array, not a map with keys.
 Not this:

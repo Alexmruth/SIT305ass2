@@ -1,20 +1,17 @@
 {
-  "IntroText":
-    {
-      "character1": "Archer Bones (you)",
-      "character2": "Henry the Villager",
-      "introText1": "Hello there, are you okay? You seemed to have crashed your plane.",
-      "introText2": "... Ugh, where am I?",
-      "introText3": "You have landed on our secluded mountain! You seem to be the only survivor...",
-      "introText4": "How do I get out of here?",
-      "introText5": "Well, the only way off is by defeating Nogard the Dragon, who guards the only exit.",
-      "introText5.1": "The exit lies deep within a maze of caves... where Nogard resides.",
-      "introText6": "Well... how do you suppose I defeat him??",
-      "introText7": "You must fight your way through the caves and face him head-on.",
-      "introText7.1": "Collect gold to purchase equipment from the shop to help you along the way!",
-      "introText7.2": "Good luck! If you have any questions, I'll be nearby!",
-      "test": "R.drawable.shop.png"
-    },
+
+  "IntroText": [
+    {"id":"introText1", "character":"Henry the Villager", "text": "Hello there, are you okay? You seemed to have crashed your plane."},
+    {"id":"introText2", "character":"Archer Bones (you)", "text": "... Ugh, where am I?"},
+    {"id":"introText3", "character":"Henry the Villager", "text": "You have landed on our secluded mountain! You seem to be the only survivor..."},
+    {"id":"introText4", "character":"Archer Bones (you)", "text": "How do I get out of here?"},
+    {"id":"introText5", "character":"Henry the Villager", "text": "Well, the only way off is by defeating Nogard the Dragon, who guards the only exit."},
+    {"id":"introText6", "character":"Henry the Villager", "text": "The exit lies deep within a maze of caves... where Nogard resides."},
+    {"id":"introText7", "character":"Archer Bones (you)", "text": "Well... how do you suppose I defeat him??"},
+    {"id":"introText8", "character":"Henry the Villager", "text": "You must fight your way through the caves and face him head-on."},
+    {"id":"introText9", "character":"Henry the Villager", "text": "Collect gold to purchase equipment from the shop to help you along the way!"},
+    {"id":"introText10", "character":"Henry the Villager", "text": "Good luck! If you have any questions, I'll be nearby!"}
+  ],
   "HenryText":
     {
       "character2": "Henry the Villager",

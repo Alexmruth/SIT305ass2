@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick (View v) {
         if (v.getId() == R.id.newGameBtn) {
+            continueGame = 0;
             Intent intent = new Intent (this, GameActivity.class);
             startActivity(intent);
         } else if (v.getId() == R.id.continueBtn){

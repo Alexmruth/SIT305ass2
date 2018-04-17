@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,7 +21,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.Timer;
 
 public class GameActivity extends AppCompatActivity {
-    int introSwitch = 2;
+
+    boolean introText;
     int henrySwitch = 0;
     int jc = 0; //short for JSON counter
     int LLcount = 0;
@@ -34,6 +36,8 @@ public class GameActivity extends AppCompatActivity {
     String dialogue;
     String charName;
     JSONObject o;
+    JSONArray ja;
+    int i = 0;
 
     private Timer timer = new Timer();
 
@@ -51,18 +55,15 @@ public class GameActivity extends AppCompatActivity {
         LL3 = findViewById(R.id.LL3);
         continueGame = MainActivity.continueGame;
 
-        if(continueGame == 1) {
+        if (continueGame == 1) {
             LLcount = 1;
-            introSwitch = 1;
+            introText = false;
         } else {
-            LLcount = 0;
-            introSwitch = 2;
-        }
-
-        if(LLcount == 0) {
             LL1.setVisibility(View.INVISIBLE);
             LL3.setVisibility(View.INVISIBLE);
+            introText = true;
         }
+
 
         //Opens the getText method
         try {
@@ -109,125 +110,53 @@ public class GameActivity extends AppCompatActivity {
         return json;
     }
 
-    public void nextDialogue(View view) {
-        if (introSwitch > 1 && introSwitch <= 10) {
-            introSwitch++;
+    public void nextDialogue(View view) throws JSONException {
+        if (i <= 8 && introText) {
+            i++;
+            getText();
         } else {
-            introSwitch = 1;
+            introText = false;
+            LLcount = 1;
+            nameJSON.setText("");
+            textJSON.setText("");
+            textImage.setBackground(null);
         }
+
         if(LLcount == 1){
             LL1.setVisibility(View.VISIBLE);
             LL3.setVisibility(View.VISIBLE);
         }
 
-        try {
-                getText();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
     }
+
 
     // This method is a working switch statement and JSON reader
     public void getText() throws JSONException {
 
         JSONObject obj = new JSONObject(loadJSON()); //defines JSONObject as the result of loadJSON method
+        ja = obj.getJSONArray("IntroText");
+
+
         if(jc == 0) {
-            o = obj.getJSONObject("IntroText");
+            o = ja.getJSONObject(i);
         } else if(jc ==1) {
             o = obj.getJSONObject("HenryText");
         }
 
-        switch (introSwitch) {
-            case 1: //Intro text 1
-                nameJSON.setText("");
-                textJSON.setText("");
-                textImage.setBackground(null);
-                break;
-            case 2: //Intro text 1 -- Henry villager
-                charName = o.getString("character2");
-                dialogue = o.getString("introText1");
-                textImage.setBackgroundResource(R.drawable.c_henryvillager);
-                nameJSON.setText(charName);
-                textJSON.setText(dialogue);
-                break;
-            case 3: //Intro text 2 -- Archer Bones
-                charName = o.getString("character1");
-                dialogue = o.getString("introText2");
-                textImage.setBackgroundResource(R.drawable.c_archerbones);
-                nameJSON.setText(charName);
-                textJSON.setText(dialogue);
-                break;
-            case 4: //Intro text 3 -- Henry villager
-                charName = o.getString("character2");
-                dialogue = o.getString("introText3");
-                textImage.setBackgroundResource(R.drawable.c_henryvillager);
-                nameJSON.setText(charName);
-                textJSON.setText(dialogue);
-                break;
-            case 5: //Intro text 4 -- Archer Bones
-                charName = o.getString("character1");
-                dialogue = o.getString("introText4");
-                textImage.setBackgroundResource(R.drawable.c_archerbones);
-                nameJSON.setText(charName);
-                textJSON.setText(dialogue);
-                break;
-            case 6: //Intro text 5 -- Henry Villager
-                charName = o.getString("character2");
-                dialogue = o.getString("introText5");
-                textImage.setBackgroundResource(R.drawable.c_henryvillager);
-                nameJSON.setText(charName);
-                textJSON.setText(dialogue);
-                break;
-            case 7: //Intro text 5.1 -- Henry Villager
-                charName = o.getString("character2");
-                dialogue = o.getString("introText5.1");
-                textImage.setBackgroundResource(R.drawable.c_henryvillager);
-                nameJSON.setText(charName);
-                textJSON.setText(dialogue);
-                break;
-            case 8: //Intro text 6 -- Archer Bones
-                charName = o.getString("character1");
-                dialogue = o.getString("introText6");
-                textImage.setBackgroundResource(R.drawable.c_archerbones);
-                nameJSON.setText(charName);
-                textJSON.setText(dialogue);
-                break;
-            case 9: //Intro text 7 -- Henry Villager
-                charName = o.getString("character2");
-                dialogue = o.getString("introText7");
-                textImage.setBackgroundResource(R.drawable.c_henryvillager);
-                nameJSON.setText(charName);
-                textJSON.setText(dialogue);
-                break;
-            case 10: //Intro text 7.1 -- Henry Villager
-                charName = o.getString("character2");
-                dialogue = o.getString("introText7.1");
-                textImage.setBackgroundResource(R.drawable.c_henryvillager);
-                nameJSON.setText(charName);
-                textJSON.setText(dialogue);
-                break;
-            case 11: //Intro text 7.2 -- Henry Villager
-                charName = o.getString("character2");
-                dialogue = o.getString("introText7.2");
-                textImage.setBackgroundResource(R.drawable.c_henryvillager);
-                nameJSON.setText(charName);
-                textJSON.setText(dialogue);
-                LLcount = 1;
-                break;
-        }
-            switch (henrySwitch) {
-                case 0:
+        charName = o.getString("character");
+        dialogue = o.getString("text");
 
-                    break;
-                case 1:
-                    charName = o.getString("character2");
-                    dialogue = o.getString("enemyNameText");
-                    textImage.setBackgroundResource(R.drawable.c_henryvillager);
-                    nameJSON.setText(charName);
-                    textJSON.setText(dialogue);
-                    break;
+        if (introText) {
+            nameJSON.setText(charName);
+            textJSON.setText(dialogue);
 
+            if(o.getString("character").equals("Henry the Villager")) {
+                textImage.setBackgroundResource(R.drawable.c_henryvillager);
+            } else if (o.getString("character").equals("Archer Bones (you)")) {
+                textImage.setBackgroundResource(R.drawable.c_archerbones);
             }
+        }
+
     }
 
 }

@@ -37,7 +37,6 @@ public class LevelOne extends AppCompatActivity {
     TextView textJSON;
     TextView enemyNameText;
     TextView enemyHealthText;
-    TextView text3;
 
     ImageView textImage;
 
@@ -68,7 +67,6 @@ public class LevelOne extends AppCompatActivity {
         textJSON = findViewById(R.id.textJSON);
         enemyNameText = findViewById(R.id.enemyNameText);
         enemyHealthText = findViewById(R.id.enemyHealthText);
-        text3 = findViewById(R.id.text3);
 
         textImage = findViewById(R.id.textImage);
 
