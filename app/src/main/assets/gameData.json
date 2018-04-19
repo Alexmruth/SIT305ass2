@@ -35,7 +35,12 @@
       "spawnChance": 10
     },
     {
-
+      "ID": 0,
+      "name": "Cave dweller",
+      "health": 40,
+      "attack": 10,
+      "defence": 20,
+      "spawnChance": 10
     }
     ],
 
@@ -44,7 +49,9 @@
     "text1": "You have ",
     "stepNum": 10,
     "text2": " steps to go before the exit!",
-    "exitText": "You have reached the exit! Click the exit button to return to main screen."
+    "exitText": "You have reached the exit! Click the exit button to return to main screen.",
+
+    "enemyNotDead": "You must kill this enemy before continuing forward!"
   }
 
 }

@@ -34,14 +34,17 @@ public class LevelOne extends AppCompatActivity {
     Boolean enemyDead = false;
     Boolean lvlClear = false;
     Boolean playerTurn = true;
+    boolean forwardErr;
 
     ProgressBar healthBar;
+    ProgressBar enemyHealthBar;
 
     String name;
     String enemyName;
     String text1JSON;
     String text2JSON;
     String exitText;
+    String forwardErrText;
 
     TextView nameJSON;
     TextView textJSON;
@@ -64,6 +67,10 @@ public class LevelOne extends AppCompatActivity {
     int attMax;
     int playerHealth;
 
+    //
+    int attValue;
+    int enemyAttack;
+
     int baseAttMin;
     int baseAttMax;
     int totalAttMin;
@@ -81,10 +88,13 @@ public class LevelOne extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_one);
 
+        //HEALTH BARS
         healthBar = findViewById(R.id.healthBar);
-
+        enemyHealthBar = findViewById(R.id.enemyHealthBar);
         healthBar.setMax(playerHealth);
-        healthBar.setProgress(70);
+
+
+
         forwardBtn = findViewById(R.id.row1Btn1);
         backBtn = findViewById(R.id.row1Btn2);
         attBtn = findViewById(R.id.attBtn);
@@ -155,7 +165,8 @@ public class LevelOne extends AppCompatActivity {
         totalAttMax = attMax + baseAttMax;
         playerStatsText.setText("ATT: " + String.valueOf(totalAttMin) + "-" + String.valueOf(totalAttMax));
         playerHealthText.setText(String.valueOf(playerHealth));
-
+        healthBar.setMax(playerHealth);
+        healthBar.setProgress(playerHealth);
 
     }
 
@@ -167,16 +178,22 @@ public class LevelOne extends AppCompatActivity {
         text1JSON = jo.getString("text1");
         text2JSON = jo.getString("text2");
         exitText = jo.getString("exitText");
+        forwardErrText = jo.getString("enemyNotDead");
         name = jo.getString("character1");
         updateText();
     }
     public void updateText() {
         textImage.setBackgroundResource(R.drawable.c_henryvillager);
         nameJSON.setText(name);
-        if(stepNum >= 1) {
-            textJSON.setText(text1JSON + String.valueOf(stepNum) + text2JSON);
+        if(forwardErr == false) {
+            if (stepNum >= 1) {
+                textJSON.setText(text1JSON + String.valueOf(stepNum) + text2JSON);
+            } else {
+                textJSON.setText(exitText);
+            }
         } else {
-            textJSON.setText(exitText);
+            textJSON.setText(forwardErrText);
+            forwardErr = false;
         }
     }
 
@@ -191,21 +208,27 @@ public class LevelOne extends AppCompatActivity {
 
         enemyNameText.setText(enemyName);
         enemyHealthText.setText(String.valueOf(enemyHealth));
+        enemyHealthBar.setMax(enemyHealth);
+        enemyHealthBar.setProgress(enemyHealth);
+
 
     }
 
     public void updateEnemy() {
         enemyHealthText.setText(String.valueOf(enemyHealth));
+        enemyHealthBar.setProgress(enemyHealth);
         if(enemyHealth <= 0) {
             enemyNameText.setText("You have defeated " + enemyName +"!!");
             enemyDead = true;
+            i++;
         }
+        updateText();
 
     }
 
     public void enemyResponse() {
         Timer timer = new Timer();
-        final int enemyAttack = enemyAtt;
+        enemyAttack = enemyAtt;
 
         if(enemyDead == false) {
             timer.schedule(new TimerTask() {
@@ -215,25 +238,30 @@ public class LevelOne extends AppCompatActivity {
                     playerHealth = playerHealth - enemyAttack;
                     updatePlayer();
 
+
                     playerTurn = true;
                 }
-            }, 2000);
-            Context context = getApplicationContext();
-            CharSequence text = "You received " + String.valueOf(enemyAttack) + " damage from " + enemyName;
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
+            }, 1500);
         }
-
+        showToast();
     }
 
     public void updatePlayer() {
         playerHealthText.setText(String.valueOf(playerHealth));
+        healthBar.setProgress(playerHealth);
+
     }
 
 
-    public void onForward(View view) {
-        stepNum--;
+    public void onForward(View view) throws JSONException {
+        if(enemyDead) {
+            stepNum--;
+            getEnemy();
+            enemyDead = false;
+            playerTurn = true;
+        } else {
+            forwardErr = true;
+        }
 
         updateText();
     }
@@ -245,26 +273,33 @@ public class LevelOne extends AppCompatActivity {
 
     public void onAttack(View view) {
         Random random = new Random();
-        int attValue = random.nextInt(totalAttMax - totalAttMin) + totalAttMin;
+        attValue = random.nextInt(totalAttMax - totalAttMin) + totalAttMin;
 
         if (enemyDead == false && playerTurn == true) {
             enemyHealth = enemyHealth - attValue;
+
+            showToast();
             updateEnemy();
-
-
-            Context context = getApplicationContext();
-            CharSequence text = "You did " + String.valueOf(attValue) + " damage against " + enemyName;
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
 
             playerTurn = false;
             enemyResponse();
         }
 
+    }
 
+    public void showToast() {
+        Context context = getApplicationContext();
+        CharSequence text;
+        Toast toast;
+        int duration = Toast.LENGTH_SHORT;
 
+        if (playerTurn) {
+            text = "You did " + String.valueOf(attValue) + " damage against " + enemyName;
+        } else {
+            text = "You received " + String.valueOf(enemyAttack) + " damage from " + enemyName;
+        }
 
-
+        toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 }
