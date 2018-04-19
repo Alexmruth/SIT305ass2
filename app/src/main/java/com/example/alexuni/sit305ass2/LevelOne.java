@@ -36,14 +36,18 @@ public class LevelOne extends AppCompatActivity {
     Boolean playerTurn = true;
     boolean forwardErr;
 
+
+
     ProgressBar healthBar;
     ProgressBar enemyHealthBar;
 
     String name;
+    String playerName;
     String enemyName;
     String text1JSON;
     String text2JSON;
     String exitText;
+    String enemyDeadText;
     String forwardErrText;
 
     TextView nameJSON;
@@ -70,6 +74,8 @@ public class LevelOne extends AppCompatActivity {
     //
     int attValue;
     int enemyAttack;
+    int enemyAttMin;
+    int enemyAttMax;
 
     int baseAttMin;
     int baseAttMax;
@@ -113,7 +119,10 @@ public class LevelOne extends AppCompatActivity {
 
         textImage = findViewById(R.id.textImage);
 
+
         playerImage.setBackgroundResource(R.drawable.c_archerbones);
+
+
 
         try {
             loadStats();
@@ -123,7 +132,8 @@ public class LevelOne extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    /* loadJSON() is responsible for grabbing all content from the specified JSON file and converting
+    /* #############################################################################################
+     loadJSON() is responsible for grabbing all content from the specified JSON file and converting
     it into a string to be used as a JSONObject within the getText() method. */
     public String loadJSON() {
         String json = null;
@@ -141,13 +151,18 @@ public class LevelOne extends AppCompatActivity {
         }
         return json;
     }
+    //##############################################################################################
 
 
+    /* #############################################################################################
+       The following methods are responsible for loading/getting data and assigning it to values.
+     */
     public void loadStats() throws JSONException {
         JSONObject gameData = new JSONObject(loadJSON());
         pd = gameData.getJSONObject("PlayerData");
         wd = gameData.getJSONArray("Weapons");
 
+        playerName = pd.getString("name");
         playerHealth = pd.getInt("baseHealth");
 
         baseAttMin = pd.getInt("baseAttackMin");
@@ -163,6 +178,8 @@ public class LevelOne extends AppCompatActivity {
 
         totalAttMin = attMin + baseAttMin;
         totalAttMax = attMax + baseAttMax;
+
+        playerNameText.setText(playerName);
         playerStatsText.setText("ATT: " + String.valueOf(totalAttMin) + "-" + String.valueOf(totalAttMax));
         playerHealthText.setText(String.valueOf(playerHealth));
         healthBar.setMax(playerHealth);
@@ -178,14 +195,40 @@ public class LevelOne extends AppCompatActivity {
         text1JSON = jo.getString("text1");
         text2JSON = jo.getString("text2");
         exitText = jo.getString("exitText");
+        enemyDeadText = jo.getString("enemyDead");
         forwardErrText = jo.getString("enemyNotDead");
         name = jo.getString("character1");
         updateText();
     }
+
+
+    public void getEnemy() throws JSONException {
+        JSONObject obj = new JSONObject(loadJSON());
+        ja = obj.getJSONArray("Enemies");
+        jo = ja.getJSONObject(i);
+
+        enemyName = jo.getString("name");
+        enemyHealth = jo.getInt("health");
+        enemyAttMin = jo.getInt("attMin");
+        enemyAttMax = jo.getInt("attMax");
+
+        enemyNameText.setText(enemyName);
+        enemyHealthText.setText(String.valueOf(enemyHealth));
+        enemyHealthBar.setMax(enemyHealth);
+        enemyHealthBar.setProgress(enemyHealth);
+
+
+    }
+
+    //##############################################################################################
+
+    /* #############################################################################################
+        The following methods are responsible for updating data based on events
+     */
     public void updateText() {
         textImage.setBackgroundResource(R.drawable.c_henryvillager);
         nameJSON.setText(name);
-        if(forwardErr == false) {
+        if (forwardErr == false) {
             if (stepNum >= 1) {
                 textJSON.setText(text1JSON + String.valueOf(stepNum) + text2JSON);
             } else {
@@ -195,23 +238,17 @@ public class LevelOne extends AppCompatActivity {
             textJSON.setText(forwardErrText);
             forwardErr = false;
         }
+
+        if(enemyDead) {
+            textJSON.setText(enemyDeadText);
+        }
+
+
     }
 
-    public void getEnemy() throws JSONException {
-        JSONObject obj = new JSONObject(loadJSON());
-        ja = obj.getJSONArray("Enemies");
-        jo = ja.getJSONObject(i);
-
-        enemyName = jo.getString("name");
-        enemyHealth = jo.getInt("health");
-        enemyAtt = jo.getInt("attack");
-
-        enemyNameText.setText(enemyName);
-        enemyHealthText.setText(String.valueOf(enemyHealth));
-        enemyHealthBar.setMax(enemyHealth);
-        enemyHealthBar.setProgress(enemyHealth);
-
-
+    public void updatePlayer() {
+        playerHealthText.setText(String.valueOf(playerHealth));
+        healthBar.setProgress(playerHealth);
     }
 
     public void updateEnemy() {
@@ -223,12 +260,45 @@ public class LevelOne extends AppCompatActivity {
             i++;
         }
         updateText();
+    }
+
+    public void showToast() {
+        Context context = getApplicationContext();
+        CharSequence text;
+        Toast toast;
+        int duration = Toast.LENGTH_SHORT;
+
+        if (playerTurn) {
+            text = "You did " + String.valueOf(attValue) + " damage against " + enemyName;
+        } else {
+            text = "You received " + String.valueOf(enemyAttack) + " damage from " + enemyName;
+        }
+
+        toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+    //##############################################################################################
+
+    public void onAttack(View view) {
+        Random random = new Random();
+        attValue = random.nextInt((totalAttMax+1) - (totalAttMin-1)) + totalAttMin;
+
+        if (enemyDead == false && playerTurn == true) {
+            enemyHealth = enemyHealth - attValue;
+
+            showToast();
+            updateEnemy();
+
+            playerTurn = false;
+            enemyResponse();
+        }
 
     }
 
     public void enemyResponse() {
         Timer timer = new Timer();
-        enemyAttack = enemyAtt;
+        Random random = new Random();
+        enemyAttack = random.nextInt((enemyAttMax+1) - (enemyAttMin-1)) + enemyAttMin;
 
         if(enemyDead == false) {
             timer.schedule(new TimerTask() {
@@ -238,7 +308,6 @@ public class LevelOne extends AppCompatActivity {
                     playerHealth = playerHealth - enemyAttack;
                     updatePlayer();
 
-
                     playerTurn = true;
                 }
             }, 1500);
@@ -246,11 +315,7 @@ public class LevelOne extends AppCompatActivity {
         showToast();
     }
 
-    public void updatePlayer() {
-        playerHealthText.setText(String.valueOf(playerHealth));
-        healthBar.setProgress(playerHealth);
 
-    }
 
 
     public void onForward(View view) throws JSONException {
@@ -271,35 +336,7 @@ public class LevelOne extends AppCompatActivity {
 
     }
 
-    public void onAttack(View view) {
-        Random random = new Random();
-        attValue = random.nextInt(totalAttMax - totalAttMin) + totalAttMin;
 
-        if (enemyDead == false && playerTurn == true) {
-            enemyHealth = enemyHealth - attValue;
 
-            showToast();
-            updateEnemy();
 
-            playerTurn = false;
-            enemyResponse();
-        }
-
-    }
-
-    public void showToast() {
-        Context context = getApplicationContext();
-        CharSequence text;
-        Toast toast;
-        int duration = Toast.LENGTH_SHORT;
-
-        if (playerTurn) {
-            text = "You did " + String.valueOf(attValue) + " damage against " + enemyName;
-        } else {
-            text = "You received " + String.valueOf(enemyAttack) + " damage from " + enemyName;
-        }
-
-        toast = Toast.makeText(context, text, duration);
-        toast.show();
-    }
 }

@@ -1,13 +1,14 @@
 {
 
   "PlayerData": {
+    "name": "Archer Bones",
     "baseHealth": 100,
     "baseAttackMin": 3,
     "baseAttackMax": 6,
     "baseDefence": 5,
 
     "currentHealth": 100,
-    "weaponEquipped": 1
+    "weaponEquipped": 0
   },
 
   "Weapons": [
@@ -30,16 +31,18 @@
       "ID": 0,
       "name": "Monster",
       "health": 50,
-      "attack": 10,
+      "attMin": 2,
+      "attMax": 7,
       "defence": 5,
       "spawnChance": 10
     },
     {
-      "ID": 0,
+      "ID": 1,
       "name": "Cave dweller",
       "health": 40,
-      "attack": 10,
-      "defence": 20,
+      "attMin": 1,
+      "attMax": 12,
+      "defence": 8,
       "spawnChance": 10
     }
     ],
@@ -51,6 +54,7 @@
     "text2": " steps to go before the exit!",
     "exitText": "You have reached the exit! Click the exit button to return to main screen.",
 
+    "enemyDead": "Well done! Click the forward button to approach your next encounter!",
     "enemyNotDead": "You must kill this enemy before continuing forward!"
   }
 
