@@ -10,13 +10,14 @@ Directory structure:
 - Java files:       app\src\main\java\com\example\alexuni\sit305ass2
 - XML layout files: app\src\main\res\layout
 
+———————————————————————————————————————————————————————————————————————
 
 # Henry comments 13/April
 - Your JSON test file isn't in the correct syntax :) . Use a JSON validator online to check it.
 - Not enough commits + changelog items to pass at this frequency.
 - You're still missing a licenses.txt file.
 
-## Thanks Henry! I appreciate the suggestions! I plan on implementing it.
+
 # Henry comments 17/April
 - Great fixes. May I make one suggestion. When doing conversations, if you want them to be in order, use an array, not a map with keys.
 Not this:
@@ -38,5 +39,5 @@ Or even this:
 Maybe something like that. There are many ways to do it, it just depends on what information would be most helpful to you for each line of speech, and the speech overall.
 
 
-
+## Thanks Henry! I appreciate the suggestions! Implementing it has significantly reduced  the amount of code I use.
 

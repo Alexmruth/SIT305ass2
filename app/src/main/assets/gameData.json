@@ -1,4 +1,30 @@
 {
+
+  "PlayerData": {
+    "baseHealth": 100,
+    "baseAttackMin": 3,
+    "baseAttackMax": 6,
+    "baseDefence": 5,
+
+    "currentHealth": 100,
+    "weaponEquipped": 1
+  },
+
+  "Weapons": [
+    {
+      "ID": 0,
+      "name": "Fists",
+      "attMin": "1",
+      "attMax": "5"
+    },
+    {
+      "ID": 1,
+      "name": "Basic Sword",
+      "attMin": "2",
+      "attMax": "8"
+    }
+  ],
+
   "Enemies": [
     {
       "ID": 0,
@@ -12,6 +38,7 @@
 
     }
     ],
+
   "Level1": {
     "character1": "Henry the Villager",
     "text1": "You have ",

@@ -21,17 +21,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_weight="1"
-            android:id="@+id/playerNameText">
+            android:layout_weight="1">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:layout_gravity="center|bottom" />
+                android:layout_gravity="center|bottom"
+                android:id="@+id/playerNameText"/>
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:id="@+id/playerImage"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/playerStatsText"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -59,12 +65,16 @@
             <TextView
                 android:id="@+id/enemyNameText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/enemyHealthText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:gravity="center|bottom"
                 android:layout_weight="1"/>
             <ProgressBar
