@@ -1,6 +1,9 @@
 package com.example.alexuni.sit305ass2;
 
 import android.content.Context;
+import android.os.Build;
+import android.provider.BaseColumns;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -31,17 +35,18 @@ public class LevelOne extends AppCompatActivity {
     int i = 0; //Counter for JSON object
     int ID = 0;
 
+
     Boolean enemyDead = false;
     Boolean lvlClear = false;
     Boolean playerTurn = true;
     boolean forwardErr;
 
-
+    Random random;
 
     ProgressBar healthBar;
     ProgressBar enemyHealthBar;
 
-    String name;
+    String textName;
     String playerName;
     String enemyName;
     String text1JSON;
@@ -50,39 +55,36 @@ public class LevelOne extends AppCompatActivity {
     String enemyDeadText;
     String forwardErrText;
 
-    TextView nameJSON;
-    TextView textJSON;
+    TextView nameJSON, textJSON;
 
-    TextView playerNameText;
-    TextView playerHealthText;
-    TextView playerStatsText;
-    TextView enemyNameText;
-    TextView enemyHealthText;
+    TextView playerNameText, playerHealthText, playerStatsText;
+    TextView enemyNameText, enemyHealthText;
 
     ImageView playerImage;
+    ImageView enemyImage;
     ImageView textImage;
 
     Button forwardBtn;
     Button backBtn;
     Button attBtn;
 
-    int wepEquipped;
-    int attMin;
-    int attMax;
     int playerHealth;
+    int wepEquipped, weaponAttMin, weaponAttMax;
+    int baseAttMin, baseAttMax, totalAttMin, totalAttMax;
+    int baseDef;
+    int totalDef;
 
     //
+    int enemyID;
     int attValue;
     int enemyAttack;
     int enemyAttMin;
     int enemyAttMax;
+    int enemyDef;
 
-    int baseAttMin;
-    int baseAttMax;
-    int totalAttMin;
-    int totalAttMax;
 
-    int baseDef;
+
+
     int enemyHealth;
     int enemyAtt;
     int stepNum;
@@ -99,7 +101,7 @@ public class LevelOne extends AppCompatActivity {
         enemyHealthBar = findViewById(R.id.enemyHealthBar);
         healthBar.setMax(playerHealth);
 
-
+        random = new Random();
 
         forwardBtn = findViewById(R.id.row1Btn1);
         backBtn = findViewById(R.id.row1Btn2);
@@ -109,6 +111,7 @@ public class LevelOne extends AppCompatActivity {
         textJSON = findViewById(R.id.textJSON);
 
         playerImage = findViewById(R.id.playerImage);
+        enemyImage = findViewById(R.id.enemyImage);
 
         playerNameText = findViewById(R.id.playerNameText);
         playerHealthText = findViewById(R.id.playerHealthText);
@@ -132,6 +135,7 @@ public class LevelOne extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     /* #############################################################################################
      loadJSON() is responsible for grabbing all content from the specified JSON file and converting
     it into a string to be used as a JSONObject within the getText() method. */
@@ -173,11 +177,13 @@ public class LevelOne extends AppCompatActivity {
         ID = wepEquipped;
         weapon = wd.getJSONObject(ID);
 
-        attMin = weapon.getInt("attMin");
-        attMax = weapon.getInt("attMax");
+        weaponAttMin = weapon.getInt("attMin");
+        weaponAttMax = weapon.getInt("attMax");
 
-        totalAttMin = attMin + baseAttMin;
-        totalAttMax = attMax + baseAttMax;
+        totalAttMin = weaponAttMin + baseAttMin;
+        totalAttMax = weaponAttMax + baseAttMax;
+
+        totalDef = baseDef;
 
         playerNameText.setText(playerName);
         playerStatsText.setText("ATT: " + String.valueOf(totalAttMin) + "-" + String.valueOf(totalAttMax));
@@ -197,7 +203,7 @@ public class LevelOne extends AppCompatActivity {
         exitText = jo.getString("exitText");
         enemyDeadText = jo.getString("enemyDead");
         forwardErrText = jo.getString("enemyNotDead");
-        name = jo.getString("character1");
+        textName = jo.getString("character1");
         updateText();
     }
 
@@ -207,17 +213,19 @@ public class LevelOne extends AppCompatActivity {
         ja = obj.getJSONArray("Enemies");
         jo = ja.getJSONObject(i);
 
+        enemyID = jo.getInt("ID");
         enemyName = jo.getString("name");
         enemyHealth = jo.getInt("health");
         enemyAttMin = jo.getInt("attMin");
         enemyAttMax = jo.getInt("attMax");
+        enemyDef = jo.getInt("defence");
 
         enemyNameText.setText(enemyName);
         enemyHealthText.setText(String.valueOf(enemyHealth));
         enemyHealthBar.setMax(enemyHealth);
         enemyHealthBar.setProgress(enemyHealth);
 
-
+       ;
     }
 
     //##############################################################################################
@@ -227,7 +235,7 @@ public class LevelOne extends AppCompatActivity {
      */
     public void updateText() {
         textImage.setBackgroundResource(R.drawable.c_henryvillager);
-        nameJSON.setText(name);
+        nameJSON.setText(textName);
         if (forwardErr == false) {
             if (stepNum >= 1) {
                 textJSON.setText(text1JSON + String.valueOf(stepNum) + text2JSON);
@@ -254,10 +262,11 @@ public class LevelOne extends AppCompatActivity {
     public void updateEnemy() {
         enemyHealthText.setText(String.valueOf(enemyHealth));
         enemyHealthBar.setProgress(enemyHealth);
+
         if(enemyHealth <= 0) {
             enemyNameText.setText("You have defeated " + enemyName +"!!");
             enemyDead = true;
-            i++;
+
         }
         updateText();
     }
@@ -280,8 +289,11 @@ public class LevelOne extends AppCompatActivity {
     //##############################################################################################
 
     public void onAttack(View view) {
-        Random random = new Random();
-        attValue = random.nextInt((totalAttMax+1) - (totalAttMin-1)) + totalAttMin;
+
+        attValue = (random.nextInt((totalAttMax+1) - (totalAttMin-1)) + totalAttMin) - enemyDef;
+        if(attValue <= 0) {
+            attValue = 1;
+        }
 
         if (enemyDead == false && playerTurn == true) {
             enemyHealth = enemyHealth - attValue;
@@ -298,7 +310,10 @@ public class LevelOne extends AppCompatActivity {
     public void enemyResponse() {
         Timer timer = new Timer();
         Random random = new Random();
-        enemyAttack = random.nextInt((enemyAttMax+1) - (enemyAttMin-1)) + enemyAttMin;
+        enemyAttack = (random.nextInt((enemyAttMax+1) - (enemyAttMin-1)) + enemyAttMin) - totalDef;
+        if(enemyAttack <= 0) {
+            enemyAttack = 1;
+        }
 
         if(enemyDead == false) {
             timer.schedule(new TimerTask() {
@@ -321,6 +336,7 @@ public class LevelOne extends AppCompatActivity {
     public void onForward(View view) throws JSONException {
         if(enemyDead) {
             stepNum--;
+            i = random.nextInt(2);
             getEnemy();
             enemyDead = false;
             playerTurn = true;

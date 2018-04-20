@@ -33,17 +33,31 @@
       "health": 50,
       "attMin": 2,
       "attMax": 7,
-      "defence": 5,
-      "spawnChance": 10
+      "defence": 2
     },
     {
       "ID": 1,
       "name": "Cave dweller",
-      "health": 40,
+      "health": 20,
       "attMin": 1,
       "attMax": 12,
-      "defence": 8,
-      "spawnChance": 10
+      "defence": 5
+    },
+    {
+      "ID": 2,
+      "name": "Skeleton",
+      "health": 20,
+      "attMin": 1,
+      "attMax": 12,
+      "defence": 5
+    },
+    {
+      "ID": 3,
+      "name": "Mutant Rat",
+      "health": 20,
+      "attMin": 1,
+      "attMax": 12,
+      "defence": 5
     }
     ],
 
