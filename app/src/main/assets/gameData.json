@@ -7,8 +7,7 @@
     "baseAttackMax": 6,
     "baseDefence": 5,
 
-    "currentHealth": 100,
-    "weaponEquipped": 0
+    "currentHealth": 100
   },
 
   "Weapons": [
@@ -16,13 +15,15 @@
       "ID": 0,
       "name": "Fists",
       "attMin": "1",
-      "attMax": "5"
+      "attMax": "5",
+      "price": 0
     },
     {
       "ID": 1,
       "name": "Basic Sword",
       "attMin": "2",
-      "attMax": "8"
+      "attMax": "8",
+      "price": 10
     }
   ],
 

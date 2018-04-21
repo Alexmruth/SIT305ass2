@@ -74,9 +74,12 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    public void lvlsActivity(View v) {
+    public void onMenuBtnClick(View v) {
         if(v.getId() == R.id.button1) {
             Intent intent = new Intent(this, LevelsActivity.class);
+            startActivity(intent);
+        } else if(v.getId() == R.id.shopBtn) {
+            Intent intent = new Intent(this, ShopActivity.class);
             startActivity(intent);
         }
     }

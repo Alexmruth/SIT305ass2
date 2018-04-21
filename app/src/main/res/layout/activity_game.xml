@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:onClick="lvlsActivity"
+                android:onClick="onMenuBtnClick"
                 android:text="Caves" />
             </LinearLayout>
 
@@ -81,7 +81,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="4"
-                    android:text="Shop" />
+                    android:text="Shop"
+                    android:id="@+id/shopBtn"
+                    android:onClick="onMenuBtnClick"/>
             </LinearLayout>
 
             <LinearLayout
@@ -160,7 +162,7 @@
                         android:text="Caves"
                         android:layout_weight="1"
                         android:id="@+id/button1"
-                        android:onClick="lvlsActivity"/>
+                        android:onClick="onMenuBtnClick"/>
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
