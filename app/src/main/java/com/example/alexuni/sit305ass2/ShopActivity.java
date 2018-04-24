@@ -2,9 +2,11 @@ package com.example.alexuni.sit305ass2;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ArrayAdapter;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,17 +16,24 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class ShopActivity extends AppCompatActivity {
 
     JSONArray wd;
     JSONObject obj;
+    private ListView listView;
+
+    ArrayList<HashMap<String, String>> shopList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
+
+        shopList = new ArrayList<>();
+
+        listView = findViewById(R.id.listView);
 
         loadJSON();
         try {
@@ -54,19 +63,43 @@ public class ShopActivity extends AppCompatActivity {
     }
 
     public void loadItems() throws JSONException {
+
+
         JSONObject gameData = new JSONObject(loadJSON());
+        // Getting JSON Array node
         wd = gameData.getJSONArray("Weapons");
+        for (int i = 0; i < wd.length(); i++) {
+            JSONObject c = wd.getJSONObject(i);
 
-        /*
-        List<String> list = new ArrayList<String>();
-        for(int i = 0; i < wd.length(); i++){
-            String name = wd.getJSONObject(i).getString("name");
-            String price = wd.getJSONObject(i).getString("price");
-            list.add(name);
-            list.add(price);
+            String id = c.getString("ID");
+            String name = c.getString("name");
+            String price = c.getString("price");
 
-        } */
 
+            // tmp hash map for single contact
+            HashMap<String, String> item = new HashMap<>();
+
+            // adding each child node to HashMap key => value
+            item.put("id", id);
+            item.put("name", name);
+            item.put("price", price);
+
+            // adding contact to contact list
+            shopList.add(item);
+        }
+
+        ListAdapter adapter = new SimpleAdapter(
+                ShopActivity.this, shopList,
+                R.layout.shop_layout, new String[]{"name",
+                "price"}, new int[]{
+                R.id.name, R.id.price});
+
+        listView.setAdapter(adapter);
+        //https://www.youtube.com/watch?v=ZEEYYvVwJGY
+
+    }
+
+    public void buyHandler(View v) {
 
     }
 }
