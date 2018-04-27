@@ -21,7 +21,8 @@ import java.util.HashMap;
 public class ShopActivity extends AppCompatActivity {
 
     JSONArray wd;
-    JSONObject obj;
+    JSONObject c;
+    int i;
     private ListView listView;
 
     ArrayList<HashMap<String, String>> shopList;
@@ -69,7 +70,7 @@ public class ShopActivity extends AppCompatActivity {
         // Getting JSON Array node
         wd = gameData.getJSONArray("Weapons");
         for (int i = 0; i < wd.length(); i++) {
-            JSONObject c = wd.getJSONObject(i);
+            c = wd.getJSONObject(i);
 
             String id = c.getString("ID");
             String name = c.getString("name");
@@ -99,7 +100,9 @@ public class ShopActivity extends AppCompatActivity {
 
     }
 
-    public void buyHandler(View v) {
+    public void buyHandler(View v) throws JSONException {
+        String price = c.getString("price");
+
 
     }
 }

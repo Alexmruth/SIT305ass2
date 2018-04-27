@@ -16,5 +16,37 @@
 - UI development for gameActivty.
 - Expansion and minor changes to switch statement.
 11/04/18 -
-- Working function which calls JSON and appends to text view depending on variables
+- Working function which calls JSON and appends to text view depending on variables.
 - A 'next' button that loads the next set of text.
+12/04/18 - 
+- Removed table view for game activity.
+13/04/18 - 
+- Uploaded image assets.
+- Added levels activity to accomodate for levels directory.
+- Expanded on dialogue.json.
+- Updated readme.
+14/04/18 - 
+- Completed introduction conversation.
+- Development on text switch statement.
+- GUI development and improvements.
+15/04/18 - 
+- Created LevelOne activity and enemies.json file.
+- UI development.
+16/04/18 -
+- Simple working battle mechanics in level.
+- Enemy and player data updated according to attacks.
+- Step forward feature and corresponding text updated.
+- Working on health bar and spawn chances.
+17/04/18 - 
+- Made JSON file structure and reading data from it far more efficient.
+- Removed switch statement to handle dialogue.
+19/04/18 - 
+- Battle mechanics development, attack value based on base attack + selected weapon.
+- Created getToast method to handle toast text upon dealing/receiving damage.
+- Changed enemy attack complexity.
+- Neatened code.
+20/04/18 - 
+- Progression on battle mechanics and JSON files.
+21/04/18 - 
+- Created shop activity to handle shop items.
+
