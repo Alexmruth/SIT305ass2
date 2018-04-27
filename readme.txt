@@ -41,3 +41,11 @@ Maybe something like that. There are many ways to do it, it just depends on what
 
 ## Thanks Henry! I appreciate the suggestions! Implementing it has significantly reduced  the amount of code I use.
 
+# Henry comments 27/April
+- Great to see progress.
+- Your changelog needs a lot of work :) It should match commits at least.
+- Your data hasn't quite progressed enough given we're at the end of Week 7.
+
+
+
+
