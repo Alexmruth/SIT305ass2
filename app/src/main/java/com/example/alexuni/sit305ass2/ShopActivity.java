@@ -1,12 +1,21 @@
 package com.example.alexuni.sit305ass2;
 
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,16 +34,17 @@ public class ShopActivity extends AppCompatActivity {
     int i;
     private ListView listView;
 
-    ArrayList<HashMap<String, String>> shopList;
+    private ArrayList<String> data = new ArrayList<String>();
+    //ArrayList<HashMap<String, String>> shopList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
 
-        shopList = new ArrayList<>();
-
         listView = findViewById(R.id.listView);
+
+
 
         loadJSON();
         try {
@@ -42,6 +52,8 @@ public class ShopActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        listView.setAdapter(new MyListAdapter(this, R.layout.shop_layout, data));
 
 
     }
@@ -78,7 +90,7 @@ public class ShopActivity extends AppCompatActivity {
 
 
             // tmp hash map for single contact
-            HashMap<String, String> item = new HashMap<>();
+           /* HashMap<String, String> item = new HashMap<>();
 
             // adding each child node to HashMap key => value
             item.put("id", id);
@@ -86,10 +98,10 @@ public class ShopActivity extends AppCompatActivity {
             item.put("price", price);
 
             // adding contact to contact list
-            shopList.add(item);
+            shopList.add(item); */
         }
 
-        ListAdapter adapter = new SimpleAdapter(
+      /*  ListAdapter adapter = new SimpleAdapter(
                 ShopActivity.this, shopList,
                 R.layout.shop_layout, new String[]{"name",
                 "price"}, new int[]{
@@ -97,7 +109,48 @@ public class ShopActivity extends AppCompatActivity {
 
         listView.setAdapter(adapter);
         //https://www.youtube.com/watch?v=ZEEYYvVwJGY
+*/
+    }
 
+    private class MyListAdapter extends ArrayAdapter<String> {
+        private int layout;
+        public MyListAdapter(@NonNull Context context, int resource, @NonNull ArrayList<String> objects) {
+            super(context, resource, objects);
+            layout = resource;
+        }
+
+        @NonNull
+        @Override
+        public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            ViewHolder mainViewHolder = null;
+            if(convertView == null) {
+                LayoutInflater inflater = LayoutInflater.from(getContext());
+                convertView = inflater.inflate(layout, parent, false);
+                ViewHolder viewHolder = new ViewHolder();
+                viewHolder.image = (ImageView) convertView.findViewById(R.id.shopImage);
+                viewHolder.name = (TextView) convertView.findViewById(R.id.name);
+                viewHolder.button = (Button) convertView.findViewById(R.id.buyBtn);
+                viewHolder.button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getContext(), "Button was clicked " + position, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                convertView.setTag(viewHolder);
+            } else {
+                mainViewHolder = (ViewHolder) convertView.getTag();
+                mainViewHolder.name.setText(getItem(position));
+            }
+
+            return convertView;
+        }
+    }
+
+    public class ViewHolder {
+        ImageView image;
+        TextView name;
+        TextView price;
+        Button button;
     }
 
     public void buyHandler(View v) throws JSONException {
