@@ -29,36 +29,55 @@
 
   "Enemies": [
     {
-      "ID": 0,
-      "name": "Monster",
-      "health": 40,
-      "attMin": 2,
-      "attMax": 7,
-      "defence": 2
+      "ID": 0, "name": "Monster", "health": 40, "attMin": 2, "attMax": 7, "defence": 2
     },
     {
       "ID": 1,
       "name": "Cave dweller",
-      "health": 20,
+      "health": 25,
       "attMin": 1,
       "attMax": 12,
-      "defence": 5
+      "defence": 3
     },
     {
       "ID": 2,
       "name": "Skeleton",
       "health": 20,
-      "attMin": 1,
-      "attMax": 12,
+      "attMin": 3,
+      "attMax": 10,
       "defence": 5
     },
     {
       "ID": 3,
       "name": "Mutant Rat",
       "health": 20,
+      "attMin": 4,
+      "attMax": 16,
+      "defence": 3
+    }
+    {
+      "ID": 4,
+      "name": "name",
+      "health": 60,
+      "attMin": 2,
+      "attMax": 8,
+      "defence": 1
+    }
+    {
+      "ID": 5,
+      "name": "name2",
+      "health": 30,
+      "attMin": 2,
+      "attMax": 9,
+      "defence": 4
+    }
+    {
+      "ID": 6,
+      "name": "name3",
+      "health": 50,
       "attMin": 1,
-      "attMax": 12,
-      "defence": 5
+      "attMax": 16,
+      "defence": 1
     }
     ],
 
