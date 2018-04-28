@@ -5,7 +5,7 @@
     "baseHealth": 100,
     "baseAttackMin": 3,
     "baseAttackMax": 6,
-    "baseDefence": 5,
+    "baseDefence": 1,
 
     "currentHealth": 100
   },
@@ -31,7 +31,7 @@
     {
       "ID": 0,
       "name": "Monster",
-      "health": 50,
+      "health": 40,
       "attMin": 2,
       "attMax": 7,
       "defence": 2

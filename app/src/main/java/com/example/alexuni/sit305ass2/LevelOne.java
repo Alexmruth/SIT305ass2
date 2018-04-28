@@ -172,7 +172,6 @@ public class LevelOne extends AppCompatActivity {
         baseAttMin = pd.getInt("baseAttackMin");
         baseAttMax = pd.getInt("baseAttackMax");
         baseDef = pd.getInt("baseDefence");
-        wepEquipped = pd.getInt("weaponEquipped");
 
         ID = wepEquipped;
         weapon = wd.getJSONObject(ID);
@@ -209,6 +208,8 @@ public class LevelOne extends AppCompatActivity {
 
 
     public void getEnemy() throws JSONException {
+        i = random.nextInt(3);
+
         JSONObject obj = new JSONObject(loadJSON());
         ja = obj.getJSONArray("Enemies");
         jo = ja.getJSONObject(i);
@@ -219,6 +220,7 @@ public class LevelOne extends AppCompatActivity {
         enemyAttMin = jo.getInt("attMin");
         enemyAttMax = jo.getInt("attMax");
         enemyDef = jo.getInt("defence");
+
 
         enemyNameText.setText(enemyName);
         enemyHealthText.setText(String.valueOf(enemyHealth));
@@ -289,8 +291,9 @@ public class LevelOne extends AppCompatActivity {
     //##############################################################################################
 
     public void onAttack(View view) {
-
+        int damage;
         attValue = (random.nextInt((totalAttMax+1) - (totalAttMin-1)) + totalAttMin) - enemyDef;
+
         if(attValue <= 0) {
             attValue = 1;
         }
@@ -336,7 +339,6 @@ public class LevelOne extends AppCompatActivity {
     public void onForward(View view) throws JSONException {
         if(enemyDead) {
             stepNum--;
-            i = random.nextInt(2);
             getEnemy();
             enemyDead = false;
             playerTurn = true;
