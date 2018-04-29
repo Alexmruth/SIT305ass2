@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -84,7 +85,7 @@ public class LevelOne extends AppCompatActivity {
 
 
 
-
+    int image;
     int enemyHealth;
     int enemyAtt;
     int stepNum;
@@ -221,13 +222,21 @@ public class LevelOne extends AppCompatActivity {
         enemyAttMax = jo.getInt("attMax");
         enemyDef = jo.getInt("defence");
 
-
         enemyNameText.setText(enemyName);
         enemyHealthText.setText(String.valueOf(enemyHealth));
         enemyHealthBar.setMax(enemyHealth);
         enemyHealthBar.setProgress(enemyHealth);
 
-       ;
+        getEnemyImage();
+
+    }
+
+    public void getEnemyImage() {
+        switch (enemyID) {
+            case 0:
+
+                break;
+        }
     }
 
     //##############################################################################################

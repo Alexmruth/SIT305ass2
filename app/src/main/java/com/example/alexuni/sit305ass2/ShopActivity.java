@@ -34,6 +34,9 @@ public class ShopActivity extends AppCompatActivity {
     int i;
     private ListView listView;
 
+    //private ArrayList<String> list = new ArrayList<String>();
+    private Context context;
+
     private ArrayList<String> data = new ArrayList<String>();
     //ArrayList<HashMap<String, String>> shopList;
 
@@ -46,15 +49,13 @@ public class ShopActivity extends AppCompatActivity {
 
 
 
+
         loadJSON();
         try {
             loadItems();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        listView.setAdapter(new MyListAdapter(this, R.layout.shop_layout, data));
-
 
     }
 
@@ -87,32 +88,14 @@ public class ShopActivity extends AppCompatActivity {
             String id = c.getString("ID");
             String name = c.getString("name");
             String price = c.getString("price");
-
-
-            // tmp hash map for single contact
-           /* HashMap<String, String> item = new HashMap<>();
-
-            // adding each child node to HashMap key => value
-            item.put("id", id);
-            item.put("name", name);
-            item.put("price", price);
-
-            // adding contact to contact list
-            shopList.add(item); */
         }
 
-      /*  ListAdapter adapter = new SimpleAdapter(
-                ShopActivity.this, shopList,
-                R.layout.shop_layout, new String[]{"name",
-                "price"}, new int[]{
-                R.id.name, R.id.price});
 
-        listView.setAdapter(adapter);
-        //https://www.youtube.com/watch?v=ZEEYYvVwJGY
-*/
     }
 
-    private class MyListAdapter extends ArrayAdapter<String> {
+
+
+   /* private class MyListAdapter extends ArrayAdapter<String> {
         private int layout;
         public MyListAdapter(@NonNull Context context, int resource, @NonNull ArrayList<String> objects) {
             super(context, resource, objects);
@@ -157,5 +140,5 @@ public class ShopActivity extends AppCompatActivity {
         String price = c.getString("price");
 
 
-    }
+    } */
 }

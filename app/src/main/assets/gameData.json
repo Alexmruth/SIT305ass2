@@ -54,7 +54,7 @@
       "attMin": 4,
       "attMax": 16,
       "defence": 3
-    }
+    },
     {
       "ID": 4,
       "name": "name",
@@ -62,7 +62,7 @@
       "attMin": 2,
       "attMax": 8,
       "defence": 1
-    }
+    },
     {
       "ID": 5,
       "name": "name2",
@@ -70,7 +70,7 @@
       "attMin": 2,
       "attMax": 9,
       "defence": 4
-    }
+    },
     {
       "ID": 6,
       "name": "name3",
@@ -80,6 +80,11 @@
       "defence": 1
     }
     ],
+  "bosses": [
+    {
+      "ID": 0, "name": "Troll", "health": 100, "attMin": 2, "attMax": 7, "defence": 2
+    }
+  ],
 
   "Level1": {
     "character1": "Henry the Villager",
