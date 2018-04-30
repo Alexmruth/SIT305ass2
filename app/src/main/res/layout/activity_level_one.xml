@@ -20,38 +20,42 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
+
             <TextView
+                android:id="@+id/playerNameText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="0"
                 android:gravity="center"
-                android:id="@+id/playerNameText"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black" />
+
             <ImageView
+                android:id="@+id/playerImage"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:id="@+id/playerImage"/>
+                android:layout_weight="1" />
+
             <TextView
+                android:id="@+id/playerStatsText"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:paddingTop="10dp"
                 android:gravity="center|top"
-                android:id="@+id/playerStatsText"
-                android:textColor="@color/black"/>
+                android:paddingTop="10dp"
+                android:textColor="@color/black" />
+
             <TextView
+                android:id="@+id/playerHealthText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:gravity="center|bottom"
-                android:id="@+id/playerHealthText"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black" />
 
             <ProgressBar
                 android:id="@+id/healthBar"
@@ -61,42 +65,49 @@
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_weight="0"/>
+                android:layout_weight="0" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/enemyNameText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="0"
                 android:gravity="center"
                 android:textColor="@color/black" />
+
             <ImageView
+                android:id="@+id/enemyImage"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
-                android:layout_weight="1"
-                android:id="@+id/enemyImage"/>
+                android:layout_weight="1" />
+
             <TextView
+                android:id="@+id/enemyStatsText"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:textColor="@color/black"/>
+                android:gravity="center|top"
+                android:paddingTop="10dp"
+                android:textColor="@color/black" />
+
             <TextView
                 android:id="@+id/enemyHealthText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center|bottom"
                 android:layout_weight="0"
-                android:textColor="@color/black"/>
+                android:gravity="center|bottom"
+                android:textColor="@color/black" />
+
             <ProgressBar
                 android:id="@+id/enemyHealthBar"
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
@@ -105,7 +116,7 @@
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_weight="0"/>
+                android:layout_weight="0" />
 
 
         </LinearLayout>
@@ -199,10 +210,11 @@
                     android:layout_height="wrap_content"
                     android:onClick="onBack"
                     android:text="Back" />
+
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="test"/>
+                    android:onClick="test" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -222,6 +234,28 @@
                     android:layout_height="wrap_content"
                     android:onClick="onAttack"
                     android:text="Attack" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/healBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onHeal"
+                        android:text="Heal" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/cave"/>
+                    <TextView
+                        android:id="@+id/potionText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>

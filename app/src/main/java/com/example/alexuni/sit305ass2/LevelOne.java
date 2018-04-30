@@ -2,6 +2,8 @@ package com.example.alexuni.sit305ass2;
 
 import android.content.Context;
 import android.os.Build;
+import android.os.Looper;
+import android.os.SystemClock;
 import android.provider.BaseColumns;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -58,18 +60,15 @@ public class LevelOne extends AppCompatActivity {
 
     TextView nameJSON, textJSON;
 
-    TextView playerNameText, playerHealthText, playerStatsText;
-    TextView enemyNameText, enemyHealthText;
+    TextView playerNameText, playerHealthText, playerStatsText, playerPotionsText;
+    TextView enemyNameText, enemyHealthText, enemyStatsText;
 
-    ImageView playerImage;
-    ImageView enemyImage;
-    ImageView textImage;
+    ImageView playerImage, enemyImage, textImage;
 
-    Button forwardBtn;
-    Button backBtn;
+    Button forwardBtn, backBtn;
     Button attBtn;
 
-    int playerHealth;
+    int playerHealth, playerMaxHealth, potions;
     int wepEquipped, weaponAttMin, weaponAttMax;
     int baseAttMin, baseAttMax, totalAttMin, totalAttMax;
     int baseDef;
@@ -117,9 +116,11 @@ public class LevelOne extends AppCompatActivity {
         playerNameText = findViewById(R.id.playerNameText);
         playerHealthText = findViewById(R.id.playerHealthText);
         playerStatsText = findViewById(R.id.playerStatsText);
+        playerPotionsText =findViewById(R.id.potionText);
 
         enemyNameText = findViewById(R.id.enemyNameText);
         enemyHealthText = findViewById(R.id.enemyHealthText);
+        enemyStatsText = findViewById(R.id.enemyStatsText);
 
         textImage = findViewById(R.id.textImage);
 
@@ -169,6 +170,7 @@ public class LevelOne extends AppCompatActivity {
 
         playerName = pd.getString("name");
         playerHealth = pd.getInt("baseHealth");
+        potions = pd.getInt("potions");
 
         baseAttMin = pd.getInt("baseAttackMin");
         baseAttMax = pd.getInt("baseAttackMax");
@@ -184,10 +186,13 @@ public class LevelOne extends AppCompatActivity {
         totalAttMax = weaponAttMax + baseAttMax;
 
         totalDef = baseDef;
+        playerMaxHealth = playerHealth;
 
+        // Assigning variables to widgets
         playerNameText.setText(playerName);
-        playerStatsText.setText("ATT: " + String.valueOf(totalAttMin) + "-" + String.valueOf(totalAttMax));
+        playerStatsText.setText("ATT: " + String.valueOf(totalAttMin) + "-" + String.valueOf(totalAttMax) + " DEF: " + String.valueOf(baseDef));
         playerHealthText.setText(String.valueOf(playerHealth));
+        playerPotionsText.setText(String.valueOf(potions));
         healthBar.setMax(playerHealth);
         healthBar.setProgress(playerHealth);
 
@@ -209,10 +214,10 @@ public class LevelOne extends AppCompatActivity {
 
 
     public void getEnemy() throws JSONException {
-        i = random.nextInt(3);
-
         JSONObject obj = new JSONObject(loadJSON());
         ja = obj.getJSONArray("Enemies");
+        //Gets random enemy from the array
+        i = random.nextInt(ja.length());
         jo = ja.getJSONObject(i);
 
         enemyID = jo.getInt("ID");
@@ -223,6 +228,7 @@ public class LevelOne extends AppCompatActivity {
         enemyDef = jo.getInt("defence");
 
         enemyNameText.setText(enemyName);
+        enemyStatsText.setText("ATT: " + String.valueOf(enemyAttMin) + "-" + String.valueOf(enemyAttMax) + " DEF: " + String.valueOf(enemyDef));
         enemyHealthText.setText(String.valueOf(enemyHealth));
         enemyHealthBar.setMax(enemyHealth);
         enemyHealthBar.setProgress(enemyHealth);
@@ -234,7 +240,19 @@ public class LevelOne extends AppCompatActivity {
     public void getEnemyImage() {
         switch (enemyID) {
             case 0:
-
+                    enemyImage.setBackgroundResource(R.drawable.c_archerbones);
+                break;
+            case 1:
+                enemyImage.setBackgroundResource(R.drawable.c_henryvillager);
+                break;
+            case 2:
+                enemyImage.setBackgroundResource(R.drawable.cave);
+                break;
+            case 3:
+                enemyImage.setBackgroundResource(R.drawable.logo);
+                break;
+            case 4:
+                enemyImage.setBackgroundResource(R.drawable.shop);
                 break;
         }
     }
@@ -285,7 +303,7 @@ public class LevelOne extends AppCompatActivity {
     public void showToast() {
         Context context = getApplicationContext();
         CharSequence text;
-        Toast toast;
+        final Toast toast;
         int duration = Toast.LENGTH_SHORT;
 
         if (playerTurn) {
@@ -327,23 +345,32 @@ public class LevelOne extends AppCompatActivity {
             enemyAttack = 1;
         }
 
-        if(enemyDead == false) {
-            timer.schedule(new TimerTask() {
+        if(!enemyDead && !playerTurn) {
+
+             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
+                    runOnUiThread(new TimerTask() {
+                        @Override
+                        public void run() {
+                            playerHealth = playerHealth - enemyAttack;
+                            updatePlayer();
+                            showToast();
+                            playerTurn = true;
 
-                    playerHealth = playerHealth - enemyAttack;
-                    updatePlayer();
+                        }
+                    });
 
-                    playerTurn = true;
+
+
+
                 }
-            }, 1500);
+            }, 2000);
+
         }
-        showToast();
+
+
     }
-
-
-
 
     public void onForward(View view) throws JSONException {
         if(enemyDead) {
@@ -357,10 +384,22 @@ public class LevelOne extends AppCompatActivity {
 
         updateText();
     }
+
     public void onBack(View view) {
 
         updateText();
 
+    }
+
+    public void onHeal(View view) {
+        if (potions >= 1) {
+            playerHealth = playerHealth + 50;
+            if(playerHealth > playerMaxHealth) {
+                playerHealth = playerMaxHealth;
+            }
+            updatePlayer();
+
+        }
     }
 
 
