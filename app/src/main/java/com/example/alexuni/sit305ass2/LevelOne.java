@@ -30,19 +30,23 @@ import java.util.TimerTask;
 
 public class LevelOne extends AppCompatActivity {
 
-    JSONArray ja; //Short for JSON array
-    JSONObject jo; //Short for JSON object
-    JSONObject pd; //Player data JSON object
-    JSONArray wd; //Weapon data JSON Array
+    JSONArray ja; //JSON array
+    JSONArray ba; //Boss array
+    JSONObject jo; //JSON object
+    JSONObject pd; //Player data object
+    JSONArray wd; //Weapon data array
     JSONObject weapon;
     int i = 0; //Counter for JSON object
     int ID = 0;
 
 
-    Boolean enemyDead = false;
-    Boolean lvlClear = false;
-    Boolean playerTurn = true;
+
+
+    boolean enemyDead = false;
+    boolean lvlClear = false;
+    boolean playerTurn = true;
     boolean forwardErr;
+    boolean boss = false;
 
     Random random;
 
@@ -60,13 +64,15 @@ public class LevelOne extends AppCompatActivity {
 
     TextView nameJSON, textJSON;
 
-    TextView playerNameText, playerHealthText, playerStatsText, playerPotionsText;
+    TextView playerNameText, playerHealthText, playerStatsText, playerPotionsText, goldText;
     TextView enemyNameText, enemyHealthText, enemyStatsText;
 
     ImageView playerImage, enemyImage, textImage;
 
     Button forwardBtn, backBtn;
     Button attBtn;
+
+    int level = 1;
 
     int playerHealth, playerMaxHealth, potions;
     int wepEquipped, weaponAttMin, weaponAttMax;
@@ -82,12 +88,16 @@ public class LevelOne extends AppCompatActivity {
     int enemyAttMax;
     int enemyDef;
 
+    int goldCount;
+    int goldMin, goldMax;
 
 
     int image;
     int enemyHealth;
     int enemyAtt;
     int stepNum;
+
+    int bossCount = 0;
 
 
 
@@ -107,6 +117,8 @@ public class LevelOne extends AppCompatActivity {
         backBtn = findViewById(R.id.row1Btn2);
         attBtn = findViewById(R.id.attBtn);
 
+        goldCount = GameActivity.goldCount;
+
         nameJSON = findViewById(R.id.nameJSON);
         textJSON = findViewById(R.id.textJSON);
 
@@ -116,7 +128,8 @@ public class LevelOne extends AppCompatActivity {
         playerNameText = findViewById(R.id.playerNameText);
         playerHealthText = findViewById(R.id.playerHealthText);
         playerStatsText = findViewById(R.id.playerStatsText);
-        playerPotionsText =findViewById(R.id.potionText);
+        playerPotionsText = findViewById(R.id.potionText);
+        goldText = findViewById(R.id.goldText);
 
         enemyNameText = findViewById(R.id.enemyNameText);
         enemyHealthText = findViewById(R.id.enemyHealthText);
@@ -126,6 +139,8 @@ public class LevelOne extends AppCompatActivity {
 
 
         playerImage.setBackgroundResource(R.drawable.c_archerbones);
+
+
 
 
 
@@ -193,6 +208,7 @@ public class LevelOne extends AppCompatActivity {
         playerStatsText.setText("ATT: " + String.valueOf(totalAttMin) + "-" + String.valueOf(totalAttMax) + " DEF: " + String.valueOf(baseDef));
         playerHealthText.setText(String.valueOf(playerHealth));
         playerPotionsText.setText(String.valueOf(potions));
+        goldText.setText(String.valueOf(goldCount));
         healthBar.setMax(playerHealth);
         healthBar.setProgress(playerHealth);
 
@@ -216,9 +232,25 @@ public class LevelOne extends AppCompatActivity {
     public void getEnemy() throws JSONException {
         JSONObject obj = new JSONObject(loadJSON());
         ja = obj.getJSONArray("Enemies");
+        ba = obj.getJSONArray("Bosses");
+
+        //Checks how many steps remaining and will make the last encounter a boss fight.
+        if(stepNum >=2) {
+            boss = false;
+        } else if (stepNum == 1) {
+            boss = true;
+        }
+
         //Gets random enemy from the array
-        i = random.nextInt(ja.length());
-        jo = ja.getJSONObject(i);
+        if(!boss) {
+            i = random.nextInt(ja.length());
+            jo = ja.getJSONObject(i);
+        } else {
+            i = bossCount;
+            jo = ba.getJSONObject(i);
+            boss = false;
+        }
+
 
         enemyID = jo.getInt("ID");
         enemyName = jo.getString("name");
@@ -226,6 +258,8 @@ public class LevelOne extends AppCompatActivity {
         enemyAttMin = jo.getInt("attMin");
         enemyAttMax = jo.getInt("attMax");
         enemyDef = jo.getInt("defence");
+
+
 
         enemyNameText.setText(enemyName);
         enemyStatsText.setText("ATT: " + String.valueOf(enemyAttMin) + "-" + String.valueOf(enemyAttMax) + " DEF: " + String.valueOf(enemyDef));
@@ -288,13 +322,27 @@ public class LevelOne extends AppCompatActivity {
         healthBar.setProgress(playerHealth);
     }
 
-    public void updateEnemy() {
+    public void goldReward() throws JSONException {
+        int goldvalue;
+        JSONObject obj = new JSONObject(loadJSON());
+        jo = obj.getJSONObject("Level1");
+
+        goldMin = jo.getInt("goldMin");
+        goldMax = jo.getInt("goldMax");
+
+        goldvalue = (random.nextInt(goldMax - goldMin) + goldMin);
+        goldCount = goldCount + goldvalue;
+        goldText.setText(String.valueOf(goldCount));
+    }
+
+    public void updateEnemy() throws JSONException {
         enemyHealthText.setText(String.valueOf(enemyHealth));
         enemyHealthBar.setProgress(enemyHealth);
 
         if(enemyHealth <= 0) {
             enemyNameText.setText("You have defeated " + enemyName +"!!");
             enemyDead = true;
+            goldReward();
 
         }
         updateText();
@@ -317,7 +365,7 @@ public class LevelOne extends AppCompatActivity {
     }
     //##############################################################################################
 
-    public void onAttack(View view) {
+    public void onAttack(View view) throws JSONException {
         int damage;
         attValue = (random.nextInt((totalAttMax+1) - (totalAttMin-1)) + totalAttMin) - enemyDef;
 
@@ -346,7 +394,9 @@ public class LevelOne extends AppCompatActivity {
         }
 
         if(!enemyDead && !playerTurn) {
-
+            /* A timer and within it is another runnable runOnUIThread to allow for the toast to be
+            called, as it can only be called from a UI thread.
+             */
              timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
@@ -357,19 +407,11 @@ public class LevelOne extends AppCompatActivity {
                             updatePlayer();
                             showToast();
                             playerTurn = true;
-
                         }
                     });
-
-
-
-
                 }
             }, 2000);
-
         }
-
-
     }
 
     public void onForward(View view) throws JSONException {
@@ -394,6 +436,8 @@ public class LevelOne extends AppCompatActivity {
     public void onHeal(View view) {
         if (potions >= 1) {
             playerHealth = playerHealth + 50;
+            potions--;
+            playerPotionsText.setText(String.valueOf(potions));
             if(playerHealth > playerMaxHealth) {
                 playerHealth = playerMaxHealth;
             }

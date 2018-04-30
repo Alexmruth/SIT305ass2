@@ -27,11 +27,13 @@ public class GameActivity extends AppCompatActivity {
     int jc = 0; //short for JSON counter
     int LLcount = 0;
     int continueGame;
+    static int goldCount;
     LinearLayout LL1;
     LinearLayout LL3;
     Button nextBtn;
     TextView textJSON;
     TextView nameJSON;
+    TextView goldText;
     ImageView textImage;
     String dialogue;
     String charName;
@@ -51,6 +53,7 @@ public class GameActivity extends AppCompatActivity {
         nextBtn = findViewById(R.id.nextBtn);
         nameJSON = findViewById(R.id.nameJSON);
         textImage = findViewById(R.id.textImage);
+        goldText = findViewById(R.id.goldText);
         LL1 = findViewById(R.id.LL1);
         LL3 = findViewById(R.id.LL3);
         continueGame = MainActivity.continueGame;
@@ -64,6 +67,7 @@ public class GameActivity extends AppCompatActivity {
             introText = true;
         }
 
+        goldText.setText(String.valueOf(goldCount));
 
         //Opens the getText method
         try {
