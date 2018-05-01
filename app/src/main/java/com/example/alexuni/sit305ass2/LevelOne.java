@@ -39,7 +39,8 @@ public class LevelOne extends AppCompatActivity {
     int i = 0; //Counter for JSON object
     int ID = 0;
 
-
+// https://stackoverflow.com/questions/41080424/how-to-output-a-interactive-game-map-from-an-array-in-android-studios
+    // https://gamedev.stackexchange.com/questions/26346/whole-map-design-vs-tiles-array-design
 
 
     boolean enemyDead = false;

@@ -202,14 +202,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="onForward"
-                    android:text="Forward" />
+                    android:text="Up" />
 
-                <Button
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Left"/>
+                    <Button
                     android:id="@+id/row1Btn2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="onBack"
-                    android:text="Back" />
+                    android:text="Down" />
+                
+
+                </LinearLayout>
+
+
 
                 <Button
                     android:layout_width="match_parent"
