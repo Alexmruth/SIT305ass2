@@ -202,31 +202,36 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="onForward"
-                    android:text="Up" />
+                    android:text="Up"
+                    android:layout_gravity="center"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <Button
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Left"/>
+                        android:layout_weight="1"
+                        android:text="Left"
+                        android:layout_marginRight="5sp"/>
                     <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="5sp"
+                        android:text="Right"/>
+
+
+
+
+                </LinearLayout>
+                <Button
                     android:id="@+id/row1Btn2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="onBack"
-                    android:text="Down" />
-                
-
-                </LinearLayout>
-
-
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="test" />
+                    android:text="Down"
+                    android:layout_gravity="center"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -262,7 +267,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:background="@drawable/cave"/>
+                        android:background="@drawable/heal"/>
                     <TextView
                         android:id="@+id/potionText"
                         android:layout_width="wrap_content"

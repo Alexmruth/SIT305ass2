@@ -147,11 +147,31 @@ public class LevelOne extends AppCompatActivity {
 
         try {
             loadStats();
-            getEnemy();
+            map();
+            //getEnemy();
             getText();
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void map() throws JSONException {
+        /*int gameBoard[][] = {
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0}
+        }; */
+        int map[] = {0,0,0,0,0};
+
+        for(int i = 0;i<5;i++) {
+//i - index of a row, we have 4 rows so we want to loop through all of them
+            if(map[i] == 0) {
+                getEnemy();
+            }
+        }
+
+
     }
 
     /* #############################################################################################
