@@ -65,7 +65,7 @@
 
   "Enemies": [
     {
-      "ID": 0, "name": "Monster", "health": 50, "attMin": 2, "attMax": 7, "defence": 1
+      "ID": 0, "name": "Fat Rat", "health": 50, "attMin": 2, "attMax": 7, "defence": 1
     },
     {
       "ID": 1,
@@ -93,7 +93,7 @@
     },
     {
       "ID": 4,
-      "name": "name",
+      "name": "Floating Eye",
       "health": 60,
       "attMin": 3,
       "attMax": 5,
@@ -101,7 +101,7 @@
     },
     {
       "ID": 5,
-      "name": "name2",
+      "name": "Spider",
       "health": 30,
       "attMin": 3,
       "attMax": 7,
@@ -109,7 +109,7 @@
     },
     {
       "ID": 6,
-      "name": "name3",
+      "name": "Dragon Minion",
       "health": 25,
       "attMin": 1,
       "attMax": 16,
@@ -129,12 +129,42 @@
     "stepNum": 5,
     "text2": " steps to go before the exit!",
     "exitText": "You have reached the exit! Click the exit button to return to main screen.",
-
     "goldMin": 10,
     "goldMax": 30,
-
     "enemyDead": "Well done! Click the forward button to approach your next encounter!",
     "enemyNotDead": "You must kill this enemy before continuing forward!"
+
+    "encounter": {
+        "name": "Cave Dweller",
+        "health": 80,
+        "attMin": 2,
+        "attMax": 8,
+        "dialog": {
+          "dialog01": {
+            "dialog": "I use to live in this town..",
+            "actions": {
+              "Tell me more": "dialog02",
+              "Attack guard":  "attack"
+
+            }
+
+
+          },
+
+
+          "dialog02": {
+
+            "dialog": "I'm sleepy. Goodbye."
+
+
+          }
+
+        }
+
+
+      }
+
+    }
   }
 
 }

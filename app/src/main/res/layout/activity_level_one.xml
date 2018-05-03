@@ -14,7 +14,8 @@
         android:layout_height="match_parent"
         android:layout_weight="0.3"
         android:background="#EFF1C5"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
 
         <LinearLayout
@@ -35,6 +36,7 @@
 
             <ImageView
                 android:id="@+id/playerImage"
+                android:contentDescription="Player Image"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
@@ -86,7 +88,7 @@
 
             <ImageView
                 android:id="@+id/enemyImage"
-                android:layout_width="wrap_content"
+                android:layout_width="100sp"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_weight="1" />

@@ -147,32 +147,14 @@ public class LevelOne extends AppCompatActivity {
 
         try {
             loadStats();
-            map();
-            //getEnemy();
+            getEnemy();
             getText();
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public void map() throws JSONException {
-        /*int gameBoard[][] = {
-                {0, 0, 0, 0},
-                {0, 0, 0, 0},
-                {0, 0, 0, 0},
-                {0, 0, 0, 0}
-        }; */
-        int map[] = {0,0,0,0,0};
 
-        for(int i = 0;i<5;i++) {
-//i - index of a row, we have 4 rows so we want to loop through all of them
-            if(map[i] == 0) {
-                getEnemy();
-            }
-        }
-
-
-    }
 
     /* #############################################################################################
      loadJSON() is responsible for grabbing all content from the specified JSON file and converting
@@ -249,6 +231,13 @@ public class LevelOne extends AppCompatActivity {
         updateText();
     }
 
+    public void getEncounter() throws JSONException {
+        JSONObject obj = new JSONObject(loadJSON());
+        jo = obj.getJSONObject("Level1");
+        JSONObject encounter = obj.optJSONObject("encounter");
+
+        
+    }
 
     public void getEnemy() throws JSONException {
         JSONObject obj = new JSONObject(loadJSON());
@@ -295,19 +284,25 @@ public class LevelOne extends AppCompatActivity {
     public void getEnemyImage() {
         switch (enemyID) {
             case 0:
-                    enemyImage.setBackgroundResource(R.drawable.c_archerbones);
+                    enemyImage.setBackgroundResource(R.drawable.e_rat_minion2);
                 break;
             case 1:
-                enemyImage.setBackgroundResource(R.drawable.c_henryvillager);
+                enemyImage.setBackgroundResource(R.drawable.e_troll);
                 break;
             case 2:
-                enemyImage.setBackgroundResource(R.drawable.cave);
+                enemyImage.setBackgroundResource(R.drawable.e_skeleton);
                 break;
             case 3:
-                enemyImage.setBackgroundResource(R.drawable.logo);
+                enemyImage.setBackgroundResource(R.drawable.e_rat_minion);
                 break;
             case 4:
-                enemyImage.setBackgroundResource(R.drawable.shop);
+                enemyImage.setBackgroundResource(R.drawable.e_eye);
+                break;
+            case 5:
+                enemyImage.setBackgroundResource(R.drawable.e_spider);
+                break;
+            case 6:
+                enemyImage.setBackgroundResource(R.drawable.e_dragon_minion3);
                 break;
         }
     }
