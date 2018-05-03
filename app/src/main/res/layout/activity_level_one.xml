@@ -186,12 +186,28 @@
         android:layout_height="match_parent"
         android:layout_weight="0.4"
         android:background="#A2A77F">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            android:id="@+id/llOptions">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Option 1"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/option1Text"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/LL3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -245,7 +261,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:id="@+id/llBottomRight">
 
                 <Button
                     android:id="@+id/attBtn"

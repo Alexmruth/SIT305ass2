@@ -133,40 +133,29 @@
     "goldMax": 30,
     "enemyDead": "Well done! Click the forward button to approach your next encounter!",
     "enemyNotDead": "You must kill this enemy before continuing forward!"
+  },
 
-    "encounter": {
+    "Encounter": {
         "name": "Cave Dweller",
         "health": 80,
         "attMin": 2,
         "attMax": 8,
-        "dialog": {
-          "dialog01": {
-            "dialog": "I use to live in this town..",
-            "actions": {
-              "Tell me more": "dialog02",
-              "Attack guard":  "attack"
-
-            }
-
-
+        "dialog": [
+          {
+            "text": "I use to live in this town..",
+              "option1": "This is option 1",
+              "option2":  "This is option 2"
           },
-
-
-          "dialog02": {
-
-            "dialog": "I'm sleepy. Goodbye."
-
-
+          {
+            "text": "I'm sleepy. Goodbye."
           }
 
-        }
-
-
-      }
-
+        ]
     }
+
   }
 
-}
+
+
 
 

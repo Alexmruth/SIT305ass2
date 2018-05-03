@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -37,7 +38,11 @@ public class LevelOne extends AppCompatActivity {
     JSONArray wd; //Weapon data array
     JSONObject weapon;
     int i = 0; //Counter for JSON object
+    int e = 0; //Counter for encounter
     int ID = 0;
+
+    LinearLayout ll3;
+    LinearLayout llOptions;
 
 // https://stackoverflow.com/questions/41080424/how-to-output-a-interactive-game-map-from-an-array-in-android-studios
     // https://gamedev.stackexchange.com/questions/26346/whole-map-design-vs-tiles-array-design
@@ -48,6 +53,7 @@ public class LevelOne extends AppCompatActivity {
     boolean playerTurn = true;
     boolean forwardErr;
     boolean boss = false;
+    boolean encounter = false;
 
     Random random;
 
@@ -59,11 +65,14 @@ public class LevelOne extends AppCompatActivity {
     String enemyName;
     String text1JSON;
     String text2JSON;
+    String text3JSON;
     String exitText;
     String enemyDeadText;
     String forwardErrText;
 
     TextView nameJSON, textJSON;
+
+    TextView option1Text;
 
     TextView playerNameText, playerHealthText, playerStatsText, playerPotionsText, goldText;
     TextView enemyNameText, enemyHealthText, enemyStatsText;
@@ -120,6 +129,8 @@ public class LevelOne extends AppCompatActivity {
 
         goldCount = GameActivity.goldCount;
 
+        option1Text = findViewById(R.id.option1Text);
+
         nameJSON = findViewById(R.id.nameJSON);
         textJSON = findViewById(R.id.textJSON);
 
@@ -140,6 +151,9 @@ public class LevelOne extends AppCompatActivity {
 
 
         playerImage.setBackgroundResource(R.drawable.c_archerbones);
+
+        ll3 = findViewById(R.id.LL3);
+        llOptions = findViewById(R.id.llOptions);
 
 
 
@@ -232,11 +246,21 @@ public class LevelOne extends AppCompatActivity {
     }
 
     public void getEncounter() throws JSONException {
-        JSONObject obj = new JSONObject(loadJSON());
-        jo = obj.getJSONObject("Level1");
-        JSONObject encounter = obj.optJSONObject("encounter");
 
-        
+        encounter = true;
+        JSONObject obj = new JSONObject(loadJSON());
+        jo = obj.getJSONObject("Encounter");
+        ja = jo.getJSONArray("dialog");
+        JSONObject d = ja.getJSONObject(e);
+        text1JSON = d.getString("text");
+        textName = jo.getString("name");
+        text2JSON = d.getString("option1");
+        text3JSON = d.getString("option2");
+
+        updateText();
+        e++;
+
+
     }
 
     public void getEnemy() throws JSONException {
@@ -313,23 +337,32 @@ public class LevelOne extends AppCompatActivity {
         The following methods are responsible for updating data based on events
      */
     public void updateText() {
-        textImage.setBackgroundResource(R.drawable.c_henryvillager);
-        nameJSON.setText(textName);
-        if (forwardErr == false) {
-            if (stepNum >= 1) {
-                textJSON.setText(text1JSON + String.valueOf(stepNum) + text2JSON);
+
+        if (!encounter) {
+            textImage.setBackgroundResource(R.drawable.c_henryvillager);
+            nameJSON.setText(textName);
+            if (forwardErr == false) {
+                if (stepNum >= 1) {
+                    textJSON.setText(text1JSON + String.valueOf(stepNum) + text2JSON);
+                } else {
+                    textJSON.setText(exitText);
+                }
             } else {
-                textJSON.setText(exitText);
+                textJSON.setText(forwardErrText);
+                forwardErr = false;
             }
-        } else {
-            textJSON.setText(forwardErrText);
-            forwardErr = false;
-        }
 
-        if(enemyDead) {
-            textJSON.setText(enemyDeadText);
+            if (enemyDead) {
+                textJSON.setText(enemyDeadText);
+            }
+        } else if(encounter) {
+            ll3.setVisibility(View.INVISIBLE);
+            llOptions.setVisibility(View.VISIBLE);
+            textImage.setBackgroundResource(R.drawable.e_troll);
+            nameJSON.setText(textName);
+            textJSON.setText(text1JSON);
+            option1Text.setText(text2JSON);
         }
-
 
     }
 
@@ -443,9 +476,9 @@ public class LevelOne extends AppCompatActivity {
         updateText();
     }
 
-    public void onBack(View view) {
+    public void onBack(View view) throws JSONException {
 
-        updateText();
+        getEncounter();
 
     }
 
