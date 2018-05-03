@@ -262,6 +262,9 @@ public class LevelOne extends AppCompatActivity {
 
 
     }
+    public void onNext(View view) throws JSONException {
+        getEncounter();
+    }
 
     public void getEnemy() throws JSONException {
         JSONObject obj = new JSONObject(loadJSON());

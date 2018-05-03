@@ -144,10 +144,16 @@
           {
             "text": "I use to live in this town..",
               "option1": "This is option 1",
-              "option2":  "This is option 2"
+              "option2":  "This is option 2",
+              "reply1": "This is reply 1",
+              "reply2": "This is reply 2"
           },
           {
-            "text": "I'm sleepy. Goodbye."
+            "text": "I'm sleepy. Goodbye.",
+            "option1": "This is the next option 1",
+            "option2": "This is the next option 2",
+            "reply1": "This is other reply 1",
+            "reply2": "This is other reply 2"
           }
 
         ]

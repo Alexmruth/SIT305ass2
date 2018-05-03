@@ -177,7 +177,8 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="7"
-                android:text="Next" />
+                android:text="Next"
+                android:onClick="onNext"/>
         </LinearLayout>
     </RelativeLayout>
 
