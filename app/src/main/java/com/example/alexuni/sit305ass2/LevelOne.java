@@ -170,9 +170,8 @@ public class LevelOne extends AppCompatActivity {
 
 
 
-    /* #############################################################################################
-     loadJSON() is responsible for grabbing all content from the specified JSON file and converting
-    it into a string to be used as a JSONObject within the getText() method. */
+    /* loadJSON() is responsible for grabbing all content from the specified JSON file and converting
+    it into a string to be used as a JSONObject. */
     public String loadJSON() {
         String json = null;
         try {
