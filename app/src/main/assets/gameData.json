@@ -65,7 +65,7 @@
       "health": 25,
       "attMin": 2,
       "attMax": 7,
-      "defence": 1
+      "defence": 3
     },
     {
       "ID": 1,
@@ -78,10 +78,10 @@
     {
       "ID": 2,
       "name": "Skeleton",
-      "health": 10,
+      "health": 20,
       "attMin": 1,
       "attMax": 9,
-      "defence": 4
+      "defence": 0
     },
     {
       "ID": 3,
@@ -89,7 +89,7 @@
       "health": 10,
       "attMin": 3,
       "attMax": 7,
-      "defence": 4
+      "defence": 1
     },
     {
       "ID": 4,
@@ -97,7 +97,7 @@
       "health": 30,
       "attMin": 3,
       "attMax": 5,
-      "defence": 1
+      "defence": 2
     },
     {
       "ID": 5,
@@ -105,7 +105,7 @@
       "health": 15,
       "attMin": 3,
       "attMax": 7,
-      "defence": 2
+      "defence": 0
     },
     {
       "ID": 6,
@@ -118,14 +118,12 @@
   ],
   "Bosses": [
     {
-      "ID": 0,
-      "name": "Troll",
+      "ID": 10,
+      "name": "Boss - Troll",
       "health": 100,
       "attMin": 2,
       "attMax": 8,
-      "defence": 2,
-      "goldMin": 50,
-      "goldMax": 80
+      "defence": 2
     }
   ],
   "Level1": {
@@ -144,21 +142,21 @@
     "health": 80,
     "attMin": 2,
     "attMax": 8,
-    "defence": 4,
+    "defence": 3,
     "dialog": [
       {
-        "text": "Stop right there! What are you doing in my cave?Give me one good reason why I shouldn't kill you on the spot.",
+        "text": "Stop right there! What are you doing in my cave? Give me one good reason why I shouldn't kill you on the spot.",
         "option1": "You don't threaten me",
         "option2": "Sorry, I didn't mean to trespass.",
-        "reply1": "This is reply 1",
-        "reply2": "This is reply 2"
+        "reply1": "Oh really? I've never lost a battle in my life, and you look like another easy win!",
+        "reply2": "Invading my space comes at a price, cough up 10 gold and i'll let you be on your way."
       },
       {
-        "text": "I'm sleepy. Goodbye.",
-        "option1": "This is the next option 1",
-        "option2": "This is the next option 2",
-        "reply1": "This is other reply 1",
-        "reply2": "This is other reply 2"
+        "text": "Very well then, I hope you're ready to die!",
+        "option1": "Fight!",
+        "option2": "Null",
+        "reply1": "Null",
+        "reply2": "Null"
       }
     ]
   }

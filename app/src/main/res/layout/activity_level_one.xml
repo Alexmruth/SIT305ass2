@@ -199,7 +199,9 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Option 1"/>
+                android:text="Option 1"
+                android:id="@+id/option1Btn"
+                android:onClick="onOption"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -212,7 +214,9 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Option 2"/>
+                    android:text="Option 2"
+                    android:onClick="onOption"
+                    android:id="@+id/option2Btn"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -241,26 +245,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="onForward"
-                    android:text="Up"
+                    android:text="Forward"
                     android:layout_gravity="center"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Left"
-                        android:layout_marginRight="5sp"/>
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="5sp"
-                        android:text="Right"/>
-
-
 
 
                 </LinearLayout>
@@ -268,8 +258,8 @@
                     android:id="@+id/row1Btn2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="onBack"
-                    android:text="Down"
+                    android:onClick="onExit"
+                    android:text="Exit"
                     android:layout_gravity="center"/>
 
                 <TextView
@@ -311,13 +301,15 @@
                     <TextView
                         android:id="@+id/potionText"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:textColor="@color/black"/>
 
                 </LinearLayout>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/goldText"/>
+                    android:id="@+id/goldText"
+                    android:textColor="@color/black"/>
             </LinearLayout>
 
         </LinearLayout>

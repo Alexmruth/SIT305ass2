@@ -1,6 +1,7 @@
 package com.example.alexuni.sit305ass2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +28,7 @@ public class GameActivity extends AppCompatActivity {
     int jc = 0; //short for JSON counter
     int LLcount = 0;
     int continueGame;
-    static int goldCount;
+    int goldCount;
     LinearLayout LL1;
     LinearLayout LL3;
     Button nextBtn;
@@ -67,6 +68,8 @@ public class GameActivity extends AppCompatActivity {
             introText = true;
         }
 
+        SharedPreferences prefs = getSharedPreferences("playerSaveData", MODE_PRIVATE);
+        goldCount = prefs.getInt("gold", 0);
         goldText.setText(String.valueOf(goldCount));
 
         //Opens the getText method

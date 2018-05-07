@@ -1,11 +1,15 @@
 package com.example.alexuni.sit305ass2;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Looper;
 import android.os.SystemClock;
 import android.provider.BaseColumns;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -53,22 +57,19 @@ public class LevelOne extends AppCompatActivity {
     boolean playerTurn = true;
     boolean forwardErr;
     boolean boss = false;
-    boolean encounter = false;
+    boolean npcEncounter = false;
 
     Random random;
 
     ProgressBar healthBar;
     ProgressBar enemyHealthBar;
 
-    String textName;
-    String playerName;
-    String enemyName;
-    String text1JSON;
-    String text2JSON;
-    String text3JSON;
+    String textName,playerName, enemyName;
+    String text1JSON, text2JSON, text3JSON;
     String exitText;
     String enemyDeadText;
     String forwardErrText;
+    String replyOne, replyTwo;
 
     TextView nameJSON, textJSON;
 
@@ -79,7 +80,7 @@ public class LevelOne extends AppCompatActivity {
 
     ImageView playerImage, enemyImage, textImage;
 
-    Button forwardBtn, backBtn;
+    Button forwardBtn, backBtn, option1Btn, option2Btn;
     Button attBtn;
 
     int level = 1;
@@ -117,7 +118,10 @@ public class LevelOne extends AppCompatActivity {
         setContentView(R.layout.activity_level_one);
 
         random = new Random();
-        goldCount = GameActivity.goldCount;
+        SharedPreferences prefs = getSharedPreferences("playerSaveData", MODE_PRIVATE);
+
+
+        goldCount = prefs.getInt("gold", 0);
 
         //LinearLayouts --------------------------------------------
         ll3 = findViewById(R.id.LL3);
@@ -132,6 +136,8 @@ public class LevelOne extends AppCompatActivity {
         forwardBtn = findViewById(R.id.row1Btn1);
         backBtn = findViewById(R.id.row1Btn2);
         attBtn = findViewById(R.id.attBtn);
+        option1Btn = findViewById(R.id.option1Btn);
+        option2Btn = findViewById(R.id.option2Btn);
 
         //Images ---------------------------------------------------
         playerImage = findViewById(R.id.playerImage);
@@ -158,17 +164,36 @@ public class LevelOne extends AppCompatActivity {
         enemyStatsText = findViewById(R.id.enemyStatsText);
 
 
+
         //Essentially starts the level, loads player stats, gets encounter and gets text
         try {
             loadStats();
-            getEncounter();
             getText();
+            getEncounter();
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
+    // getEncounter() is responsible for handling what to show and when during the course of completing the level
+    public void getEncounter() throws JSONException {
 
+        if(stepNum == 3) npcEncounter = true;
 
+        if(stepNum >= 1) {
+            if (!npcEncounter) {
+                getEnemy();
+            } else {
+                getText();
+                getNPC();
+            }
+        } else {
+            lvlClear = true;
+            forwardBtn.setClickable(false);
+            attBtn.setClickable(false);
+        }
+
+        updateText();
+    }
 
     /* loadJSON() is responsible for grabbing all content from the specified JSON file and converting
     it into a string to be used as a JSONObject. */
@@ -188,20 +213,7 @@ public class LevelOne extends AppCompatActivity {
         }
         return json;
     }
-    // getEncounter() is responsible for handling what to show and when during the course of completing the level
-    public void getEncounter() throws JSONException {
 
-        if(stepNum == 3) encounter = true;
-
-        if (!encounter) {
-            getEnemy();
-        } else {
-            getText();
-            getNPC();
-        }
-
-        updateText();
-    }
     // loadStats() is responsible for loading JSON player data and assigning it to variables in-game.
     public void loadStats() throws JSONException {
         JSONObject gameData = new JSONObject(loadJSON());
@@ -227,6 +239,9 @@ public class LevelOne extends AppCompatActivity {
 
         totalDef = baseDef;
         playerMaxHealth = playerHealth;
+
+        jo = gameData.getJSONObject("Level1");
+        stepNum = jo.getInt("stepNum");
 
         // Assigning variables to widgets
         playerNameText.setText(playerName);
@@ -261,15 +276,12 @@ public class LevelOne extends AppCompatActivity {
             boss = false;
         }
 
-
         enemyID = jo.getInt("ID");
         enemyName = jo.getString("name");
         enemyHealth = jo.getInt("health");
         enemyAttMin = jo.getInt("attMin");
         enemyAttMax = jo.getInt("attMax");
         enemyDef = jo.getInt("defence");
-
-
 
         enemyNameText.setText(enemyName);
         enemyStatsText.setText("ATT: " + String.valueOf(enemyAttMin) + "-" + String.valueOf(enemyAttMax) + " DEF: " + String.valueOf(enemyDef));
@@ -278,7 +290,6 @@ public class LevelOne extends AppCompatActivity {
         enemyHealthBar.setProgress(enemyHealth);
 
         getEnemyImage();
-
     }
     // getEnemyImage is responsible for assigning an image to an enemy based on their ID
     public void getEnemyImage() {
@@ -304,16 +315,15 @@ public class LevelOne extends AppCompatActivity {
             case 6:
                 enemyImage.setBackgroundResource(R.drawable.e_dragon_minion3);
                 break;
+            case 10:
+                enemyImage.setBackgroundResource(R.drawable.eb_troll_boss);
         }
     }
-
 
     public void getText() throws JSONException {
         JSONObject obj = new JSONObject(loadJSON());
         jo = obj.getJSONObject("Level1");
-
-        if(!encounter) {
-            stepNum = jo.getInt("stepNum");
+        if(!npcEncounter) {
             text1JSON = jo.getString("text1");
             text2JSON = jo.getString("text2");
             exitText = jo.getString("exitText");
@@ -329,12 +339,13 @@ public class LevelOne extends AppCompatActivity {
             textName = jo.getString("name");
             text2JSON = d.getString("option1");
             text3JSON = d.getString("option2");
-            e++;
+            replyOne = d.getString("reply1");
+            replyTwo = d.getString("reply2");
         }
     }
     public void updateText() {
 
-        if (!encounter) {
+        if (!npcEncounter) {
             textImage.setBackgroundResource(R.drawable.c_henryvillager);
             nameJSON.setText(textName);
             if (forwardErr == false) {
@@ -348,12 +359,23 @@ public class LevelOne extends AppCompatActivity {
                 forwardErr = false;
             }
 
-        } else if(encounter) {
+        } else if(npcEncounter) {
             ll3.setVisibility(View.INVISIBLE);
             llOptions.setVisibility(View.VISIBLE);
             textImage.setBackgroundResource(R.drawable.e_troll);
+
             nameJSON.setText(textName);
             textJSON.setText(text1JSON);
+
+            if (text2JSON.contains("Null")) {
+                option1Btn.setVisibility(View.INVISIBLE);
+                option1Text.setVisibility(View.INVISIBLE);
+            }
+
+            if (text3JSON.contains("Null")) {
+                option2Btn.setVisibility(View.INVISIBLE);
+                option2Text.setVisibility(View.INVISIBLE);
+            }
             option1Text.setText(text2JSON);
             option2Text.setText(text3JSON);
 
@@ -365,7 +387,6 @@ public class LevelOne extends AppCompatActivity {
         }
 
     }
-
 
     public void getNPC() throws JSONException {
         JSONObject obj = new JSONObject(loadJSON());
@@ -385,17 +406,31 @@ public class LevelOne extends AppCompatActivity {
         enemyHealthBar.setProgress(enemyHealth);
         enemyImage.setBackgroundResource(R.drawable.e_troll);
     }
-    public void onNext(View view) throws JSONException {
-        getEncounter();
+
+    public void onOption(View v) throws JSONException {
+        if (v.getId() == R.id.option1Btn) {
+
+
+            if (text2JSON.contains("Fight!")) {
+                npcEncounter = false;
+                ll3.setVisibility(View.VISIBLE);
+                llOptions.setVisibility(View.INVISIBLE);
+            } else {
+                e++;
+            }
+            getText();
+            updateText();
+
+        } else if(v.getId() == R.id.option2Btn) {
+
+            updateText();
+        }
     }
 
 
+    public void onNext(View view) throws JSONException {
 
-    //##############################################################################################
-
-    /* #############################################################################################
-        The following methods are responsible for updating data based on events
-     */
+    }
 
 
     public void updatePlayer() {
@@ -508,10 +543,36 @@ public class LevelOne extends AppCompatActivity {
         updateText();
     }
 
-    public void onBack(View view) throws JSONException {
+    public void onExit(View view) throws JSONException {
+        if (lvlClear) {
+            save();
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Exit?");
+            builder.setMessage("If you exit before you finish the level, all progress is lost!");
+            builder.setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    goToGameActivity();
+                }
+            });
+            builder.setNegativeButton("Stay", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
 
-        getEncounter();
+                }
+            });
+            builder.show();
+        }
+    }
+    public void goToGameActivity() {
+        Intent intent = new Intent (this, GameActivity.class);
+        startActivity(intent);
+    }
 
+    public void save() {
+        SharedPreferences prefs = getSharedPreferences("playerSaveData", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("gold", goldCount);
+        editor.commit();
     }
 
     public void onHeal(View view) {
