@@ -72,7 +72,7 @@ public class LevelOne extends AppCompatActivity {
 
     TextView nameJSON, textJSON;
 
-    TextView option1Text;
+    TextView option1Text, option2Text;
 
     TextView playerNameText, playerHealthText, playerStatsText, playerPotionsText, goldText;
     TextView enemyNameText, enemyHealthText, enemyStatsText;
@@ -116,52 +116,52 @@ public class LevelOne extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_one);
 
-        //HEALTH BARS
+        random = new Random();
+        goldCount = GameActivity.goldCount;
+
+        //LinearLayouts --------------------------------------------
+        ll3 = findViewById(R.id.LL3);
+        llOptions = findViewById(R.id.llOptions);
+
+        //Health bars ----------------------------------------------
         healthBar = findViewById(R.id.healthBar);
         enemyHealthBar = findViewById(R.id.enemyHealthBar);
         healthBar.setMax(playerHealth);
 
-        random = new Random();
-
+        //Buttons --------------------------------------------------
         forwardBtn = findViewById(R.id.row1Btn1);
         backBtn = findViewById(R.id.row1Btn2);
         attBtn = findViewById(R.id.attBtn);
 
-        goldCount = GameActivity.goldCount;
-
-        option1Text = findViewById(R.id.option1Text);
-
-        nameJSON = findViewById(R.id.nameJSON);
-        textJSON = findViewById(R.id.textJSON);
-
+        //Images ---------------------------------------------------
         playerImage = findViewById(R.id.playerImage);
         enemyImage = findViewById(R.id.enemyImage);
+        textImage = findViewById(R.id.textImage);
+        playerImage.setBackgroundResource(R.drawable.c_archerbones);
 
+        //TextViews ------------------------------------------------
+            //Options
+        option1Text = findViewById(R.id.option1Text);
+        option2Text = findViewById(R.id.option2Text);
+            //Dialogue text
+        nameJSON = findViewById(R.id.nameJSON);
+        textJSON = findViewById(R.id.textJSON);
+            //Player text
         playerNameText = findViewById(R.id.playerNameText);
         playerHealthText = findViewById(R.id.playerHealthText);
         playerStatsText = findViewById(R.id.playerStatsText);
         playerPotionsText = findViewById(R.id.potionText);
         goldText = findViewById(R.id.goldText);
-
+            //Enemy text
         enemyNameText = findViewById(R.id.enemyNameText);
         enemyHealthText = findViewById(R.id.enemyHealthText);
         enemyStatsText = findViewById(R.id.enemyStatsText);
 
-        textImage = findViewById(R.id.textImage);
 
-
-        playerImage.setBackgroundResource(R.drawable.c_archerbones);
-
-        ll3 = findViewById(R.id.LL3);
-        llOptions = findViewById(R.id.llOptions);
-
-
-
-
-
+        //Essentially starts the level, loads player stats, gets encounter and gets text
         try {
             loadStats();
-            getEnemy();
+            getEncounter();
             getText();
         } catch (JSONException e) {
             e.printStackTrace();
@@ -189,12 +189,21 @@ public class LevelOne extends AppCompatActivity {
         }
         return json;
     }
-    //##############################################################################################
+    // getEncounter() is responsible for handling what to show and when during the course of completing the level
+    public void getEncounter() throws JSONException {
 
+        if(stepNum == 3) encounter = true;
 
-    /* #############################################################################################
-       The following methods are responsible for loading/getting data and assigning it to values.
-     */
+        if (!encounter) {
+            getEnemy();
+        } else {
+            getText();
+            getNPC();
+        }
+
+        updateText();
+    }
+    // loadStats() is responsible for loading JSON player data and assigning it to variables in-game.
     public void loadStats() throws JSONException {
         JSONObject gameData = new JSONObject(loadJSON());
         pd = gameData.getJSONObject("PlayerData");
@@ -230,42 +239,7 @@ public class LevelOne extends AppCompatActivity {
         healthBar.setProgress(playerHealth);
 
     }
-
-    public void getText() throws JSONException {
-        JSONObject obj = new JSONObject(loadJSON());
-        jo = obj.getJSONObject("Level1");
-
-        stepNum = jo.getInt("stepNum");
-        text1JSON = jo.getString("text1");
-        text2JSON = jo.getString("text2");
-        exitText = jo.getString("exitText");
-        enemyDeadText = jo.getString("enemyDead");
-        forwardErrText = jo.getString("enemyNotDead");
-        textName = jo.getString("character1");
-        updateText();
-    }
-
-    public void getEncounter() throws JSONException {
-
-        encounter = true;
-        JSONObject obj = new JSONObject(loadJSON());
-        jo = obj.getJSONObject("Encounter");
-        ja = jo.getJSONArray("dialog");
-        JSONObject d = ja.getJSONObject(e);
-        text1JSON = d.getString("text");
-        textName = jo.getString("name");
-        text2JSON = d.getString("option1");
-        text3JSON = d.getString("option2");
-
-        updateText();
-        e++;
-
-
-    }
-    public void onNext(View view) throws JSONException {
-        getEncounter();
-    }
-
+    // getEnemy() is responsible for loading JSON enemy data and assigning it to variables in-game.
     public void getEnemy() throws JSONException {
         JSONObject obj = new JSONObject(loadJSON());
         ja = obj.getJSONArray("Enemies");
@@ -307,11 +281,11 @@ public class LevelOne extends AppCompatActivity {
         getEnemyImage();
 
     }
-
+    // getEnemyImage is responsible for assigning an image to an enemy based on their ID
     public void getEnemyImage() {
         switch (enemyID) {
             case 0:
-                    enemyImage.setBackgroundResource(R.drawable.e_rat_minion2);
+                enemyImage.setBackgroundResource(R.drawable.e_rat_minion2);
                 break;
             case 1:
                 enemyImage.setBackgroundResource(R.drawable.e_troll);
@@ -334,11 +308,31 @@ public class LevelOne extends AppCompatActivity {
         }
     }
 
-    //##############################################################################################
 
-    /* #############################################################################################
-        The following methods are responsible for updating data based on events
-     */
+    public void getText() throws JSONException {
+        JSONObject obj = new JSONObject(loadJSON());
+        jo = obj.getJSONObject("Level1");
+
+        if(!encounter) {
+            stepNum = jo.getInt("stepNum");
+            text1JSON = jo.getString("text1");
+            text2JSON = jo.getString("text2");
+            exitText = jo.getString("exitText");
+            enemyDeadText = jo.getString("enemyDead");
+            forwardErrText = jo.getString("enemyNotDead");
+            textName = jo.getString("character1");
+            updateText();
+        } else {
+            jo = obj.getJSONObject("Encounter");
+            ja = jo.getJSONArray("dialog");
+            JSONObject d = ja.getJSONObject(e);
+            text1JSON = d.getString("text");
+            textName = jo.getString("name");
+            text2JSON = d.getString("option1");
+            text3JSON = d.getString("option2");
+            e++;
+        }
+    }
     public void updateText() {
 
         if (!encounter) {
@@ -355,9 +349,6 @@ public class LevelOne extends AppCompatActivity {
                 forwardErr = false;
             }
 
-            if (enemyDead) {
-                textJSON.setText(enemyDeadText);
-            }
         } else if(encounter) {
             ll3.setVisibility(View.INVISIBLE);
             llOptions.setVisibility(View.VISIBLE);
@@ -365,9 +356,48 @@ public class LevelOne extends AppCompatActivity {
             nameJSON.setText(textName);
             textJSON.setText(text1JSON);
             option1Text.setText(text2JSON);
+            option2Text.setText(text3JSON);
+
+            enemyNameText.setText(enemyName);
+            enemyStatsText.setText("ATT: " + String.valueOf(enemyAttMin) + "-" + String.valueOf(enemyAttMax) + " DEF: " + String.valueOf(enemyDef));
+            enemyHealthText.setText(String.valueOf(enemyHealth));
+            enemyHealthBar.setMax(enemyHealth);
+            enemyHealthBar.setProgress(enemyHealth);
         }
 
     }
+
+
+    public void getNPC() throws JSONException {
+        JSONObject obj = new JSONObject(loadJSON());
+        jo = obj.getJSONObject("Encounter");
+
+        enemyName = jo.getString("name");
+        enemyHealth = jo.getInt("health");
+        enemyAttMin = jo.getInt("attMin");
+        enemyAttMax = jo.getInt("attMax");
+        enemyDef = jo.getInt("defence");
+
+
+        enemyNameText.setText(enemyName);
+        enemyStatsText.setText("ATT: " + String.valueOf(enemyAttMin) + "-" + String.valueOf(enemyAttMax) + " DEF: " + String.valueOf(enemyDef));
+        enemyHealthText.setText(String.valueOf(enemyHealth));
+        enemyHealthBar.setMax(enemyHealth);
+        enemyHealthBar.setProgress(enemyHealth);
+        enemyImage.setBackgroundResource(R.drawable.e_troll);
+    }
+    public void onNext(View view) throws JSONException {
+        getEncounter();
+    }
+
+
+
+    //##############################################################################################
+
+    /* #############################################################################################
+        The following methods are responsible for updating data based on events
+     */
+
 
     public void updatePlayer() {
         playerHealthText.setText(String.valueOf(playerHealth));
@@ -395,9 +425,9 @@ public class LevelOne extends AppCompatActivity {
             enemyNameText.setText("You have defeated " + enemyName +"!!");
             enemyDead = true;
             goldReward();
-
+            textJSON.setText(enemyDeadText);
         }
-        updateText();
+
     }
 
     public void showToast() {
@@ -469,7 +499,7 @@ public class LevelOne extends AppCompatActivity {
     public void onForward(View view) throws JSONException {
         if(enemyDead) {
             stepNum--;
-            getEnemy();
+            getEncounter();
             enemyDead = false;
             playerTurn = true;
         } else {

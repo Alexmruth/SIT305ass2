@@ -1,16 +1,12 @@
 {
-
   "PlayerData": {
     "name": "Archer Bones",
     "baseHealth": 100,
     "baseAttackMin": 3,
     "baseAttackMax": 6,
     "baseDefence": 1,
-
     "potions": 3
-
   },
-
   "Weapons": [
     {
       "ID": 0,
@@ -62,15 +58,19 @@
       "price": 100000
     }
   ],
-
   "Enemies": [
     {
-      "ID": 0, "name": "Fat Rat", "health": 50, "attMin": 2, "attMax": 7, "defence": 1
+      "ID": 0,
+      "name": "Fat Rat",
+      "health": 25,
+      "attMin": 2,
+      "attMax": 7,
+      "defence": 1
     },
     {
       "ID": 1,
       "name": "Cave dweller",
-      "health": 25,
+      "health": 12,
       "attMin": 3,
       "attMax": 5,
       "defence": 3
@@ -78,7 +78,7 @@
     {
       "ID": 2,
       "name": "Skeleton",
-      "health": 20,
+      "health": 10,
       "attMin": 1,
       "attMax": 9,
       "defence": 4
@@ -86,7 +86,7 @@
     {
       "ID": 3,
       "name": "Mutant Rat",
-      "health": 20,
+      "health": 10,
       "attMin": 3,
       "attMax": 7,
       "defence": 4
@@ -94,7 +94,7 @@
     {
       "ID": 4,
       "name": "Floating Eye",
-      "health": 60,
+      "health": 30,
       "attMin": 3,
       "attMax": 5,
       "defence": 1
@@ -102,7 +102,7 @@
     {
       "ID": 5,
       "name": "Spider",
-      "health": 30,
+      "health": 15,
       "attMin": 3,
       "attMax": 7,
       "defence": 2
@@ -110,19 +110,24 @@
     {
       "ID": 6,
       "name": "Dragon Minion",
-      "health": 25,
+      "health": 12,
       "attMin": 1,
       "attMax": 16,
       "defence": 2
     }
-    ],
+  ],
   "Bosses": [
     {
-      "ID": 0, "name": "Troll", "health": 100, "attMin": 2, "attMax": 8 , "defence": 2, "goldMin": 50,
+      "ID": 0,
+      "name": "Troll",
+      "health": 100,
+      "attMin": 2,
+      "attMax": 8,
+      "defence": 2,
+      "goldMin": 50,
       "goldMax": 80
     }
   ],
-
   "Level1": {
     "character1": "Henry the Villager",
     "text1": "You have ",
@@ -134,32 +139,30 @@
     "enemyDead": "Well done! Click the forward button to approach your next encounter!",
     "enemyNotDead": "You must kill this enemy before continuing forward!"
   },
-
-    "Encounter": {
-        "name": "Cave Dweller",
-        "health": 80,
-        "attMin": 2,
-        "attMax": 8,
-        "dialog": [
-          {
-            "text": "I use to live in this town..",
-              "option1": "This is option 1",
-              "option2":  "This is option 2",
-              "reply1": "This is reply 1",
-              "reply2": "This is reply 2"
-          },
-          {
-            "text": "I'm sleepy. Goodbye.",
-            "option1": "This is the next option 1",
-            "option2": "This is the next option 2",
-            "reply1": "This is other reply 1",
-            "reply2": "This is other reply 2"
-          }
-
-        ]
-    }
-
+  "Encounter": {
+    "name": "Cave Dweller",
+    "health": 80,
+    "attMin": 2,
+    "attMax": 8,
+    "defence": 4,
+    "dialog": [
+      {
+        "text": "Stop right there! What are you doing in my cave?Give me one good reason why I shouldn't kill you on the spot.",
+        "option1": "You don't threaten me",
+        "option2": "Sorry, I didn't mean to trespass.",
+        "reply1": "This is reply 1",
+        "reply2": "This is reply 2"
+      },
+      {
+        "text": "I'm sleepy. Goodbye.",
+        "option1": "This is the next option 1",
+        "option2": "This is the next option 2",
+        "reply1": "This is other reply 1",
+        "reply2": "This is other reply 2"
+      }
+    ]
   }
+}
 
 
 

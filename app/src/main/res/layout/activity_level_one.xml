@@ -88,7 +88,7 @@
 
             <ImageView
                 android:id="@+id/enemyImage"
-                android:layout_width="100sp"
+                android:layout_width="78dp"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_weight="1" />
@@ -191,7 +191,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="invisible"
+            android:orientation="vertical"
             android:id="@+id/llOptions">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -199,7 +203,22 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/option1Text"/>
+                android:id="@+id/option1Text"
+                android:textColor="@color/black"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Option 2"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/option2Text"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -207,7 +226,8 @@
             android:id="@+id/LL3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="visible">
 
 
             <LinearLayout
