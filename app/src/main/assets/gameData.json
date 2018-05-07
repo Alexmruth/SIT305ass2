@@ -3,60 +3,18 @@
     "name": "Archer Bones",
     "baseHealth": 100,
     "baseAttackMin": 3,
-    "baseAttackMax": 6,
+    "baseAttackMax": 600,
     "baseDefence": 1,
     "potions": 3
   },
   "Weapons": [
-    {
-      "ID": 0,
-      "name": "Fists",
-      "attMin": "1",
-      "attMax": "5",
-      "price": 0
-    },
-    {
-      "ID": 1,
-      "name": "Basic Sword",
-      "attMin": "2",
-      "attMax": "8",
-      "price": 100
-    },
-    {
-      "ID": 2,
-      "name": "Copper Swiftblade",
-      "attMin": "5",
-      "attMax": "10",
-      "price": 2500
-    },
-    {
-      "ID": 3,
-      "name": "Vanquisher",
-      "attMin": "7",
-      "attMax": "15",
-      "price": 10000
-    },
-    {
-      "ID": 4,
-      "name": "Obsidian Razor",
-      "attMin": "10",
-      "attMax": "22",
-      "price": 30000
-    },
-    {
-      "ID": 5,
-      "name": "Slice of Life",
-      "attMin": "15",
-      "attMax": "33",
-      "price": 50000
-    },
-    {
-      "ID": 6,
-      "name": "Eternal Blade",
-      "attMin": "22",
-      "attMax": "50",
-      "price": 100000
-    }
+    {"ID": 0, "name": "Fists", "attMin": "1", "attMax": "5", "price": 0},
+    {"ID": 1, "name": "Basic Sword", "attMin": "2", "attMax": "8", "price": 100},
+    {"ID": 2, "name": "Copper Swiftblade", "attMin": "5", "attMax": "10", "price": 2500},
+    {"ID": 3, "name": "Vanquisher", "attMin": "7", "attMax": "15", "price": 10000},
+    {"ID": 4, "name": "Obsidian Razor", "attMin": "10", "attMax": "22", "price": 30000},
+    {"ID": 5, "name": "Slice of Life", "attMin": "15", "attMax": "33", "price": 50000},
+    {"ID": 6, "name": "Eternal Blade", "attMin": "22", "attMax": "50", "price": 100000}
   ],
   "Enemies": [
     {
@@ -146,17 +104,18 @@
     "dialog": [
       {
         "text": "Stop right there! What are you doing in my cave? Give me one good reason why I shouldn't kill you on the spot.",
-        "option1": "You don't threaten me",
-        "option2": "Sorry, I didn't mean to trespass.",
-        "reply1": "Oh really? I've never lost a battle in my life, and you look like another easy win!",
-        "reply2": "Invading my space comes at a price, cough up 10 gold and i'll let you be on your way."
+        "option1": "You don't threaten me!",
+        "option2": "Sorry, I didn't mean to trespass."
       },
       {
         "text": "Very well then, I hope you're ready to die!",
         "option1": "Fight!",
-        "option2": "Null",
-        "reply1": "Null",
-        "reply2": "Null"
+        "option2": "Null"
+      },
+      {
+        "text": "Invading my space comes at a price, cough up 10 gold and i'll let you be on your way.",
+        "option1": "Fight!",
+        "option2": "Give 10 gold."
       }
     ]
   }

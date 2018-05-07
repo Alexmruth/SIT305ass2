@@ -4,8 +4,8 @@
     android:id="@+id/sizeTest1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#EFF1C5"
+    android:orientation="vertical"
     tools:context="com.example.alexuni.sit305ass2.GameActivity">
 
     <LinearLayout
@@ -27,26 +27,29 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:visibility="invisible" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
+
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:layout_gravity="center"
                     android:layout_weight="3"
-                    android:background="@drawable/cave"/>
-            <Button
-                android:id="@+id/button1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:onClick="onMenuBtnClick"
-                android:text="Caves" />
+                    android:background="@drawable/cave" />
+
+                <Button
+                    android:id="@+id/button1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:onClick="onMenuBtnClick"
+                    android:text="Caves" />
             </LinearLayout>
 
             <Button
@@ -71,19 +74,19 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
                     android:layout_weight="3"
-                    android:layout_gravity="center"
-                    android:background="@drawable/shop"/>
+                    android:background="@drawable/shop" />
 
                 <Button
+                    android:id="@+id/shopBtn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="4"
-                    android:text="Shop"
-                    android:id="@+id/shopBtn"
-                    android:onClick="onMenuBtnClick"/>
+                    android:onClick="onMenuBtnClick"
+                    android:text="Shop" />
             </LinearLayout>
 
             <LinearLayout
@@ -95,11 +98,11 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
                     android:layout_weight="3"
-                    android:layout_gravity="center"
-                    android:background="@drawable/sword001"/>
+                    android:background="@drawable/sword001" />
 
                 <Button
                     android:layout_width="match_parent"
@@ -135,85 +138,6 @@
 
 
     </LinearLayout>
-    -
-    <!--
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.3"
-                android:id="@+id/sizeTest"
-                android:background="#EFF1C5">
-
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="100sp"
-                    android:layout_weight="1">
-
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:visibility="invisible"/>
-
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="Caves"
-                        android:layout_weight="1"
-                        android:id="@+id/button1"
-                        android:onClick="onMenuBtnClick"/>
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:visibility="invisible"/>
-
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="Shop"
-                        android:layout_weight="1"
-                        />
-                        <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Inventory"
-                        android:layout_weight="1"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:layout_weight="3"
-                            android:background="@drawable/c_henryvillager"
-                            android:scaleType="fitXY" />
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="Talk to Henry"
-                            android:layout_weight="4"
-                            android:onClick="talkHenry"
-                            android:id="@+id/henryBtn"/>
-                    </LinearLayout>
-
-                </TableRow>
-
-            </TableLayout> -->
-
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -278,10 +202,10 @@
         android:background="#A2A77F">
 
         <LinearLayout
+            android:id="@+id/LL3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:id="@+id/LL3">
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -307,14 +231,78 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/goldText"/>
+                    android:text="PLAYER STATS"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/playerStatsText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/playerStatsText2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/playerHealthText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:gravity="center|bottom"
+                    android:textColor="@color/black" />
+
+                <ProgressBar
+                    android:id="@+id/homeHealthBar"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginRight="10sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/coin" />
+
+                    <TextView
+                        android:id="@+id/homeGoldText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/heal" />
+
+                    <TextView
+                        android:id="@+id/homePotionText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical" />
+                </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>

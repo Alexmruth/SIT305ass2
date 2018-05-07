@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -28,13 +29,13 @@ public class GameActivity extends AppCompatActivity {
     int jc = 0; //short for JSON counter
     int LLcount = 0;
     int continueGame;
-    int goldCount;
+    int goldCount, potionCount, playerHealth, attMin, attMax, def;
+    ProgressBar healthBar;
     LinearLayout LL1;
     LinearLayout LL3;
     Button nextBtn;
-    TextView textJSON;
-    TextView nameJSON;
-    TextView goldText;
+    TextView textJSON, nameJSON;
+    TextView playerStatsText, playerStatsText2, playerHealthText, goldText, potionsText;
     ImageView textImage;
     String dialogue;
     String charName;
@@ -50,11 +51,16 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        healthBar = findViewById(R.id.homeHealthBar);
+        playerStatsText = findViewById(R.id.playerStatsText);
+        playerStatsText2 = findViewById(R.id.playerStatsText2);
+        playerHealthText = findViewById(R.id.playerHealthText);
+        potionsText = findViewById(R.id.homePotionText);
         textJSON = findViewById(R.id.textJSON);
         nextBtn = findViewById(R.id.nextBtn);
         nameJSON = findViewById(R.id.nameJSON);
         textImage = findViewById(R.id.textImage);
-        goldText = findViewById(R.id.goldText);
+        goldText = findViewById(R.id.homeGoldText);
         LL1 = findViewById(R.id.LL1);
         LL3 = findViewById(R.id.LL3);
         continueGame = MainActivity.continueGame;
@@ -70,7 +76,19 @@ public class GameActivity extends AppCompatActivity {
 
         SharedPreferences prefs = getSharedPreferences("playerSaveData", MODE_PRIVATE);
         goldCount = prefs.getInt("gold", 0);
+        potionCount = prefs.getInt("potions", 3);
+        playerHealth = prefs.getInt("health", 100);
+        attMin = prefs.getInt("attMin", 0);
+        attMax = prefs.getInt("attMax", 0);
+        def = prefs.getInt("def", 0);
+
+        playerStatsText.setText("ATT: " + String.valueOf(attMin) + "-" + String.valueOf(attMax));
+        playerStatsText2.setText( "DEF: " + String.valueOf(def));
+        playerHealthText.setText(String.valueOf(playerHealth));
+        healthBar.setMax(100);
+        healthBar.setProgress(playerHealth);
         goldText.setText(String.valueOf(goldCount));
+        potionsText.setText(String.valueOf(potionCount));
 
         //Opens the getText method
         try {

@@ -120,7 +120,7 @@ public class LevelOne extends AppCompatActivity {
         random = new Random();
         SharedPreferences prefs = getSharedPreferences("playerSaveData", MODE_PRIVATE);
 
-
+        playerHealth = prefs.getInt("health", 0);
         goldCount = prefs.getInt("gold", 0);
 
         //LinearLayouts --------------------------------------------
@@ -339,8 +339,8 @@ public class LevelOne extends AppCompatActivity {
             textName = jo.getString("name");
             text2JSON = d.getString("option1");
             text3JSON = d.getString("option2");
-            replyOne = d.getString("reply1");
-            replyTwo = d.getString("reply2");
+            //replyOne = d.getString("reply1");
+            //replyTwo = d.getString("reply2");
         }
     }
     public void updateText() {
@@ -422,7 +422,16 @@ public class LevelOne extends AppCompatActivity {
             updateText();
 
         } else if(v.getId() == R.id.option2Btn) {
-
+            if(text3JSON.contains("Give")) {
+                stepNum--;
+                npcEncounter = false;
+                ll3.setVisibility(View.VISIBLE);
+                llOptions.setVisibility(View.INVISIBLE);
+                getEnemy();
+            } else {
+                e = 2;
+            }
+            getText();
             updateText();
         }
     }
@@ -546,6 +555,7 @@ public class LevelOne extends AppCompatActivity {
     public void onExit(View view) throws JSONException {
         if (lvlClear) {
             save();
+            goToGameActivity();
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Exit?");
@@ -572,6 +582,11 @@ public class LevelOne extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("playerSaveData", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt("gold", goldCount);
+        editor.putInt("health", playerHealth);
+        editor.putInt("potions", potions);
+        editor.putInt("attMin", totalAttMin);
+        editor.putInt("attMax", totalAttMax);
+        editor.putInt("def", totalDef);
         editor.commit();
     }
 
