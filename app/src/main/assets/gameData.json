@@ -2,10 +2,11 @@
   "PlayerData": {
     "name": "Archer Bones",
     "baseHealth": 100,
-    "baseAttackMin": 3,
-    "baseAttackMax": 600,
+    "baseAttMin": 3,
+    "baseAttMax": 6,
     "baseDefence": 1,
-    "potions": 3
+    "basePotions": 3,
+    "baseGold": 10
   },
   "Weapons": [
     {"ID": 0, "name": "Fists", "attMin": "1", "attMax": "5", "price": 0},
@@ -84,10 +85,14 @@
       "defence": 2
     }
   ],
-  "Level1": {
+  "LevelText": {
     "character1": "Henry the Villager",
     "text1": "You have ",
-    "stepNum": 5,
+    "stepNumLvl1": 5,
+    "stepNumLvl2": 7,
+    "lvl1Difficulty": 1,
+    "lvl2Difficulty": 1.2,
+    "lvl3Difficulty": 1.5,
     "text2": " steps to go before the exit!",
     "exitText": "You have reached the exit! Click the exit button to return to main screen.",
     "goldMin": 10,

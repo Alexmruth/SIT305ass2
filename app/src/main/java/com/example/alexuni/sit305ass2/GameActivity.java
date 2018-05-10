@@ -43,6 +43,9 @@ public class GameActivity extends AppCompatActivity {
     JSONArray ja;
     int i = 0;
 
+    SharedPreferences prefs;
+    SharedPreferences.Editor editor;
+
     private Timer timer = new Timer();
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -65,6 +68,9 @@ public class GameActivity extends AppCompatActivity {
         LL3 = findViewById(R.id.LL3);
         continueGame = MainActivity.continueGame;
 
+        prefs = getSharedPreferences("playerSaveData", MODE_PRIVATE);
+        editor = prefs.edit();
+
         if (continueGame == 1) {
             LLcount = 1;
             introText = false;
@@ -72,15 +78,36 @@ public class GameActivity extends AppCompatActivity {
             LL1.setVisibility(View.INVISIBLE);
             LL3.setVisibility(View.INVISIBLE);
             introText = true;
+            editor.clear();
+            editor.apply();
         }
 
-        SharedPreferences prefs = getSharedPreferences("playerSaveData", MODE_PRIVATE);
-        goldCount = prefs.getInt("gold", 0);
-        potionCount = prefs.getInt("potions", 3);
-        playerHealth = prefs.getInt("health", 100);
-        attMin = prefs.getInt("attMin", 0);
-        attMax = prefs.getInt("attMax", 0);
-        def = prefs.getInt("def", 0);
+
+        //Opens the getText method
+        try {
+            loadPlayerData();
+            getText();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void loadPlayerData() throws JSONException {
+        JSONObject obj = new JSONObject(loadGameData());
+        JSONObject jo = obj.getJSONObject("PlayerData");
+        int baseAttMin = jo.getInt("baseAttMin");
+        int baseAttMax = jo.getInt("baseAttMax");
+        int baseDef = jo.getInt("baseDefence");
+        int baseHealth = jo.getInt("baseHealth");
+        int basePotions = jo.getInt("basePotions");
+        int baseGold = jo.getInt("baseGold");
+        goldCount = prefs.getInt("gold", baseGold);
+        potionCount = prefs.getInt("potions", basePotions);
+        playerHealth = prefs.getInt("health", baseHealth);
+        attMin = prefs.getInt("attMin", baseAttMin);
+        attMax = prefs.getInt("attMax", baseAttMax);
+        def = prefs.getInt("def", baseDef);
 
         playerStatsText.setText("ATT: " + String.valueOf(attMin) + "-" + String.valueOf(attMax));
         playerStatsText2.setText( "DEF: " + String.valueOf(def));
@@ -89,14 +116,6 @@ public class GameActivity extends AppCompatActivity {
         healthBar.setProgress(playerHealth);
         goldText.setText(String.valueOf(goldCount));
         potionsText.setText(String.valueOf(potionCount));
-
-        //Opens the getText method
-        try {
-            getText();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
     }
 
     public void onMenuBtnClick(View v) {
@@ -125,6 +144,22 @@ public class GameActivity extends AppCompatActivity {
         String json = null;
         try {
             InputStream file = getAssets().open("dialogue.json");
+            int size = file.available();
+            byte[] buffer = new byte[size];
+            file.read(buffer);
+            file.close();
+            json = new String(buffer, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
+    public String loadGameData() {
+        String json = null;
+        try {
+            InputStream file = getAssets().open("gameData.json");
             int size = file.available();
             byte[] buffer = new byte[size];
             file.read(buffer);

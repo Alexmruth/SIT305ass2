@@ -9,6 +9,7 @@ package com.example.alexuni.sit305ass2;
 public class LevelsActivity extends AppCompatActivity {
 
     Button lvlBtn1, lvlBtn2;
+    static  int currentLevel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,10 +20,12 @@ public class LevelsActivity extends AppCompatActivity {
 
     public void lvlHandler(View v) {
         if(v.getId() == R.id.lvlBtn1) {
-            Intent intent = new Intent (this, LevelOne.class);
-            startActivity(intent);
-        } else if (v.getId() == R.id.lvlBtn2) {
-
+            currentLevel =  1;
         }
+        if (v.getId() == R.id.lvlBtn2) {
+            currentLevel = 2;
+        }
+        Intent intent = new Intent (this, LevelOne.class);
+        startActivity(intent);
     }
 }

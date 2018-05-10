@@ -44,6 +44,7 @@ public class LevelOne extends AppCompatActivity {
     int i = 0; //Counter for JSON object
     int e = 0; //Counter for encounter
     int ID = 0;
+    int lvlDifficulty;
 
     LinearLayout ll3;
     LinearLayout llOptions;
@@ -83,7 +84,7 @@ public class LevelOne extends AppCompatActivity {
     Button forwardBtn, backBtn, option1Btn, option2Btn;
     Button attBtn;
 
-    int level = 1;
+    int currentLevel = LevelsActivity.currentLevel;
 
     int playerHealth, playerMaxHealth, potions;
     int wepEquipped, weaponAttMin, weaponAttMax;
@@ -174,12 +175,17 @@ public class LevelOne extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     // getEncounter() is responsible for handling what to show and when during the course of completing the level
     public void getEncounter() throws JSONException {
 
-        if(stepNum == 3) npcEncounter = true;
-
-        if(stepNum >= 1) {
+        if(currentLevel == 1) {
+            if (stepNum == 3) npcEncounter = true;
+        }
+        if(currentLevel == 2) {
+            if (stepNum == 4) npcEncounter = true;
+        }
+        if (stepNum >= 1) {
             if (!npcEncounter) {
                 getEnemy();
             } else {
@@ -222,10 +228,10 @@ public class LevelOne extends AppCompatActivity {
 
         playerName = pd.getString("name");
         playerHealth = pd.getInt("baseHealth");
-        potions = pd.getInt("potions");
+        potions = pd.getInt("basePotions");
 
-        baseAttMin = pd.getInt("baseAttackMin");
-        baseAttMax = pd.getInt("baseAttackMax");
+        baseAttMin = pd.getInt("baseAttMin");
+        baseAttMax = pd.getInt("baseAttMax");
         baseDef = pd.getInt("baseDefence");
 
         ID = wepEquipped;
@@ -240,8 +246,15 @@ public class LevelOne extends AppCompatActivity {
         totalDef = baseDef;
         playerMaxHealth = playerHealth;
 
-        jo = gameData.getJSONObject("Level1");
-        stepNum = jo.getInt("stepNum");
+        jo = gameData.getJSONObject("LevelText");
+        if(currentLevel == 1) {
+            stepNum = jo.getInt("stepNumLvl1");
+            lvlDifficulty = jo.getInt("lvl1Difficulty");
+        }
+        if(currentLevel == 2) {
+            stepNum = jo.getInt("stepNumLvl2");
+            lvlDifficulty = jo.getInt("lvl2Difficulty");
+        }
 
         // Assigning variables to widgets
         playerNameText.setText(playerName);
@@ -322,7 +335,7 @@ public class LevelOne extends AppCompatActivity {
 
     public void getText() throws JSONException {
         JSONObject obj = new JSONObject(loadJSON());
-        jo = obj.getJSONObject("Level1");
+        jo = obj.getJSONObject("LevelText");
         if(!npcEncounter) {
             text1JSON = jo.getString("text1");
             text2JSON = jo.getString("text2");
@@ -450,7 +463,7 @@ public class LevelOne extends AppCompatActivity {
     public void goldReward() throws JSONException {
         int goldvalue;
         JSONObject obj = new JSONObject(loadJSON());
-        jo = obj.getJSONObject("Level1");
+        jo = obj.getJSONObject("LevelText");
 
         goldMin = jo.getInt("goldMin");
         goldMax = jo.getInt("goldMax");
