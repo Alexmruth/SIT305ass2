@@ -31,21 +31,16 @@ public class ShopActivity extends AppCompatActivity {
 
     JSONArray wd;
     JSONObject c;
-    int i;
-    private ListView listView;
 
-    //private ArrayList<String> list = new ArrayList<String>();
-    private Context context;
-
-    private ArrayList<String> data = new ArrayList<String>();
-    //ArrayList<HashMap<String, String>> shopList;
+    int id, shopID, price;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
 
-        listView = findViewById(R.id.listView);
+        // listView = findViewById(R.id.listView);
 
 
 
@@ -77,68 +72,21 @@ public class ShopActivity extends AppCompatActivity {
     }
 
     public void loadItems() throws JSONException {
-
-
         JSONObject gameData = new JSONObject(loadJSON());
         // Getting JSON Array node
         wd = gameData.getJSONArray("Weapons");
-        for (int i = 0; i < wd.length(); i++) {
-            c = wd.getJSONObject(i);
+        int i = shopID;
+        c = wd.getJSONObject(i);
 
-            String id = c.getString("ID");
-            String name = c.getString("name");
-            String price = c.getString("price");
-        }
+        id = c.getInt("ID");
+        name = c.getString("name");
+        price = c.getInt("price");
 
-
-    }
-
-
-
-   /* private class MyListAdapter extends ArrayAdapter<String> {
-        private int layout;
-        public MyListAdapter(@NonNull Context context, int resource, @NonNull ArrayList<String> objects) {
-            super(context, resource, objects);
-            layout = resource;
-        }
-
-        @NonNull
-        @Override
-        public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            ViewHolder mainViewHolder = null;
-            if(convertView == null) {
-                LayoutInflater inflater = LayoutInflater.from(getContext());
-                convertView = inflater.inflate(layout, parent, false);
-                ViewHolder viewHolder = new ViewHolder();
-                viewHolder.image = (ImageView) convertView.findViewById(R.id.shopImage);
-                viewHolder.name = (TextView) convertView.findViewById(R.id.name);
-                viewHolder.button = (Button) convertView.findViewById(R.id.buyBtn);
-                viewHolder.button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(getContext(), "Button was clicked " + position, Toast.LENGTH_SHORT).show();
-                    }
-                });
-                convertView.setTag(viewHolder);
-            } else {
-                mainViewHolder = (ViewHolder) convertView.getTag();
-                mainViewHolder.name.setText(getItem(position));
-            }
-
-            return convertView;
-        }
-    }
-
-    public class ViewHolder {
-        ImageView image;
-        TextView name;
-        TextView price;
-        Button button;
     }
 
     public void buyHandler(View v) throws JSONException {
-        String price = c.getString("price");
+        
 
 
-    } */
+    }
 }

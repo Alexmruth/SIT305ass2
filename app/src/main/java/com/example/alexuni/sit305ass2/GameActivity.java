@@ -102,6 +102,7 @@ public class GameActivity extends AppCompatActivity {
         int baseHealth = jo.getInt("baseHealth");
         int basePotions = jo.getInt("basePotions");
         int baseGold = jo.getInt("baseGold");
+        int playerMaxHealth = baseHealth;
         goldCount = prefs.getInt("gold", baseGold);
         potionCount = prefs.getInt("potions", basePotions);
         playerHealth = prefs.getInt("health", baseHealth);
@@ -111,7 +112,7 @@ public class GameActivity extends AppCompatActivity {
 
         playerStatsText.setText("ATT: " + String.valueOf(attMin) + "-" + String.valueOf(attMax));
         playerStatsText2.setText( "DEF: " + String.valueOf(def));
-        playerHealthText.setText(String.valueOf(playerHealth));
+        playerHealthText.setText("HEALTH: " + String.valueOf(playerHealth) + "/" + String.valueOf(playerMaxHealth));
         healthBar.setMax(100);
         healthBar.setProgress(playerHealth);
         goldText.setText(String.valueOf(goldCount));

@@ -4,7 +4,7 @@
     android:id="@+id/sizeTest1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EFF1C5"
+    android:background="@color/lightColour"
     android:orientation="vertical"
     tools:context="com.example.alexuni.sit305ass2.GameActivity">
 
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.3"
-        android:background="#EFF1C5"
+        android:background="@color/lightColour"
         android:orientation="vertical">
 
         <LinearLayout
@@ -199,7 +199,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.4"
-        android:background="#A2A77F">
+        android:background="@color/darkColour">
 
         <LinearLayout
             android:id="@+id/LL3"
@@ -252,21 +252,21 @@
                     android:layout_weight="1"
                     android:textColor="@color/black" />
 
-                <TextView
-                    android:id="@+id/playerHealthText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:gravity="center|bottom"
-                    android:textColor="@color/black" />
+                    <TextView
+                        android:id="@+id/playerHealthText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left|bottom"
+                        android:textColor="@color/black"
+                        android:layout_weight="1"/>
+                    <ProgressBar
+                        android:id="@+id/homeHealthBar"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10sp"
+                        android:layout_weight="1"/>
 
-                <ProgressBar
-                    android:id="@+id/homeHealthBar"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10sp"
-                    android:layout_marginRight="10sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

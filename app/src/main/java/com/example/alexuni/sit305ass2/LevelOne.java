@@ -259,7 +259,7 @@ public class LevelOne extends AppCompatActivity {
         // Assigning variables to widgets
         playerNameText.setText(playerName);
         playerStatsText.setText("ATT: " + String.valueOf(totalAttMin) + "-" + String.valueOf(totalAttMax) + " DEF: " + String.valueOf(baseDef));
-        playerHealthText.setText(String.valueOf(playerHealth));
+        playerHealthText.setText(String.valueOf(playerHealth) + "/" + String.valueOf(playerMaxHealth));
         playerPotionsText.setText(String.valueOf(potions));
         goldText.setText(String.valueOf(goldCount));
         healthBar.setMax(playerHealth);

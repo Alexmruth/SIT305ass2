@@ -1,58 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.alexuni.sit305ass2.MainActivity"
-
-    >
-    <ImageView
-        android:layout_width="match_parent"
+    android:background="@color/lightColour">
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/logo"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal">
+        <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/logo2"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
-        />
+         />
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="vertical"
+        android:layout_weight="0.5"
+        android:background="@color/lightColour"
         >
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:id="@+id/newGameBtn"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_gravity="center_horizontal"
             android:layout_alignParentTop="true"
             android:text="New Game"
-            android:onClick="onClick"/>
+            android:onClick="onClick"
+            android:layout_weight="1"/>
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:id="@+id/continueBtn"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_gravity="center_horizontal"
             android:layout_alignParentTop="true"
             android:text="Continue"
+            android:layout_weight="1"
             android:onClick="onClick"/>
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:id="@+id/aboutBtn"
             android:onClick="onClick"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
             android:layout_gravity="center_horizontal"
             android:layout_alignParentTop="true"
             android:text="About"
@@ -61,4 +74,4 @@
 
 
 
-</RelativeLayout>
+</LinearLayout>
