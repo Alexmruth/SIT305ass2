@@ -171,18 +171,28 @@
     "dialog": [
       {
         "text": "Help... please...",
-        "option1": "What's wrong?",
-        "option2": "Nice try, but you don't fool anyone! (Fight)"
+        "option1": "Nice try, but you don't fool me! (Fight)",
+        "option2": "What's wrong?"
       },
       {
-        "text": "The working conditions are horrible! I don't even get paid overtime",
+        "text": "The working conditions are horrible! Not to mention I don't even get paid overtime...",
+        "option1": "I don't care. (Fight)",
+        "option2": "How can I help?"
+      },
+      {
+        "text": "Well, you could help by giving me a health potion... and I will reward you generously.",
+        "option1": "Forget it, you're wasting my time! (Fight)",
+        "option2": "Give health potion."
+      },
+      {
+        "text": "Hah! Thanks for the potion, did you think I would actually reward you? It's time to die!",
         "option1": "Fight!",
         "option2": "Null"
       },
       {
-        "text": "Invading my space comes at a price, cough up 10 gold and i'll let you be on your way.",
+        "text": "Your loss, now it's time to die!",
         "option1": "Fight!",
-        "option2": "Give 10 gold."
+        "option2": "Null"
       }
     ]
   }
