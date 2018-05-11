@@ -8,7 +8,7 @@ package com.example.alexuni.sit305ass2;
 
 public class LevelsActivity extends AppCompatActivity {
 
-    Button lvlBtn1, lvlBtn2;
+    Button lvlBtn1, lvlBtn2, lvlBtn3;
     static  int currentLevel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +16,7 @@ public class LevelsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_levels);
         lvlBtn1 = findViewById(R.id.lvlBtn1);
         lvlBtn2 = findViewById(R.id.lvlBtn2);
+        lvlBtn3 = findViewById(R.id.lvlBtn3);
     }
 
     public void lvlHandler(View v) {
@@ -24,6 +25,9 @@ public class LevelsActivity extends AppCompatActivity {
         }
         if (v.getId() == R.id.lvlBtn2) {
             currentLevel = 2;
+        }
+        if (v.getId() == R.id.lvlBtn3) {
+            currentLevel = 3;
         }
         Intent intent = new Intent (this, LevelOne.class);
         startActivity(intent);

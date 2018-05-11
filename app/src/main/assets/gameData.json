@@ -10,11 +10,11 @@
   },
   "Weapons": [
     {"ID": 0, "name": "Fists", "attMin": "1", "attMax": "5", "price": 0},
-    {"ID": 1, "name": "Basic Sword", "attMin": "2", "attMax": "8", "price": 100},
-    {"ID": 2, "name": "Copper Swiftblade", "attMin": "5", "attMax": "10", "price": 2500},
-    {"ID": 3, "name": "Vanquisher", "attMin": "7", "attMax": "15", "price": 10000},
-    {"ID": 4, "name": "Obsidian Razor", "attMin": "10", "attMax": "22", "price": 30000},
-    {"ID": 5, "name": "Slice of Life", "attMin": "15", "attMax": "33", "price": 50000},
+    {"ID": 1, "name": "Basic Sword", "attMin": "2", "attMax": "6", "price": 100},
+    {"ID": 2, "name": "Copper Swiftblade", "attMin": "3", "attMax": "8", "price": 2500},
+    {"ID": 3, "name": "Vanquisher", "attMin": "4", "attMax": "13", "price": 10000},
+    {"ID": 4, "name": "Obsidian Razor", "attMin": "5", "attMax": "20", "price": 30000},
+    {"ID": 5, "name": "Slice of Life", "attMin": "10", "attMax": "30", "price": 50000},
     {"ID": 6, "name": "Eternal Blade", "attMin": "22", "attMax": "50", "price": 100000}
   ],
   "Enemies": [
@@ -23,8 +23,8 @@
       "name": "Fat Rat",
       "health": 25,
       "attMin": 2,
-      "attMax": 7,
-      "defence": 3
+      "attMax": 6,
+      "defence": 2
     },
     {
       "ID": 1,
@@ -32,21 +32,21 @@
       "health": 12,
       "attMin": 3,
       "attMax": 5,
-      "defence": 3
+      "defence": 2
     },
     {
       "ID": 2,
       "name": "Skeleton",
       "health": 20,
       "attMin": 1,
-      "attMax": 9,
-      "defence": 0
+      "attMax": 8,
+      "defence": 1
     },
     {
       "ID": 3,
       "name": "Mutant Rat",
       "health": 10,
-      "attMin": 3,
+      "attMin": 1,
       "attMax": 7,
       "defence": 1
     },
@@ -63,15 +63,15 @@
       "name": "Spider",
       "health": 15,
       "attMin": 3,
-      "attMax": 7,
-      "defence": 0
+      "attMax": 6,
+      "defence": 1
     },
     {
       "ID": 6,
       "name": "Dragon Minion",
       "health": 12,
       "attMin": 1,
-      "attMax": 16,
+      "attMax": 10,
       "defence": 2
     }
   ],
@@ -81,26 +81,64 @@
       "name": "Boss - Troll",
       "health": 100,
       "attMin": 2,
-      "attMax": 8,
+      "attMax": 6,
+      "defence": 1
+    },
+    {
+      "ID": 11,
+      "name": "Boss - Rat King",
+      "health": 110,
+      "attMin": 3,
+      "attMax": 7,
       "defence": 2
+    },
+    {
+      "ID": 12,
+      "name": "Boss - Medusa",
+      "health": 120,
+      "attMin": 4,
+      "attMax": 8,
+      "defence": 3
     }
   ],
-  "LevelText": {
+  "LevelData": {
     "character1": "Henry the Villager",
     "text1": "You have ",
+    "enemyDead": "Well done! Click the forward button to approach your next encounter!",
+    "enemyNotDead": "You must kill this enemy before continuing forward!",
+    "text2": " steps to go before the exit!",
+    "exitText": "You have reached the exit! Click the exit button to return to main screen.",
+
     "stepNumLvl1": 5,
-    "stepNumLvl2": 7,
+    "stepNumLvl2": 6,
+    "stepNumLvl3": 7,
     "lvl1Difficulty": 1,
     "lvl2Difficulty": 1.2,
     "lvl3Difficulty": 1.5,
-    "text2": " steps to go before the exit!",
-    "exitText": "You have reached the exit! Click the exit button to return to main screen.",
-    "goldMin": 10,
-    "goldMax": 30,
-    "enemyDead": "Well done! Click the forward button to approach your next encounter!",
-    "enemyNotDead": "You must kill this enemy before continuing forward!"
+    "lvl4Difficulty": 2.5,
+    "lvl5Difficulty": 3.5,
+    "lvl6Difficulty": 5,
+
+    "goldMin1": 10,
+    "goldMax1": 30,
+
+    "goldMin2": 20,
+    "goldMax2": 40,
+
+    "goldMin3": 35,
+    "goldMax3": 55,
+
+    "goldMin4": 50,
+    "goldMax4": 80,
+
+    "goldMin5": 75,
+    "goldMax5": 95,
+
+    "goldMin6": 90,
+    "goldMax6": 130
+
   },
-  "Encounter": {
+  "Encounter1": {
     "name": "Cave Dweller",
     "health": 80,
     "attMin": 2,
@@ -114,6 +152,30 @@
       },
       {
         "text": "Very well then, I hope you're ready to die!",
+        "option1": "Fight!",
+        "option2": "Null"
+      },
+      {
+        "text": "Invading my space comes at a price, cough up 10 gold and i'll let you be on your way.",
+        "option1": "Fight!",
+        "option2": "Give 10 gold."
+      }
+    ]
+  },
+  "Encounter2": {
+    "name": "Rat King Minion",
+    "health": 100,
+    "attMin": 3,
+    "attMax": 9,
+    "defence": 2,
+    "dialog": [
+      {
+        "text": "Help... please...",
+        "option1": "What's wrong?",
+        "option2": "Nice try, but you don't fool anyone! (Fight)"
+      },
+      {
+        "text": "The working conditions are horrible! I don't even get paid overtime",
         "option1": "Fight!",
         "option2": "Null"
       },
