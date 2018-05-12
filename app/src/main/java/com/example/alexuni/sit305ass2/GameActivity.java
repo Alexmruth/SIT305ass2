@@ -230,6 +230,11 @@ public class GameActivity extends AppCompatActivity {
         healthBar.setProgress(playerHealth);
     }
 
+    public void onQuit(View v) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
 }
 
 

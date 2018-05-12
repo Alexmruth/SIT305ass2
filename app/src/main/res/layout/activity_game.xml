@@ -212,24 +212,37 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/full_heal"
-                    android:onClick="fullHeal"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Full heal (20 gold)"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/black" />
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/full_heal"
+                        android:onClick="fullHeal" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="Full heal (20 gold)"
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:text="Quit"
+                        android:onClick="onQuit"/>
+                </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -259,20 +272,21 @@
                     android:layout_weight="1"
                     android:textColor="@color/black" />
 
-                    <TextView
-                        android:id="@+id/playerHealthText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="left|bottom"
-                        android:textColor="@color/black"
-                        android:layout_weight="1"/>
-                    <ProgressBar
-                        android:id="@+id/homeHealthBar"
-                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10sp"
-                        android:layout_weight="1"/>
+                <TextView
+                    android:id="@+id/playerHealthText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left|bottom"
+                    android:textColor="@color/black" />
+
+                <ProgressBar
+                    android:id="@+id/homeHealthBar"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10sp"
+                    android:layout_weight="1" />
 
 
                 <LinearLayout
@@ -308,7 +322,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
             </LinearLayout>
