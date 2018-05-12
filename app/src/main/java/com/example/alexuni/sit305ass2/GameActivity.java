@@ -29,7 +29,7 @@ public class GameActivity extends AppCompatActivity {
     int jc = 0; //short for JSON counter
     int LLcount = 0;
     int continueGame;
-    int goldCount, potionCount, playerHealth, attMin, attMax, def;
+    int goldCount, potionCount, playerHealth, playerMaxHealth, attMin, attMax, def;
     ProgressBar healthBar;
     LinearLayout LL1;
     LinearLayout LL3;
@@ -102,7 +102,7 @@ public class GameActivity extends AppCompatActivity {
         int baseHealth = jo.getInt("baseHealth");
         int basePotions = jo.getInt("basePotions");
         int baseGold = jo.getInt("baseGold");
-        int playerMaxHealth = baseHealth;
+        playerMaxHealth = baseHealth;
         goldCount = prefs.getInt("gold", baseGold);
         potionCount = prefs.getInt("potions", basePotions);
         playerHealth = prefs.getInt("health", baseHealth);
@@ -221,6 +221,13 @@ public class GameActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    public void fullHeal(View v) {
+        playerHealth = 100;
+        playerHealthText.setText("HEALTH: " + String.valueOf(playerHealth) + "/" + String.valueOf(playerMaxHealth));
+        healthBar.setMax(100);
+        healthBar.setProgress(playerHealth);
     }
 
 }

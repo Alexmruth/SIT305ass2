@@ -351,6 +351,12 @@ public class LevelOne extends AppCompatActivity {
                 break;
             case 10:
                 enemyImage.setBackgroundResource(R.drawable.eb_troll_boss);
+            case 11:
+                enemyImage.setBackgroundResource(R.drawable.eb_rat_boss);
+            case 20:
+                enemyImage.setBackgroundResource(R.drawable.e_troll);
+            case 21:
+                enemyImage.setBackgroundResource(R.drawable.e_rat_minion);
         }
     }
 
@@ -430,6 +436,7 @@ public class LevelOne extends AppCompatActivity {
         JSONObject obj = new JSONObject(loadJSON());
 
         enemyName = encounterJSON.getString("name");
+        enemyID = encounterJSON.getInt("ID");
         enemyHealth = encounterJSON.getInt("health");
         enemyAttMin = encounterJSON.getInt("attMin");
         enemyAttMax = encounterJSON.getInt("attMax");
@@ -441,7 +448,7 @@ public class LevelOne extends AppCompatActivity {
         enemyHealthText.setText(String.valueOf(enemyHealth));
         enemyHealthBar.setMax(enemyHealth);
         enemyHealthBar.setProgress(enemyHealth);
-        enemyImage.setBackgroundResource(R.drawable.e_troll);
+        getEnemyImage();
     }
 
     public void onOption(View v) throws JSONException {
@@ -453,7 +460,9 @@ public class LevelOne extends AppCompatActivity {
             } else {
                 e++;
             }
-        } else if(v.getId() == R.id.option2Btn) {
+        }
+
+        if(v.getId() == R.id.option2Btn) {
             if(currentLevel == 1) {
                 if (text3JSON.contains("Give")) {
                     stepNum--;
@@ -466,7 +475,26 @@ public class LevelOne extends AppCompatActivity {
                 }
             }
             if(currentLevel == 2) {
-                    e++;
+                boolean goNext = true;
+                if(text3JSON.contains("(Give potion)")) {
+                    if(potions > 0) {
+                        potions--;
+                        playerPotionsText.setText(String.valueOf(potions));
+                        e++;
+                    } else {
+                        goNext = false;
+                        Context context = getApplicationContext();
+                        CharSequence text;
+                        final Toast toast;
+                        int duration = Toast.LENGTH_SHORT;
+                        text = "Insufficient potions";
+                        toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
+                }
+                if(goNext)
+                e++;
+
             }
         }
         getText();

@@ -212,16 +212,23 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/row1Btn1"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="" />
+                    android:background="@drawable/full_heal"
+                    android:onClick="fullHeal"/>
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:text="Full heal (20 gold)"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/black" />
+                </LinearLayout>
 
             </LinearLayout>
 

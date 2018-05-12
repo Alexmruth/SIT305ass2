@@ -140,6 +140,7 @@
   },
   "Encounter1": {
     "name": "Cave Dweller",
+    "ID": 20,
     "health": 80,
     "attMin": 2,
     "attMax": 8,
@@ -164,6 +165,7 @@
   },
   "Encounter2": {
     "name": "Rat King Minion",
+    "ID": 21,
     "health": 100,
     "attMin": 3,
     "attMax": 9,
@@ -182,7 +184,7 @@
       {
         "text": "Well, you could help by giving me a health potion... and I will reward you generously.",
         "option1": "Forget it, you're wasting my time! (Fight)",
-        "option2": "Give health potion."
+        "option2": "Okay, take this. (Give potion)"
       },
       {
         "text": "Hah! Thanks for the potion, did you think I would actually reward you? It's time to die!",
