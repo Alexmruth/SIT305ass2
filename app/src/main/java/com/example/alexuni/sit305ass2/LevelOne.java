@@ -51,6 +51,8 @@ public class LevelOne extends AppCompatActivity {
     LinearLayout ll3;
     LinearLayout llOptions;
 
+    SharedPreferences prefs;
+
 // https://stackoverflow.com/questions/41080424/how-to-output-a-interactive-game-map-from-an-array-in-android-studios
     // https://gamedev.stackexchange.com/questions/26346/whole-map-design-vs-tiles-array-design
 
@@ -64,15 +66,9 @@ public class LevelOne extends AppCompatActivity {
 
     Random random;
 
-    ProgressBar healthBar;
-    ProgressBar enemyHealthBar;
+    ProgressBar healthBar, enemyHealthBar;
 
-    String textName,playerName, enemyName;
-    String text1JSON, text2JSON, text3JSON;
-    String exitText;
-    String enemyDeadText;
-    String forwardErrText;
-    String replyOne, replyTwo;
+    String textName, playerName, enemyName, text1JSON, text2JSON, text3JSON, exitText, enemyDeadText, forwardErrText;
 
     TextView nameJSON, textJSON;
 
@@ -98,14 +94,13 @@ public class LevelOne extends AppCompatActivity {
     int enemyID;
     int attValue;
 
-    int enemyAttack, enemyAttMin, enemyAttMax, enemyDef;
+    int enemyHealth, enemyMaxHealth, enemyAttack, enemyAttMin, enemyAttMax, enemyDef;
 
     int goldCount;
     int goldMin, goldMax;
 
 
     int image;
-    int enemyHealth;
     int stepNum;
 
     int bossCount;
@@ -118,7 +113,7 @@ public class LevelOne extends AppCompatActivity {
         setContentView(R.layout.activity_level_one);
 
         random = new Random();
-        SharedPreferences prefs = getSharedPreferences("playerSaveData", MODE_PRIVATE);
+        prefs = getSharedPreferences("playerSaveData", MODE_PRIVATE);
 
         playerHealth = prefs.getInt("health", 0);
         goldCount = prefs.getInt("gold", 0);
@@ -254,12 +249,28 @@ public class LevelOne extends AppCompatActivity {
         wd = gameData.getJSONArray("Weapons");
 
         playerName = pd.getString("name");
-        playerHealth = pd.getInt("baseHealth");
-        potions = pd.getInt("basePotions");
+        // playerHealth = pd.getInt("baseHealth");
+        // potions = pd.getInt("basePotions");
 
-        baseAttMin = pd.getInt("baseAttMin");
+        /* baseAttMin = pd.getInt("baseAttMin");
         baseAttMax = pd.getInt("baseAttMax");
-        baseDef = pd.getInt("baseDefence");
+        baseDef = pd.getInt("baseDefence"); */
+
+        // Default values from JSON
+        int baseAttMin1 = pd.getInt("baseAttMin");
+        int baseAttMax1 = pd.getInt("baseAttMax");
+        int baseDef1 = pd.getInt("baseDefence");
+        int baseHealth = pd.getInt("baseHealth");
+        int basePotions = pd.getInt("basePotions");
+        int baseGold = pd.getInt("baseGold");
+        playerMaxHealth = baseHealth;
+        // Saved values from Shared Preferences
+        goldCount = prefs.getInt("gold", baseGold);
+        potions = prefs.getInt("potions", basePotions);
+        playerHealth = prefs.getInt("health", baseHealth);
+        baseAttMin = prefs.getInt("attMin", baseAttMin1);
+        baseAttMax = prefs.getInt("attMax", baseAttMax1);
+        baseDef = prefs.getInt("def", baseDef1);
 
         ID = wepEquipped;
         weapon = wd.getJSONObject(ID);
@@ -271,7 +282,6 @@ public class LevelOne extends AppCompatActivity {
         totalAttMax = weaponAttMax + baseAttMax;
 
         totalDef = baseDef;
-        playerMaxHealth = playerHealth;
 
         // Assigning variables to widgets
         playerNameText.setText(playerName);
@@ -279,7 +289,7 @@ public class LevelOne extends AppCompatActivity {
         playerHealthText.setText(String.valueOf(playerHealth) + "/" + String.valueOf(playerMaxHealth));
         playerPotionsText.setText(String.valueOf(potions));
         goldText.setText(String.valueOf(goldCount));
-        healthBar.setMax(playerHealth);
+        healthBar.setMax(playerMaxHealth);
         healthBar.setProgress(playerHealth);
 
     }
@@ -313,6 +323,7 @@ public class LevelOne extends AppCompatActivity {
         double enemyAttMaxDbl = Math.round(jo.getDouble("attMax") * lvlDifficulty);
         double enemyDefDbl = Math.round(jo.getDouble("defence") * lvlDifficulty);
         enemyHealth = (int) enemyHealthDbl;
+        enemyMaxHealth = enemyHealth;
         enemyAttMin = (int) enemyAttMinDbl;
         enemyAttMax = (int) enemyAttMaxDbl;
         enemyDef = (int) enemyDefDbl;
@@ -438,6 +449,7 @@ public class LevelOne extends AppCompatActivity {
         enemyName = encounterJSON.getString("name");
         enemyID = encounterJSON.getInt("ID");
         enemyHealth = encounterJSON.getInt("health");
+        enemyMaxHealth = enemyHealth;
         enemyAttMin = encounterJSON.getInt("attMin");
         enemyAttMax = encounterJSON.getInt("attMax");
         enemyDef = encounterJSON.getInt("defence");
@@ -445,7 +457,7 @@ public class LevelOne extends AppCompatActivity {
 
         enemyNameText.setText(enemyName);
         enemyStatsText.setText("ATT: " + String.valueOf(enemyAttMin) + "-" + String.valueOf(enemyAttMax) + " DEF: " + String.valueOf(enemyDef));
-        enemyHealthText.setText(String.valueOf(enemyHealth));
+        enemyHealthText.setText(String.valueOf(String.valueOf(enemyHealth) + "/" + String.valueOf(enemyMaxHealth)));
         enemyHealthBar.setMax(enemyHealth);
         enemyHealthBar.setProgress(enemyHealth);
         getEnemyImage();
@@ -508,7 +520,7 @@ public class LevelOne extends AppCompatActivity {
 
 
     public void updatePlayer() {
-        playerHealthText.setText(String.valueOf(playerHealth));
+        playerHealthText.setText(String.valueOf(String.valueOf(playerHealth) + "/" + String.valueOf(playerMaxHealth)));
         healthBar.setProgress(playerHealth);
     }
 
