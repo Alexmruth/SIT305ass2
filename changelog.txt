@@ -49,4 +49,24 @@
 - Progression on battle mechanics and JSON files.
 21/04/18 - 
 - Created shop activity to handle shop items.
-
+26/04/18 -
+- Shop activity UI progression.
+30/04/18 -
+- JSON game content expanded and developed on.
+- Implemented gold and in the process of having it hold value across activities (SharedPreferences).
+- Added boss fight at the end of the level.
+03/05/18 -
+- Implemented random NPC encounters.
+- Simple option buttons for dialogue replies replace bottom of screen when encounter is occuring.
+07/05/18 -
+- NPC interaction development.
+- Neater code and more comments added.
+- Game saves user gold upon exiting level at the end.
+- If user tries to exit before level is finished, a pop up warns the user their progress will not be saved.
+- Added more values to Shared Prefs.
+11/05/18 -
+- JSON data progression.
+- Multi level development using mostly the same code for each level.
+12/05/18 -
+- Level 2 NPC development.
+- Adding gameplay and small game features.
