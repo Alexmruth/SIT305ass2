@@ -263,6 +263,21 @@ public class GameActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void buyPotion(View view) {
+        if (goldCount >= 15) {
+            goldCount = goldCount - 15;
+            goldText.setText(String.valueOf(goldCount));
+            potionCount++;
+            potionsText.setText(String.valueOf(potionCount));
+
+            editor.putInt("gold", goldCount);
+            editor.putInt("potions", potionCount);
+            editor.commit();
+
+        } else {
+            showToast();
+        }
+    }
 }
 
 

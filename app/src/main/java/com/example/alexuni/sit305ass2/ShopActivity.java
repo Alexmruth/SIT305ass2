@@ -235,12 +235,51 @@ public class ShopActivity extends AppCompatActivity {
         }
         buyBtn4.setText(btn4Text);
     }
+    public void btnText5Value() {
+        if(item5Purchased) {
+            if(weapEquipped != 4 ) {
+                btn5Text = "Equip";
+            } else {
+                btn5Text = "Equipped";
+            }
+        } else {
+            btn5Text = "Buy";
+        }
+        buyBtn5.setText(btn5Text);
+    }
+    public void btnText6Value() {
+        if(item6Purchased) {
+            if(weapEquipped != 5 ) {
+                btn6Text = "Equip";
+            } else {
+                btn6Text = "Equipped";
+            }
+        } else {
+            btn6Text = "Buy";
+        }
+        buyBtn6.setText(btn6Text);
+    }
+    public void btnText7Value() {
+        if(item7Purchased) {
+            if(weapEquipped != 6 ) {
+                btn7Text = "Equip";
+            } else {
+                btn7Text = "Equipped";
+            }
+        } else {
+            btn7Text = "Buy";
+        }
+        buyBtn7.setText(btn7Text);
+    }
 
     public void loadButtons() {
         btnText1Value();
         btnText2Value();
         btnText3Value();
         btnText4Value();
+        btnText5Value();
+        btnText6Value();
+        btnText7Value();
     }
 
     public void buyHandler(View v) throws JSONException {
@@ -298,6 +337,57 @@ public class ShopActivity extends AppCompatActivity {
             }
             if(btn3Text.contains("Equip")) {
                 weapEquipped = 3;
+            }
+        }
+        if(v.getId() == R.id.buyBtn5) {
+            c = wd.getJSONObject(4);
+            price = c.getInt("price");
+            if(btn5Text.contains("Buy")) {
+                if(goldCount >= price) {
+                    goldCount = goldCount - price;
+                    item5Purchased = true;
+                    editor.putBoolean("item5Purchased", true);
+                } else {
+                    showToast();
+                }
+                weapEquipped = 4;
+            }
+            if(btn3Text.contains("Equip")) {
+                weapEquipped = 4;
+            }
+        }
+        if(v.getId() == R.id.buyBtn6) {
+            c = wd.getJSONObject(5);
+            price = c.getInt("price");
+            if(btn6Text.contains("Buy")) {
+                if(goldCount >= price) {
+                    goldCount = goldCount - price;
+                    item6Purchased = true;
+                    editor.putBoolean("item6Purchased", true);
+                } else {
+                    showToast();
+                }
+                weapEquipped = 5;
+            }
+            if(btn3Text.contains("Equip")) {
+                weapEquipped = 5;
+            }
+        }
+        if(v.getId() == R.id.buyBtn7) {
+            c = wd.getJSONObject(6);
+            price = c.getInt("price");
+            if(btn7Text.contains("Buy")) {
+                if(goldCount >= price) {
+                    goldCount = goldCount - price;
+                    item7Purchased = true;
+                    editor.putBoolean("item7Purchased", true);
+                } else {
+                    showToast();
+                }
+                weapEquipped = 6;
+            }
+            if(btn3Text.contains("Equip")) {
+                weapEquipped = 6;
             }
         }
         loadButtons();

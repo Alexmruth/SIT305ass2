@@ -178,6 +178,10 @@ public class LevelOne extends AppCompatActivity {
 
         if (currentLevel == 1 && stepNum == 3) npcEncounter = true;
         if (currentLevel == 2 && stepNum == 4) npcEncounter = true;
+        if (currentLevel == 3 && stepNum == 4) npcEncounter = true;
+        if (currentLevel == 4 && stepNum == 5) npcEncounter = true;
+        if (currentLevel == 5 && stepNum == 3) npcEncounter = true;
+        if (currentLevel == 6 && stepNum == 2) npcEncounter = true;
 
         if (stepNum >= 1) {
             if (!npcEncounter) {
@@ -200,7 +204,6 @@ public class LevelOne extends AppCompatActivity {
         if(currentLevel == 1) {
             encounterJSON = gameData.getJSONObject("Encounter1");
             bossCount = 0;  // Boss number
-            ec = 0;  // Encounter counter
             stepNum = jo.getInt("stepNumLvl1"); // Number of steps for level
             lvlDifficulty = jo.getDouble("lvl1Difficulty");  // Difficulty multiplyer
             goldMin = jo.getInt("goldMin1");
@@ -209,19 +212,42 @@ public class LevelOne extends AppCompatActivity {
         if(currentLevel == 2) {
             encounterJSON = gameData.getJSONObject("Encounter2");
             bossCount = 1;
-            ec = 1;  // Encounter counter
             stepNum = jo.getInt("stepNumLvl2");
             lvlDifficulty = jo.getDouble("lvl2Difficulty");
             goldMin = jo.getInt("goldMin2");
             goldMax = jo.getInt("goldMax2");
         }
         if(currentLevel == 3) {
+            encounterJSON = gameData.getJSONObject("Encounter2");
             bossCount = 2;
-            ec = 2;  // Encounter counter
             stepNum = jo.getInt("stepNumLvl3");
             lvlDifficulty = jo.getDouble("lvl3Difficulty");
             goldMin = jo.getInt("goldMin3");
             goldMax = jo.getInt("goldMax3");
+        }
+        if(currentLevel == 4) {
+            encounterJSON = gameData.getJSONObject("Encounter2");
+            bossCount = 3;
+            stepNum = jo.getInt("stepNumLvl4");
+            lvlDifficulty = jo.getDouble("lvl4Difficulty");
+            goldMin = jo.getInt("goldMin4");
+            goldMax = jo.getInt("goldMax4");
+        }
+        if(currentLevel == 5) {
+            encounterJSON = gameData.getJSONObject("Encounter2");
+            bossCount = 4;
+            stepNum = jo.getInt("stepNumLvl5");
+            lvlDifficulty = jo.getDouble("lvl5Difficulty");
+            goldMin = jo.getInt("goldMin5");
+            goldMax = jo.getInt("goldMax5");
+        }
+        if(currentLevel == 6) {
+            encounterJSON = gameData.getJSONObject("Encounter6");
+            bossCount = 5;
+            stepNum = jo.getInt("stepNumLvl6");
+            lvlDifficulty = jo.getDouble("lvl6Difficulty");
+            goldMin = jo.getInt("goldMin6");
+            goldMax = jo.getInt("goldMax6");
         }
     }
 
@@ -372,11 +398,26 @@ public class LevelOne extends AppCompatActivity {
             case 11:
                 enemyImage.setBackgroundResource(R.drawable.eb_rat_boss);
                 break;
+            case 12:
+                enemyImage.setBackgroundResource(R.drawable.eb_medusa_boss);
+                break;
+            case 13:
+                enemyImage.setBackgroundResource(R.drawable.eb_mage_boss);
+                break;
+            case 14:
+                enemyImage.setBackgroundResource(R.drawable.eb_demon_boss);
+                break;
+            case 15:
+                enemyImage.setBackgroundResource(R.drawable.eb_dragon_boss);
+                break;
             case 20:
                 enemyImage.setBackgroundResource(R.drawable.e_troll);
                 break;
             case 21:
                 enemyImage.setBackgroundResource(R.drawable.e_rat_minion);
+                break;
+            case 25:
+                enemyImage.setBackgroundResource(R.drawable.c_henryvillager);
                 break;
         }
     }
@@ -516,7 +557,9 @@ public class LevelOne extends AppCompatActivity {
                 }
                 if(goNext)
                 e++;
-
+            }
+            if(currentLevel == 6) {
+                
             }
         }
         getText();
@@ -619,7 +662,7 @@ public class LevelOne extends AppCompatActivity {
                         }
                     });
                 }
-            }, 1500);
+            }, 10);
         }
     }
 

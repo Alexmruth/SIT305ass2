@@ -6,16 +6,16 @@
     "baseAttMax": 6,
     "baseDefence": 1,
     "basePotions": 3,
-    "baseGold": 100000
+    "baseGold": 10
   },
   "Weapons": [
     {"ID": 0, "name": "Fists", "attMin": "1", "attMax": "5", "price": 0},
-    {"ID": 1, "name": "Basic Sword", "attMin": "2", "attMax": "6", "price": 10},
-    {"ID": 2, "name": "Copper Swiftblade", "attMin": "3", "attMax": "8", "price": 2500},
-    {"ID": 3, "name": "Vanquisher", "attMin": "4", "attMax": "13", "price": 10000},
-    {"ID": 4, "name": "Obsidian Razor", "attMin": "5", "attMax": "20", "price": 30000},
-    {"ID": 5, "name": "Slice of Life", "attMin": "10", "attMax": "30", "price": 50000},
-    {"ID": 6, "name": "Eternal Blade", "attMin": "22", "attMax": "50", "price": 100000}
+    {"ID": 1, "name": "Basic Sword", "attMin": "3", "attMax": "8", "price": 50},
+    {"ID": 2, "name": "Copper Swiftblade", "attMin": "4", "attMax": "13", "price": 120},
+    {"ID": 3, "name": "Vanquisher", "attMin": "6", "attMax": "20", "price": 400},
+    {"ID": 4, "name": "Obsidian Razor", "attMin": "8", "attMax": "28", "price": 600},
+    {"ID": 5, "name": "Slice of Life", "attMin": "15", "attMax": "30", "price": 900},
+    {"ID": 6, "name": "Eternal Blade", "attMin": "22", "attMax": "50", "price": 1500}
   ],
   "Enemies": [
     {
@@ -79,7 +79,7 @@
     {
       "ID": 10,
       "name": "Boss - Troll",
-      "health": 100,
+      "health": 80,
       "attMin": 2,
       "attMax": 6,
       "defence": 1
@@ -95,6 +95,30 @@
     {
       "ID": 12,
       "name": "Boss - Medusa",
+      "health": 100,
+      "attMin": 4,
+      "attMax": 8,
+      "defence": 3
+    },
+    {
+      "ID": 13,
+      "name": "Boss - Mage",
+      "health": 80,
+      "attMin": 2,
+      "attMax": 7,
+      "defence": 3
+    },
+    {
+      "ID": 14,
+      "name": "Boss - Demon",
+      "health": 60,
+      "attMin": 2,
+      "attMax": 5,
+      "defence": 3
+    },
+    {
+      "ID": 15,
+      "name": "Nogard the Dragon",
       "health": 120,
       "attMin": 4,
       "attMax": 8,
@@ -109,39 +133,42 @@
     "text2": " steps to go before the exit!",
     "exitText": "You have reached the exit! Click the exit button to return to main screen.",
 
-    "stepNumLvl1": 2,
+    "stepNumLvl1": 5,
     "stepNumLvl2": 6,
     "stepNumLvl3": 7,
+    "stepNumLvl4": 8,
+    "stepNumLvl5": 9,
+    "stepNumLvl6": 10,
     "lvl1Difficulty": 1,
     "lvl2Difficulty": 1.2,
     "lvl3Difficulty": 1.5,
-    "lvl4Difficulty": 2.5,
-    "lvl5Difficulty": 3.5,
+    "lvl4Difficulty": 2,
+    "lvl5Difficulty": 3,
     "lvl6Difficulty": 5,
 
     "goldMin1": 10,
     "goldMax1": 30,
 
-    "goldMin2": 20,
-    "goldMax2": 40,
+    "goldMin2": 30,
+    "goldMax2": 50,
 
-    "goldMin3": 35,
-    "goldMax3": 55,
+    "goldMin3": 50,
+    "goldMax3": 70,
 
-    "goldMin4": 50,
-    "goldMax4": 80,
+    "goldMin4": 70,
+    "goldMax4": 90,
 
-    "goldMin5": 75,
-    "goldMax5": 95,
+    "goldMin5": 90,
+    "goldMax5": 110,
 
-    "goldMin6": 90,
+    "goldMin6": 110,
     "goldMax6": 130
 
   },
   "Encounter1": {
     "name": "Cave Dweller",
     "ID": 20,
-    "health": 80,
+    "health": 60,
     "attMin": 2,
     "attMax": 8,
     "defence": 3,
@@ -166,9 +193,9 @@
   "Encounter2": {
     "name": "Rat King Minion",
     "ID": 21,
-    "health": 100,
+    "health": 80,
     "attMin": 3,
-    "attMax": 9,
+    "attMax": 7,
     "defence": 2,
     "dialog": [
       {
@@ -193,6 +220,36 @@
       },
       {
         "text": "Your loss, now it's time to die!",
+        "option1": "Fight!",
+        "option2": "Null"
+      }
+    ]
+  },
+  "Encounter6": {
+    "name": "Henry the Villager",
+    "ID": 25,
+    "health": 80,
+    "attMin": 3,
+    "attMax": 7,
+    "defence": 2,
+    "dialog": [
+      {
+        "text": "That's enough! I can't let this go on any longer!",
+        "option1": "Henry... what are you doing?",
+        "option2": "Null"
+      },
+      {
+        "text": "I'm stopping you from leaving this mountain! I'm giving you one last chance before you have to face me AND Nogard.",
+        "option1": "No one gets in my way, not even you! (Fight)",
+        "option2": "But.. I thought we were friends."
+      },
+      {
+        "text": "hah! You fool. I would never be friends with you. Now make your choice.",
+        "option1": "Bring it on! (Fight)",
+        "option2": "Goodbye. (Exit level)"
+      },
+      {
+        "text": "Very well, it was nice knowing you.",
         "option1": "Fight!",
         "option2": "Null"
       }
