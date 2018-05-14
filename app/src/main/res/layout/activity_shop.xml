@@ -25,17 +25,18 @@
                 android:padding="10dp">
                 <ImageView
                     android:id="@+id/shopImage1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:layout_marginRight="10dp"/>
                 <TextView
                     android:id="@+id/shopName1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
                 <TextView
                     android:id="@+id/shopPrice1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
                 <Button
@@ -52,17 +53,18 @@
                 android:padding="10dp">
                 <ImageView
                     android:id="@+id/shopImage2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:layout_marginRight="10dp"/>
                 <TextView
                     android:id="@+id/shopName2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
                 <TextView
                     android:id="@+id/shopPrice2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
                 <Button
@@ -79,17 +81,18 @@
                 android:padding="10dp">
                 <ImageView
                     android:id="@+id/shopImage3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:layout_marginRight="10dp"/>
                 <TextView
                     android:id="@+id/shopName3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
                 <TextView
                     android:id="@+id/shopPrice3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
                 <Button
@@ -106,17 +109,17 @@
                 android:padding="10dp">
                 <ImageView
                     android:id="@+id/shopImage4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"/>
                 <TextView
                     android:id="@+id/shopName4"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
                 <TextView
                     android:id="@+id/shopPrice4"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
                 <Button

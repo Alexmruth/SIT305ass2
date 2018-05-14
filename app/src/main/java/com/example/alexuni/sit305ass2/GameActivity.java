@@ -29,7 +29,7 @@ public class GameActivity extends AppCompatActivity {
     int jc = 0; //short for JSON counter
     int LLcount = 0;
     int continueGame;
-    int goldCount, potionCount, playerHealth, playerMaxHealth, attMin, attMax, def;
+    int goldCount, potionCount, playerHealth, playerMaxHealth, attMin, attMax, def, weapEquipped;
     ProgressBar healthBar;
     LinearLayout LL1;
     LinearLayout LL3;
@@ -53,6 +53,8 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        prefs = getSharedPreferences("playerSaveData", MODE_PRIVATE);
+        editor = prefs.edit();
 
         healthBar = findViewById(R.id.homeHealthBar);
         playerStatsText = findViewById(R.id.playerStatsText);
@@ -67,9 +69,7 @@ public class GameActivity extends AppCompatActivity {
         LL1 = findViewById(R.id.LL1);
         LL3 = findViewById(R.id.LL3);
         continueGame = MainActivity.continueGame;
-
-        prefs = getSharedPreferences("playerSaveData", MODE_PRIVATE);
-        editor = prefs.edit();
+        weapEquipped = prefs.getInt("weapEquipped", 0);
 
         if (continueGame == 1) {
             LLcount = 1;

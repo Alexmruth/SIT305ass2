@@ -109,7 +109,7 @@
     "text2": " steps to go before the exit!",
     "exitText": "You have reached the exit! Click the exit button to return to main screen.",
 
-    "stepNumLvl1": 5,
+    "stepNumLvl1": 2,
     "stepNumLvl2": 6,
     "stepNumLvl3": 7,
     "lvl1Difficulty": 1,

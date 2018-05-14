@@ -330,7 +330,7 @@ public class LevelOne extends AppCompatActivity {
 
         enemyNameText.setText(enemyName);
         enemyStatsText.setText("ATT: " + String.valueOf(enemyAttMin) + "-" + String.valueOf(enemyAttMax) + " DEF: " + String.valueOf(enemyDef));
-        enemyHealthText.setText(String.valueOf(enemyHealth));
+        enemyHealthText.setText(String.valueOf(enemyHealth) + "/" + String.valueOf(enemyMaxHealth));
         enemyHealthBar.setMax(enemyHealth);
         enemyHealthBar.setProgress(enemyHealth);
 
@@ -362,12 +362,16 @@ public class LevelOne extends AppCompatActivity {
                 break;
             case 10:
                 enemyImage.setBackgroundResource(R.drawable.eb_troll_boss);
+                break;
             case 11:
                 enemyImage.setBackgroundResource(R.drawable.eb_rat_boss);
+                break;
             case 20:
                 enemyImage.setBackgroundResource(R.drawable.e_troll);
+                break;
             case 21:
                 enemyImage.setBackgroundResource(R.drawable.e_rat_minion);
+                break;
         }
     }
 
@@ -436,7 +440,7 @@ public class LevelOne extends AppCompatActivity {
             textJSON.setText(text1JSON);
             enemyNameText.setText(enemyName);
             enemyStatsText.setText("ATT: " + String.valueOf(enemyAttMin) + "-" + String.valueOf(enemyAttMax) + " DEF: " + String.valueOf(enemyDef));
-            enemyHealthText.setText(String.valueOf(enemyHealth));
+            enemyHealthText.setText(String.valueOf(enemyHealth) + "/" + String.valueOf(enemyMaxHealth));
             enemyHealthBar.setMax(enemyHealth);
             enemyHealthBar.setProgress(enemyHealth);
         }
@@ -535,7 +539,7 @@ public class LevelOne extends AppCompatActivity {
     }
 
     public void updateEnemy() throws JSONException {
-        enemyHealthText.setText(String.valueOf(enemyHealth));
+        enemyHealthText.setText(String.valueOf(enemyHealth) + "/" + String.valueOf(enemyMaxHealth));
         enemyHealthBar.setProgress(enemyHealth);
 
         if(enemyHealth <= 0) {
@@ -609,7 +613,7 @@ public class LevelOne extends AppCompatActivity {
                         }
                     });
                 }
-            }, 2000);
+            }, 1500);
         }
     }
 
