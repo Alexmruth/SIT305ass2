@@ -10,7 +10,7 @@
   },
   "Weapons": [
     {"ID": 0, "name": "Fists", "attMin": "1", "attMax": "5", "price": 0},
-    {"ID": 1, "name": "Basic Sword", "attMin": "2", "attMax": "6", "price": 100},
+    {"ID": 1, "name": "Basic Sword", "attMin": "2", "attMax": "6", "price": 10},
     {"ID": 2, "name": "Copper Swiftblade", "attMin": "3", "attMax": "8", "price": 2500},
     {"ID": 3, "name": "Vanquisher", "attMin": "4", "attMax": "13", "price": 10000},
     {"ID": 4, "name": "Obsidian Razor", "attMin": "5", "attMax": "20", "price": 30000},

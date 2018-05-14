@@ -12,12 +12,40 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.3">
-
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:padding="10dp">
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:layout_marginRight="10dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="Name"
+                    android:textColor="@color/black"
+                    android:layout_weight="1" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="Price"
+                    android:textColor="@color/black"
+                    android:layout_weight="1" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -32,12 +60,14 @@
                 <TextView
                     android:id="@+id/shopName1"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_weight="1" />
                 <TextView
                     android:id="@+id/shopPrice1"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_weight="1" />
                 <Button
                     android:id="@+id/buyBtn1"
@@ -60,12 +90,14 @@
                 <TextView
                     android:id="@+id/shopName2"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_weight="1" />
                 <TextView
                     android:id="@+id/shopPrice2"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_weight="1" />
                 <Button
                     android:id="@+id/buyBtn2"
@@ -84,16 +116,18 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginRight="10sp"/>
                 <TextView
                     android:id="@+id/shopName3"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_weight="1" />
                 <TextView
                     android:id="@+id/shopPrice3"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_weight="1" />
                 <Button
                     android:id="@+id/buyBtn3"
@@ -111,19 +145,112 @@
                     android:id="@+id/shopImage4"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"/>
+                    android:layout_weight="0.5"
+                    android:layout_marginRight="10sp"/>
                 <TextView
                     android:id="@+id/shopName4"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_weight="1" />
                 <TextView
                     android:id="@+id/shopPrice4"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_weight="1" />
                 <Button
                     android:id="@+id/buyBtn4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:onClick="buyHandler" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+                <ImageView
+                    android:id="@+id/shopImage5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:layout_marginRight="10sp"/>
+                <TextView
+                    android:id="@+id/shopName5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1" />
+                <TextView
+                    android:id="@+id/shopPrice5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1" />
+                <Button
+                    android:id="@+id/buyBtn5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:onClick="buyHandler" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+                <ImageView
+                    android:id="@+id/shopImage6"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:layout_marginRight="10sp"/>
+                <TextView
+                    android:id="@+id/shopName6"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1" />
+                <TextView
+                    android:id="@+id/shopPrice6"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1" />
+                <Button
+                    android:id="@+id/buyBtn6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:onClick="buyHandler" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+                <ImageView
+                    android:id="@+id/shopImage7"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:layout_marginRight="10sp"/>
+                <TextView
+                    android:id="@+id/shopName7"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1" />
+                <TextView
+                    android:id="@+id/shopPrice7"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1" />
+                <Button
+                    android:id="@+id/buyBtn7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
@@ -221,14 +348,20 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <Button
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="" />
+                    android:background="@drawable/coin" />
+
+                <TextView
+                    android:id="@+id/shopGoldText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/black" />
             </LinearLayout>
 
         </LinearLayout>
