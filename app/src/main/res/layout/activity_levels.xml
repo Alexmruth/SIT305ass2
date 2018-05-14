@@ -122,7 +122,12 @@
         android:layout_height="match_parent"
         android:layout_weight="0.4"
         android:background="#A2A77F">
-
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Back"
+                android:layout_alignParentBottom="true"
+                android:onClick="onBack"/>
 
     </RelativeLayout>
 </LinearLayout>

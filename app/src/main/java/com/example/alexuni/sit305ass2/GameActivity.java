@@ -1,5 +1,6 @@
 package com.example.alexuni.sit305ass2;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,8 +26,7 @@ import java.util.Timer;
 
 public class GameActivity extends AppCompatActivity {
 
-    boolean introText;
-    int henrySwitch = 0;
+    boolean introText, henrySwitch;
     int jc = 0; //short for JSON counter
     int LLcount = 0;
     int continueGame;
@@ -68,7 +69,7 @@ public class GameActivity extends AppCompatActivity {
         goldText = findViewById(R.id.homeGoldText);
         LL1 = findViewById(R.id.LL1);
         LL3 = findViewById(R.id.LL3);
-        continueGame = MainActivity.continueGame;
+        continueGame = prefs.getInt("continueGame", 0);
         weapEquipped = prefs.getInt("weapEquipped", 0);
 
         if (continueGame == 1) {
@@ -123,7 +124,8 @@ public class GameActivity extends AppCompatActivity {
         if(v.getId() == R.id.button1) {
             Intent intent = new Intent(this, LevelsActivity.class);
             startActivity(intent);
-        } else if(v.getId() == R.id.shopBtn) {
+        }
+        if(v.getId() == R.id.shopBtn) {
             Intent intent = new Intent(this, ShopActivity.class);
             startActivity(intent);
         }
@@ -131,8 +133,9 @@ public class GameActivity extends AppCompatActivity {
 
     public void talkHenry(View v) {
         jc = 1;
-        henrySwitch = 1;
+        henrySwitch = true;
 
+        textJSON.setText("Coming soon!");
         try {
             getText();
         } catch (JSONException e) {
@@ -179,12 +182,16 @@ public class GameActivity extends AppCompatActivity {
             i++;
             getText();
         } else {
+            continueGame = 1;
+            editor.putInt("continueGame", continueGame);
+            editor.commit();
             introText = false;
             LLcount = 1;
             nameJSON.setText("");
             textJSON.setText("");
             textImage.setBackground(null);
         }
+
 
         if(LLcount == 1){
             LL1.setVisibility(View.VISIBLE);
@@ -199,7 +206,6 @@ public class GameActivity extends AppCompatActivity {
 
         JSONObject obj = new JSONObject(loadJSON()); //defines JSONObject as the result of loadJSON method
         ja = obj.getJSONArray("IntroText");
-
 
         if(jc == 0) {
             o = ja.getJSONObject(i);
@@ -224,10 +230,32 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void fullHeal(View v) {
-        playerHealth = 100;
-        playerHealthText.setText("HEALTH: " + String.valueOf(playerHealth) + "/" + String.valueOf(playerMaxHealth));
-        healthBar.setMax(100);
-        healthBar.setProgress(playerHealth);
+        if (goldCount >= 20) {
+            goldCount = goldCount - 20;
+            goldText.setText(String.valueOf(goldCount));
+            playerHealth = 100;
+            playerHealthText.setText("HEALTH: " + String.valueOf(playerHealth) + "/" + String.valueOf(playerMaxHealth));
+            healthBar.setMax(100);
+            healthBar.setProgress(playerHealth);
+
+            editor.putInt("gold", goldCount);
+            editor.putInt("health", playerHealth);
+            editor.commit();
+
+        } else {
+            showToast();
+        }
+    }
+
+    public void showToast() {
+        Context context = getApplicationContext();
+        CharSequence text;
+        final Toast toast;
+        int duration = Toast.LENGTH_LONG;
+        text = "Not enough gold!";
+
+        toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 
     public void onQuit(View v) {

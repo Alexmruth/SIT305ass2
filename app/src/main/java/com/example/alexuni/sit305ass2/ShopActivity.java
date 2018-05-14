@@ -1,6 +1,7 @@
 package com.example.alexuni.sit305ass2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -31,7 +32,7 @@ import java.util.HashMap;
 public class ShopActivity extends AppCompatActivity {
 
     JSONArray wd;
-    JSONObject c;
+    JSONObject c, jo;
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
 
@@ -44,7 +45,7 @@ public class ShopActivity extends AppCompatActivity {
 
     String btn1Text, btn2Text, btn3Text, btn4Text, btn5Text, btn6Text, btn7Text;
 
-    int i, id, price, weapEquipped, goldCount;
+    int i, id, price, weapEquipped, goldCount, baseGold;
     String name;
 
     @Override
@@ -99,7 +100,14 @@ public class ShopActivity extends AppCompatActivity {
         item6Purchased = prefs.getBoolean("item6Purchased", false);
         item7Purchased = prefs.getBoolean("item7Purchased", false);
         weapEquipped = prefs.getInt("weapEquipped", 0);
-        goldCount = prefs.getInt("gold", 0);
+        try {
+            JSONObject obj = new JSONObject(loadJSON());
+            JSONObject jo = obj.getJSONObject("PlayerData");
+            baseGold = jo.getInt("baseGold");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        goldCount = prefs.getInt("gold", baseGold);
         goldText.setText(String.valueOf(goldCount));
 
         loadJSON();
@@ -297,6 +305,26 @@ public class ShopActivity extends AppCompatActivity {
         editor.putInt("gold", goldCount);
         editor.putInt("weapEquipped", weapEquipped);
         editor.commit();
+        save();
+
+    }
+    public void save() throws JSONException {
+        JSONObject obj = new JSONObject(loadJSON());
+        JSONObject jo = obj.getJSONObject("PlayerData");
+        int baseAttMin1 = jo.getInt("baseAttMin");
+        int baseAttMax1 = jo.getInt("baseAttMax");
+        wd = obj.getJSONArray("Weapons");
+        JSONObject weapon = wd.getJSONObject(weapEquipped);
+
+        int weaponAttMin = weapon.getInt("attMin");
+        int weaponAttMax = weapon.getInt("attMax");
+
+        int totalAttMin = weaponAttMin + baseAttMin1;
+        int totalAttMax = weaponAttMax + baseAttMax1;
+
+        editor.putInt("attMin", totalAttMin);
+        editor.putInt("attMax", totalAttMax);
+        editor.commit();
     }
 
     public void showToast() {
@@ -308,5 +336,10 @@ public class ShopActivity extends AppCompatActivity {
 
         toast = Toast.makeText(context, text, duration);
         toast.show();
+    }
+
+    public void onBack(View v) {
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
     }
 }

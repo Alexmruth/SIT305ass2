@@ -19,7 +19,7 @@
         <activity android:name=".GameActivity" />
         <activity android:name=".ShopActivity" />
         <activity android:name=".LevelsActivity" />
-        <activity android:name=".LevelOne"></activity>
+        <activity android:name=".LevelOne" />
     </application>
 
 </manifest>

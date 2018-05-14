@@ -6,7 +6,7 @@
     "baseAttMax": 6,
     "baseDefence": 1,
     "basePotions": 3,
-    "baseGold": 10
+    "baseGold": 100000
   },
   "Weapons": [
     {"ID": 0, "name": "Fists", "attMin": "1", "attMax": "5", "price": 0},

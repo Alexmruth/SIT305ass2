@@ -70,7 +70,29 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="3"
+                    android:background="@drawable/c_henryvillager"
+                    android:scaleType="fitXY" />
 
+                <Button
+                    android:id="@+id/henryBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:onClick="talkHenry"
+                    android:text="Talk to Henry" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -87,6 +109,7 @@
                     android:layout_weight="4"
                     android:onClick="onMenuBtnClick"
                     android:text="Shop" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -94,44 +117,20 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_weight="3"
-                    android:background="@drawable/sword001" />
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="4"
-                    android:text="Inventory" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_weight="3"
-                    android:background="@drawable/c_henryvillager"
                     android:scaleType="fitXY" />
 
                 <Button
-                    android:id="@+id/henryBtn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="4"
-                    android:onClick="talkHenry"
-                    android:text="Talk to Henry" />
+                    android:text="Quit"
+                    android:onClick="onQuit"/>
+
             </LinearLayout>
 
         </LinearLayout>
@@ -236,12 +235,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:text="Quit"
-                        android:onClick="onQuit"/>
+
                 </RelativeLayout>
             </LinearLayout>
 

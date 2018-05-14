@@ -52,6 +52,7 @@ public class LevelOne extends AppCompatActivity {
     LinearLayout llOptions;
 
     SharedPreferences prefs;
+    SharedPreferences.Editor editor;
 
 // https://stackoverflow.com/questions/41080424/how-to-output-a-interactive-game-map-from-an-array-in-android-studios
     // https://gamedev.stackexchange.com/questions/26346/whole-map-design-vs-tiles-array-design
@@ -114,6 +115,7 @@ public class LevelOne extends AppCompatActivity {
 
         random = new Random();
         prefs = getSharedPreferences("playerSaveData", MODE_PRIVATE);
+        editor = prefs.edit();
 
         playerHealth = prefs.getInt("health", 0);
         goldCount = prefs.getInt("gold", 0);
@@ -271,15 +273,19 @@ public class LevelOne extends AppCompatActivity {
         baseAttMin = prefs.getInt("attMin", baseAttMin1);
         baseAttMax = prefs.getInt("attMax", baseAttMax1);
         baseDef = prefs.getInt("def", baseDef1);
-
-        ID = wepEquipped;
-        weapon = wd.getJSONObject(ID);
+        int weapEquipped = prefs.getInt("weapEquipped", 0);
+        weapon = wd.getJSONObject(weapEquipped);
 
         weaponAttMin = weapon.getInt("attMin");
         weaponAttMax = weapon.getInt("attMax");
 
-        totalAttMin = weaponAttMin + baseAttMin;
-        totalAttMax = weaponAttMax + baseAttMax;
+        totalAttMin = weaponAttMin + baseAttMin1;
+        totalAttMax = weaponAttMax + baseAttMax1;
+
+        editor.putInt("attMin", totalAttMin);
+        editor.putInt("attMax", totalAttMax);
+        editor.commit();
+
 
         totalDef = baseDef;
 
@@ -657,8 +663,7 @@ public class LevelOne extends AppCompatActivity {
     }
 
     public void save() {
-        SharedPreferences prefs = getSharedPreferences("playerSaveData", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
+
         editor.putInt("gold", goldCount);
         editor.putInt("health", playerHealth);
         editor.putInt("potions", potions);

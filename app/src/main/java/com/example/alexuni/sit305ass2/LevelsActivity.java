@@ -32,4 +32,9 @@ public class LevelsActivity extends AppCompatActivity {
         Intent intent = new Intent (this, LevelOne.class);
         startActivity(intent);
     }
+
+    public void onBack(View v) {
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
+    }
 }
