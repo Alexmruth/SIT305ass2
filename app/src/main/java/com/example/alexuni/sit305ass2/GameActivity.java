@@ -30,13 +30,13 @@ public class GameActivity extends AppCompatActivity {
     int jc = 0; //short for JSON counter
     int LLcount = 0;
     int continueGame;
-    int goldCount, potionCount, playerHealth, playerMaxHealth, attMin, attMax, def, weapEquipped;
+    int goldCount, potionCount, playerHealth, playerMaxHealth, attMin, attMax, def, weapEquipped, healthUpgradeCost, healthUpgrade;
     ProgressBar healthBar;
     LinearLayout LL1;
     LinearLayout LL3;
     Button nextBtn;
     TextView textJSON, nameJSON;
-    TextView playerStatsText, playerStatsText2, playerHealthText, goldText, potionsText;
+    TextView playerStatsText, playerStatsText2, playerHealthText, goldText, potionsText, buyHealthText;
     ImageView textImage;
     String dialogue;
     String charName;
@@ -62,6 +62,7 @@ public class GameActivity extends AppCompatActivity {
         playerStatsText2 = findViewById(R.id.playerStatsText2);
         playerHealthText = findViewById(R.id.playerHealthText);
         potionsText = findViewById(R.id.homePotionText);
+        buyHealthText = findViewById(R.id.upgradeHealthText);
         textJSON = findViewById(R.id.textJSON);
         nextBtn = findViewById(R.id.nextBtn);
         nameJSON = findViewById(R.id.nameJSON);
@@ -103,21 +104,28 @@ public class GameActivity extends AppCompatActivity {
         int baseHealth = jo.getInt("baseHealth");
         int basePotions = jo.getInt("basePotions");
         int baseGold = jo.getInt("baseGold");
-        playerMaxHealth = baseHealth;
+        int baseHealthUpgradeCost = jo.getInt("healthUpgradeCost");
+        healthUpgrade = jo.getInt("healthUpgrade");
+        playerMaxHealth = prefs.getInt("playerMaxHealth", baseHealth);
+        healthUpgradeCost = prefs.getInt("healthUpgradeCost", baseHealthUpgradeCost);
         goldCount = prefs.getInt("gold", baseGold);
         potionCount = prefs.getInt("potions", basePotions);
         playerHealth = prefs.getInt("health", baseHealth);
         attMin = prefs.getInt("attMin", baseAttMin);
         attMax = prefs.getInt("attMax", baseAttMax);
         def = prefs.getInt("def", baseDef);
+        updatePlayerText();
 
+    }
+    public void updatePlayerText() {
         playerStatsText.setText("ATT: " + String.valueOf(attMin) + "-" + String.valueOf(attMax));
         playerStatsText2.setText( "DEF: " + String.valueOf(def));
         playerHealthText.setText("HEALTH: " + String.valueOf(playerHealth) + "/" + String.valueOf(playerMaxHealth));
-        healthBar.setMax(100);
+        healthBar.setMax(playerMaxHealth);
         healthBar.setProgress(playerHealth);
         goldText.setText(String.valueOf(goldCount));
         potionsText.setText(String.valueOf(potionCount));
+        buyHealthText.setText("Upgrade health ("+String.valueOf(healthUpgradeCost)+" Gold)");
     }
 
     public void onMenuBtnClick(View v) {
@@ -192,7 +200,6 @@ public class GameActivity extends AppCompatActivity {
             textImage.setBackground(null);
         }
 
-
         if(LLcount == 1){
             LL1.setVisibility(View.VISIBLE);
             LL3.setVisibility(View.VISIBLE);
@@ -232,15 +239,12 @@ public class GameActivity extends AppCompatActivity {
     public void fullHeal(View v) {
         if (goldCount >= 20) {
             goldCount = goldCount - 20;
-            goldText.setText(String.valueOf(goldCount));
-            playerHealth = 100;
-            playerHealthText.setText("HEALTH: " + String.valueOf(playerHealth) + "/" + String.valueOf(playerMaxHealth));
-            healthBar.setMax(100);
-            healthBar.setProgress(playerHealth);
+            playerHealth = playerMaxHealth;
 
             editor.putInt("gold", goldCount);
             editor.putInt("health", playerHealth);
             editor.commit();
+            updatePlayerText();
 
         } else {
             showToast();
@@ -253,7 +257,6 @@ public class GameActivity extends AppCompatActivity {
         final Toast toast;
         int duration = Toast.LENGTH_LONG;
         text = "Not enough gold!";
-
         toast = Toast.makeText(context, text, duration);
         toast.show();
     }
@@ -266,16 +269,31 @@ public class GameActivity extends AppCompatActivity {
     public void buyPotion(View view) {
         if (goldCount >= 15) {
             goldCount = goldCount - 15;
-            goldText.setText(String.valueOf(goldCount));
             potionCount++;
-            potionsText.setText(String.valueOf(potionCount));
 
             editor.putInt("gold", goldCount);
             editor.putInt("potions", potionCount);
             editor.commit();
+            updatePlayerText();
 
         } else {
             showToast();
+        }
+    }
+
+    public void buyHealth(View view) {
+        if(goldCount >= healthUpgradeCost) {
+            goldCount = goldCount - healthUpgradeCost;
+            playerMaxHealth = playerMaxHealth + healthUpgrade;
+            healthUpgradeCost = healthUpgradeCost * 2;
+
+            editor.putInt("gold", goldCount);
+            editor.putInt("playerMaxHealth", playerMaxHealth);
+            editor.putInt("healthUpgradeCost", healthUpgradeCost);
+            editor.commit();
+
+            updatePlayerText();
+
         }
     }
 }

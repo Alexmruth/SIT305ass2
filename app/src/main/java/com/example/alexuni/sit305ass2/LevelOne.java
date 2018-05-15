@@ -277,12 +277,6 @@ public class LevelOne extends AppCompatActivity {
         wd = gameData.getJSONArray("Weapons");
 
         playerName = pd.getString("name");
-        // playerHealth = pd.getInt("baseHealth");
-        // potions = pd.getInt("basePotions");
-
-        /* baseAttMin = pd.getInt("baseAttMin");
-        baseAttMax = pd.getInt("baseAttMax");
-        baseDef = pd.getInt("baseDefence"); */
 
         // Default values from JSON
         int baseAttMin1 = pd.getInt("baseAttMin");
@@ -291,8 +285,8 @@ public class LevelOne extends AppCompatActivity {
         int baseHealth = pd.getInt("baseHealth");
         int basePotions = pd.getInt("basePotions");
         int baseGold = pd.getInt("baseGold");
-        playerMaxHealth = baseHealth;
         // Saved values from Shared Preferences
+        playerMaxHealth = prefs.getInt("playerMaxHealth", baseHealth);
         goldCount = prefs.getInt("gold", baseGold);
         potions = prefs.getInt("potions", basePotions);
         playerHealth = prefs.getInt("health", baseHealth);
@@ -319,7 +313,7 @@ public class LevelOne extends AppCompatActivity {
         playerNameText.setText(playerName);
         playerStatsText.setText("ATT: " + String.valueOf(totalAttMin) + "-" + String.valueOf(totalAttMax) + " DEF: " + String.valueOf(baseDef));
         playerHealthText.setText(String.valueOf(playerHealth) + "/" + String.valueOf(playerMaxHealth));
-        playerPotionsText.setText(String.valueOf(potions));
+        playerPotionsText.setText("x" + String.valueOf(potions));
         goldText.setText(String.valueOf(goldCount));
         healthBar.setMax(playerMaxHealth);
         healthBar.setProgress(playerHealth);
@@ -530,6 +524,7 @@ public class LevelOne extends AppCompatActivity {
                 if (text3JSON.contains("Give")) {
                     stepNum--;
                     npcEncounter = false;
+                    goldCount = goldCount - 10;
                     ll3.setVisibility(View.VISIBLE);
                     llOptions.setVisibility(View.INVISIBLE);
                     getEnemy();
@@ -542,8 +537,9 @@ public class LevelOne extends AppCompatActivity {
                 if(text3JSON.contains("(Give potion)")) {
                     if(potions > 0) {
                         potions--;
-                        playerPotionsText.setText(String.valueOf(potions));
+                        playerPotionsText.setText("x" + String.valueOf(potions));
                         e++;
+                        goNext = false;
                     } else {
                         goNext = false;
                         Context context = getApplicationContext();
@@ -559,7 +555,7 @@ public class LevelOne extends AppCompatActivity {
                 e++;
             }
             if(currentLevel == 6) {
-                
+
             }
         }
         getText();
@@ -572,9 +568,12 @@ public class LevelOne extends AppCompatActivity {
     }
 
 
-    public void updatePlayer() {
+    public void updatePlayer() throws JSONException {
         playerHealthText.setText(String.valueOf(String.valueOf(playerHealth) + "/" + String.valueOf(playerMaxHealth)));
         healthBar.setProgress(playerHealth);
+        if(playerHealth <= 0) {
+            playerDead();
+        }
     }
 
     public void goldReward() throws JSONException {
@@ -595,7 +594,11 @@ public class LevelOne extends AppCompatActivity {
             enemyNameText.setText("You have defeated " + enemyName +"!!");
             enemyDead = true;
             goldReward();
-            textJSON.setText(enemyDeadText);
+            if(bossCount == 5) {
+                endGame();
+            } else {
+                textJSON.setText(enemyDeadText);
+            }
         }
 
     }
@@ -618,7 +621,6 @@ public class LevelOne extends AppCompatActivity {
     //##############################################################################################
 
     public void onAttack(View view) throws JSONException {
-        int damage;
         attValue = (random.nextInt((totalAttMax+1) - (totalAttMin-1)) + totalAttMin) - enemyDef;
 
         if(attValue <= 0) {
@@ -656,14 +658,31 @@ public class LevelOne extends AppCompatActivity {
                         @Override
                         public void run() {
                             playerHealth = playerHealth - enemyAttack;
-                            updatePlayer();
+                            try {
+                                updatePlayer();
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
+                            }
                             showToast();
                             playerTurn = true;
                         }
                     });
                 }
-            }, 10);
+            }, 1000);
         }
+    }
+
+    public void playerDead() throws JSONException {
+        JSONObject obj = new JSONObject(loadJSON());
+        jo = obj.getJSONObject("LevelData");
+
+        text1JSON = jo.getString("playerDead");
+        textJSON.setText(text1JSON);
+        forwardBtn.setClickable(false);
+        attBtn.setClickable(false);
+        playerHealth = playerMaxHealth;
+        editor.putInt("health", playerHealth);
+        editor.commit();
     }
 
     public void onForward(View view) throws JSONException {
@@ -716,11 +735,11 @@ public class LevelOne extends AppCompatActivity {
         editor.commit();
     }
 
-    public void onHeal(View view) {
+    public void onHeal(View view) throws JSONException {
         if (potions >= 1) {
             playerHealth = playerHealth + 50;
             potions--;
-            playerPotionsText.setText(String.valueOf(potions));
+            playerPotionsText.setText("x" + String.valueOf(potions));
             if(playerHealth > playerMaxHealth) {
                 playerHealth = playerMaxHealth;
             }
@@ -729,7 +748,8 @@ public class LevelOne extends AppCompatActivity {
         }
     }
 
-
-
+    public void endGame() {
+        
+    }
 
 }

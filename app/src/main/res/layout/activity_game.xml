@@ -248,6 +248,24 @@
                         android:text="Buy potion (15 gold)"
                         android:textColor="@color/black" />
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/heart"
+                        android:onClick="buyHealth" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:id="@+id/upgradeHealthText"
+                        android:textColor="@color/black" />
+                </LinearLayout>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"

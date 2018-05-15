@@ -6,7 +6,9 @@
     "baseAttMax": 6,
     "baseDefence": 1,
     "basePotions": 3,
-    "baseGold": 10
+    "baseGold": 10,
+    "healthUpgrade": 50,
+    "healthUpgradeCost": 60
   },
   "Weapons": [
     {"ID": 0, "name": "Fists", "attMin": "1", "attMax": "5", "price": 0},
@@ -29,7 +31,7 @@
     {
       "ID": 1,
       "name": "Cave dweller",
-      "health": 12,
+      "health": 15,
       "attMin": 3,
       "attMax": 5,
       "defence": 2
@@ -45,7 +47,7 @@
     {
       "ID": 3,
       "name": "Mutant Rat",
-      "health": 10,
+      "health": 15,
       "attMin": 1,
       "attMax": 7,
       "defence": 1
@@ -61,7 +63,7 @@
     {
       "ID": 5,
       "name": "Spider",
-      "health": 15,
+      "health": 20,
       "attMin": 3,
       "attMax": 6,
       "defence": 1
@@ -69,7 +71,7 @@
     {
       "ID": 6,
       "name": "Dragon Minion",
-      "health": 12,
+      "health": 30,
       "attMin": 1,
       "attMax": 10,
       "defence": 2
@@ -87,34 +89,34 @@
     {
       "ID": 11,
       "name": "Boss - Rat King",
-      "health": 110,
-      "attMin": 3,
-      "attMax": 7,
-      "defence": 2
+      "health": 80,
+      "attMin": 2,
+      "attMax": 6,
+      "defence": 1
     },
     {
       "ID": 12,
       "name": "Boss - Medusa",
       "health": 100,
-      "attMin": 4,
-      "attMax": 8,
-      "defence": 3
+      "attMin": 3,
+      "attMax": 7,
+      "defence": 2
     },
     {
       "ID": 13,
       "name": "Boss - Mage",
-      "health": 80,
-      "attMin": 2,
-      "attMax": 7,
-      "defence": 3
+      "health": 90,
+      "attMin": 4,
+      "attMax": 8,
+      "defence": 2
     },
     {
       "ID": 14,
       "name": "Boss - Demon",
-      "health": 60,
+      "health": 80,
       "attMin": 2,
       "attMax": 5,
-      "defence": 3
+      "defence": 1
     },
     {
       "ID": 15,
@@ -130,6 +132,7 @@
     "text1": "You have ",
     "enemyDead": "Well done! Click the forward button to approach your next encounter!",
     "enemyNotDead": "You must kill this enemy before continuing forward!",
+    "playerDead": "You have died! Click the exit button to exit level.",
     "text2": " steps to go before the exit!",
     "exitText": "You have reached the exit! Click the exit button to return to main screen.",
 
@@ -144,7 +147,7 @@
     "lvl3Difficulty": 1.5,
     "lvl4Difficulty": 2,
     "lvl5Difficulty": 3,
-    "lvl6Difficulty": 5,
+    "lvl6Difficulty": 4.2,
 
     "goldMin1": 10,
     "goldMax1": 30,
@@ -171,7 +174,7 @@
     "health": 60,
     "attMin": 2,
     "attMax": 8,
-    "defence": 3,
+    "defence": 1,
     "dialog": [
       {
         "text": "Stop right there! What are you doing in my cave? Give me one good reason why I shouldn't kill you on the spot.",
@@ -194,8 +197,8 @@
     "name": "Rat King Minion",
     "ID": 21,
     "health": 80,
-    "attMin": 3,
-    "attMax": 7,
+    "attMin": 2,
+    "attMax": 6,
     "defence": 2,
     "dialog": [
       {
