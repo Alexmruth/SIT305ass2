@@ -48,15 +48,10 @@ public class LevelOne extends AppCompatActivity {
     int ID = 0;
     double lvlDifficulty;
 
-    LinearLayout ll3;
-    LinearLayout llOptions;
+    LinearLayout ll3, llOptions;
 
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
-
-// https://stackoverflow.com/questions/41080424/how-to-output-a-interactive-game-map-from-an-array-in-android-studios
-    // https://gamedev.stackexchange.com/questions/26346/whole-map-design-vs-tiles-array-design
-
 
     boolean enemyDead = false;
     boolean lvlClear = false;
@@ -113,10 +108,9 @@ public class LevelOne extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_one);
 
-        random = new Random();
+        //SharedPreferences ----------------------------------------
         prefs = getSharedPreferences("playerSaveData", MODE_PRIVATE);
         editor = prefs.edit();
-
         playerHealth = prefs.getInt("health", 0);
         goldCount = prefs.getInt("gold", 0);
 
@@ -160,6 +154,9 @@ public class LevelOne extends AppCompatActivity {
         enemyHealthText = findViewById(R.id.enemyHealthText);
         enemyStatsText = findViewById(R.id.enemyStatsText);
 
+        //Misc -----------------------------------------------------
+        random = new Random();
+        //----------------------------------------------------------
 
 
         //Essentially starts the level, loads player stats, gets encounter and gets text

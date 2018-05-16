@@ -10,10 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    Button newGameBtn;
-    Button continueBtn;
-    static int continueGame;
-
+    Button newGameBtn, continueBtn;
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
 
@@ -24,35 +21,43 @@ public class MainActivity extends AppCompatActivity {
         newGameBtn = findViewById(R.id.newGameBtn);
         continueBtn = findViewById(R.id.continueBtn);
 
+        //Declaring Shared prefs variables
         prefs = getSharedPreferences("playerSaveData", MODE_PRIVATE);
         editor = prefs.edit();
     }
 
+    // Method onClick() is called when either newGameBtn or continueBtn is clicked.
+    // Method signature: Public void as it is publicly accessible and returns no value. (View v) grabs the view clicked
     public void onClick (View v) {
+        //If newGameBtn is clicked, this code executes
         if (v.getId() == R.id.newGameBtn) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("New Game?");
-            builder.setMessage("If you start a new game, all current progress is lost!");
+            builder.setTitle("New Game?"); //alert title
+            builder.setMessage("If you start a new game, all current progress is lost!"); //alert message
             builder.setPositiveButton("New Game", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
-                    startNewGame();
+                    startNewGame(); //positive reaction button response, calls startNewGame() method
                 }
             });
             builder.setNegativeButton("Back", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
+                    // negative reaction button exits back to home screen
                 }
             });
             builder.show();
-        } else if (v.getId() == R.id.continueBtn){
-            editor.putInt("continueGame", 1);
+        }
+        //If continueBtn is clicked, this code executes and loads GameActivity
+        if (v.getId() == R.id.continueBtn){
+            editor.putInt("continueGame", 1); // changes continueGame variable to 1, which skips intro scene
             Intent intent = new Intent (this, GameActivity.class);
             startActivity(intent);
         }
-        editor.commit();
+        editor.commit(); // commits changes to shared prefs file
     }
+    // Method startNewGame() responsible for triggering a new game state and loading the GameActivity.
     public void startNewGame() {
-        editor.putInt("continueGame", 0);
-        editor.commit();
+        editor.putInt("continueGame", 0); // changes continueGame variable to 0, which triggers intro scene upon entering GameActivity
+        editor.commit(); // commits changes
         Intent intent = new Intent (this, GameActivity.class);
         startActivity(intent);
 

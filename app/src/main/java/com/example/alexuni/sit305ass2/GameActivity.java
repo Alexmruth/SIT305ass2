@@ -26,57 +26,63 @@ import java.util.Timer;
 
 public class GameActivity extends AppCompatActivity {
 
-    boolean introText, henrySwitch;
+    boolean introText;
     int jc = 0; //short for JSON counter
     int LLcount = 0;
-    int continueGame;
-    int goldCount, potionCount, playerHealth, playerMaxHealth, attMin, attMax, def, weapEquipped, healthUpgradeCost, healthUpgrade;
+    int i = 0;
+    int continueGame, goldCount, potionCount, playerHealth, playerMaxHealth, attMin, attMax, def, weapEquipped, healthUpgradeCost, healthUpgrade;
     ProgressBar healthBar;
-    LinearLayout LL1;
-    LinearLayout LL3;
+    LinearLayout LL1, LL3;
     Button nextBtn;
     TextView textJSON, nameJSON;
     TextView playerStatsText, playerStatsText2, playerHealthText, goldText, potionsText, buyHealthText;
     ImageView textImage;
-    String dialogue;
-    String charName;
+    String dialogue, charName;
     JSONObject o;
     JSONArray ja;
-    int i = 0;
-
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
-
-    private Timer timer = new Timer();
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        //SharedPreferences ----------------------------------------
         prefs = getSharedPreferences("playerSaveData", MODE_PRIVATE);
         editor = prefs.edit();
-
+        continueGame = prefs.getInt("continueGame", 0); //if 0, new game - if 1, continue game
+        weapEquipped = prefs.getInt("weapEquipped", 0); //loads current weapon equipped
+        //LinearLayouts --------------------------------------------
+        LL1 = findViewById(R.id.LL1);
+        LL3 = findViewById(R.id.LL3);
+        //Health bars ----------------------------------------------
         healthBar = findViewById(R.id.homeHealthBar);
+        //Buttons --------------------------------------------------
+        nextBtn = findViewById(R.id.nextBtn);
+        //Images ---------------------------------------------------
+        textImage = findViewById(R.id.textImage);
+        //TextViews ------------------------------------------------
+            //Player stats text
         playerStatsText = findViewById(R.id.playerStatsText);
         playerStatsText2 = findViewById(R.id.playerStatsText2);
         playerHealthText = findViewById(R.id.playerHealthText);
         potionsText = findViewById(R.id.homePotionText);
-        buyHealthText = findViewById(R.id.upgradeHealthText);
-        textJSON = findViewById(R.id.textJSON);
-        nextBtn = findViewById(R.id.nextBtn);
-        nameJSON = findViewById(R.id.nameJSON);
-        textImage = findViewById(R.id.textImage);
         goldText = findViewById(R.id.homeGoldText);
-        LL1 = findViewById(R.id.LL1);
-        LL3 = findViewById(R.id.LL3);
-        continueGame = prefs.getInt("continueGame", 0);
-        weapEquipped = prefs.getInt("weapEquipped", 0);
+            //Upgrades text
+        buyHealthText = findViewById(R.id.upgradeHealthText);
+            //Dialogue text
+        textJSON = findViewById(R.id.textJSON);
+        nameJSON = findViewById(R.id.nameJSON);
+        //----------------------------------------------------------
 
+
+        //Decides if game shows intro text (only displayed when starting a new game)
         if (continueGame == 1) {
             LLcount = 1;
             introText = false;
         } else {
+            //When a new game starts, introText = true and all SharedPreferences data is wiped.
             LL1.setVisibility(View.INVISIBLE);
             LL3.setVisibility(View.INVISIBLE);
             introText = true;
@@ -85,19 +91,23 @@ public class GameActivity extends AppCompatActivity {
         }
 
 
-        //Opens the getText method
+        //Calls important methods, surrounded with try/catch to prevent crashes
         try {
-            loadPlayerData();
-            getText();
+            loadPlayerData(); //loads all player data
+            getText(); //loads intro text etc
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
     }
-
+    /* Method loadPlayerData() is responsible for grabbing data from both JSON and SharedPreferences files
+    and assigning them to values within the activity. Only to be loaded once at beginning of activity
+    to avoid resetting any values that have since changed from beginning of actvitiy. */
     public void loadPlayerData() throws JSONException {
-        JSONObject obj = new JSONObject(loadGameData());
+        JSONObject obj = new JSONObject(loadGameData()); // creates a JSONObject using the return value of loadGameData()
         JSONObject jo = obj.getJSONObject("PlayerData");
+        /* These values below are primarily used for default or beginner values, which then get written over
+            when it is updated in SharedPreferences */
         int baseAttMin = jo.getInt("baseAttMin");
         int baseAttMax = jo.getInt("baseAttMax");
         int baseDef = jo.getInt("baseDefence");
@@ -106,6 +116,8 @@ public class GameActivity extends AppCompatActivity {
         int baseGold = jo.getInt("baseGold");
         int baseHealthUpgradeCost = jo.getInt("healthUpgradeCost");
         healthUpgrade = jo.getInt("healthUpgrade");
+        //------------------------------------------------------------------------------------------
+        // These values below are grabbed from the SharedPreferences file, and use the JSON values as defaults
         playerMaxHealth = prefs.getInt("playerMaxHealth", baseHealth);
         healthUpgradeCost = prefs.getInt("healthUpgradeCost", baseHealthUpgradeCost);
         goldCount = prefs.getInt("gold", baseGold);
@@ -114,7 +126,8 @@ public class GameActivity extends AppCompatActivity {
         attMin = prefs.getInt("attMin", baseAttMin);
         attMax = prefs.getInt("attMax", baseAttMax);
         def = prefs.getInt("def", baseDef);
-        updatePlayerText();
+        //------------------------------------------------------------------------------------------
+        updatePlayerText(); // calls method which uses this data and assigns it to TextViews etc.
 
     }
     public void updatePlayerText() {
@@ -141,7 +154,6 @@ public class GameActivity extends AppCompatActivity {
 
     public void talkHenry(View v) {
         jc = 1;
-        henrySwitch = true;
 
         textJSON.setText("Coming soon!");
         try {
