@@ -77,8 +77,6 @@ public class GameActivity extends AppCompatActivity {
         textJSON = findViewById(R.id.textJSON);
         nameJSON = findViewById(R.id.nameJSON);
         //----------------------------------------------------------
-
-
         //Decides if game shows intro text (only displayed when starting a new game)
         if (continueGame == 1) {
             LLcount = 1;
@@ -91,8 +89,6 @@ public class GameActivity extends AppCompatActivity {
             editor.clear();
             editor.apply();
         }
-
-
         //Calls important methods, surrounded with try/catch to prevent crashes
         try {
             loadPlayerData(); //loads all player data
@@ -191,6 +187,53 @@ public class GameActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+    // The getText() method is used to grab text from JSON objects/arrays based on specific events or values
+    public void getText() throws JSONException {
+
+        JSONObject obj = new JSONObject(loadJSON()); //defines JSONObject as the result of loadJSON method
+        ja = obj.getJSONArray("IntroText");
+
+        if(jc == 0) {
+            o = ja.getJSONObject(i);
+        } else if(jc ==1) {
+            o = obj.getJSONObject("HenryText");
+        }
+        charName = o.getString("character");
+        dialogue = o.getString("text");
+        // Intro text code, sets the player/NPC name and corresponding text to TextViews, and sets images as well
+        if (introText) {
+            nameJSON.setText(charName);
+            textJSON.setText(dialogue);
+            //Selects image based on what dialogue is being shown
+            if(o.getString("character").equals("Henry the Villager")) { //Henry the villager character image
+                textImage.setBackgroundResource(R.drawable.c_henryvillager);
+            } else if (o.getString("character").equals("Archer Bones (you)")) { //Player image
+                textImage.setBackgroundResource(R.drawable.c_archerbones);
+            }
+        }
+
+    }
+    // nextDialogue() method is called by clicking the next button
+    public void nextDialogue(View view) throws JSONException {
+        if (i <= 8 && introText) { //Grabs the next line of the JSON array each time the button is clicked
+            i++;
+            getText(); //Calls getText() and uses the value of i to grab the specificed section in JSON array
+        } else {
+            continueGame = 1; //Removes new game state
+            editor.putInt("continueGame", continueGame); //Saves game state in shared prefs
+            editor.commit();
+            introText = false;
+            LLcount = 1;
+            nameJSON.setText("");
+            textJSON.setText("");
+            textImage.setBackground(null);
+        }
+        //Makes LinearLayout section 1 and 3 visible
+        if(LLcount == 1){
+            LL1.setVisibility(View.VISIBLE);
+            LL3.setVisibility(View.VISIBLE);
+        }
+    }
     // Method talkHenry() doesn't have many uses yet, other than setting the textJSON to "coming soon"
     public void talkHenry(View v) {
         jc = 1;
@@ -202,117 +245,65 @@ public class GameActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    
-    public void nextDialogue(View view) throws JSONException {
-        if (i <= 8 && introText) {
-            i++;
-            getText();
-        } else {
-            continueGame = 1;
-            editor.putInt("continueGame", continueGame);
-            editor.commit();
-            introText = false;
-            LLcount = 1;
-            nameJSON.setText("");
-            textJSON.setText("");
-            textImage.setBackground(null);
-        }
-
-        if(LLcount == 1){
-            LL1.setVisibility(View.VISIBLE);
-            LL3.setVisibility(View.VISIBLE);
-        }
-
-    }
-
-
-    // This method is a working switch statement and JSON reader
-    public void getText() throws JSONException {
-
-        JSONObject obj = new JSONObject(loadJSON()); //defines JSONObject as the result of loadJSON method
-        ja = obj.getJSONArray("IntroText");
-
-        if(jc == 0) {
-            o = ja.getJSONObject(i);
-        } else if(jc ==1) {
-            o = obj.getJSONObject("HenryText");
-        }
-
-        charName = o.getString("character");
-        dialogue = o.getString("text");
-
-        if (introText) {
-            nameJSON.setText(charName);
-            textJSON.setText(dialogue);
-
-            if(o.getString("character").equals("Henry the Villager")) {
-                textImage.setBackgroundResource(R.drawable.c_henryvillager);
-            } else if (o.getString("character").equals("Archer Bones (you)")) {
-                textImage.setBackgroundResource(R.drawable.c_archerbones);
-            }
-        }
-
-    }
-
+    /* The fullHeal() method is called when the ImageButton for full heal is clicked. It is responsible
+    for fully restoring player health */
     public void fullHeal(View v) {
-        if (goldCount >= 20) {
-            goldCount = goldCount - 20;
-            playerHealth = playerMaxHealth;
-
+        if (goldCount >= 20) { //Checks if player has enough gold
+            goldCount = goldCount - 20; //Deducts cost from player gold
+            playerHealth = playerMaxHealth; //Brings health up to equal max health
+            //Update player data in SharedPreferences
             editor.putInt("gold", goldCount);
             editor.putInt("health", playerHealth);
             editor.commit();
-            updatePlayerText();
-
+            updatePlayerText(); //Update TextViews in activity with updated data
         } else {
-            showToast();
+            showToast(); //else, will call showToast().
         }
     }
-
+    // The showToast() method is called to display a toast which notifies the user that they have insufficient gold
     public void showToast() {
         Context context = getApplicationContext();
         CharSequence text;
         final Toast toast;
-        int duration = Toast.LENGTH_LONG;
-        text = "Not enough gold!";
+        int duration = Toast.LENGTH_LONG; //duration
+        text = "Not enough gold!"; // Toast text
         toast = Toast.makeText(context, text, duration);
-        toast.show();
+        toast.show(); //displays toast
     }
-
-    public void onQuit(View v) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
+    // The buyPotion() method is called when clicking on the buy potion ImageButton. It is responsible for buying potions.
     public void buyPotion(View view) {
-        if (goldCount >= 15) {
-            goldCount = goldCount - 15;
-            potionCount++;
-
+        if (goldCount >= 15) { //Checks if user has enough gold
+            goldCount = goldCount - 15; //Deducts cost from player gold
+            potionCount++; //Increases potion count by 1
+            //Updating SharedPreferences values.
             editor.putInt("gold", goldCount);
             editor.putInt("potions", potionCount);
             editor.commit();
-            updatePlayerText();
-
+            updatePlayerText(); //Updates TextViews in activity with the new data
         } else {
             showToast();
         }
     }
-
+    /* The buyHealth() method is called when the user clicks on the buy health ImageButton. It is
+    responsible for increasing the maximum player health */
     public void buyHealth(View view) {
-        if(goldCount >= healthUpgradeCost) {
-            goldCount = goldCount - healthUpgradeCost;
-            playerMaxHealth = playerMaxHealth + healthUpgrade;
-            healthUpgradeCost = healthUpgradeCost * 2;
-
+        if(goldCount >= healthUpgradeCost) { //Checks if user has enough gold to purchase upgrade
+            goldCount = goldCount - healthUpgradeCost; //Deducts cost
+            playerMaxHealth = playerMaxHealth + healthUpgrade; //Adds the health upgrade to the players max health
+            healthUpgradeCost = healthUpgradeCost * 2; //Increase the cost of the upgrade
+            //Update SharedPrefs data
             editor.putInt("gold", goldCount);
             editor.putInt("playerMaxHealth", playerMaxHealth);
             editor.putInt("healthUpgradeCost", healthUpgradeCost);
             editor.commit();
-
-            updatePlayerText();
-
+            updatePlayerText(); //Update activity with the new data
         }
+    }
+    /* The onQuit() method is called by clicking on the exit button in the activity, and takes the user
+    back to the home screen */
+    public void onQuit(View v) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }
 

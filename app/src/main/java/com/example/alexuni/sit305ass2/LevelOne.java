@@ -48,7 +48,7 @@ public class LevelOne extends AppCompatActivity {
     int ID = 0;
     double lvlDifficulty;
 
-    LinearLayout ll3, llOptions;
+    LinearLayout ll1, ll3, llOptions;
 
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
@@ -59,6 +59,7 @@ public class LevelOne extends AppCompatActivity {
     boolean forwardErr;
     boolean boss = false;
     boolean npcEncounter = false;
+    boolean endGame = true;
 
     Random random;
 
@@ -115,6 +116,7 @@ public class LevelOne extends AppCompatActivity {
         goldCount = prefs.getInt("gold", 0);
 
         //LinearLayouts --------------------------------------------
+        ll1 = findViewById(R.id.LL1);
         ll3 = findViewById(R.id.LL3);
         llOptions = findViewById(R.id.llOptions);
 
@@ -183,17 +185,25 @@ public class LevelOne extends AppCompatActivity {
         if (stepNum >= 1) {
             if (!npcEncounter) {
                 getEnemy();
+                updateText();
             } else {
                 getText();
                 getNPC();
+                updateText();
             }
+
         } else {
-            lvlClear = true;
-            forwardBtn.setClickable(false);
-            attBtn.setClickable(false);
+            if(currentLevel == 6) {
+                endGame();
+            } else {
+                lvlClear = true;
+                forwardBtn.setClickable(false);
+                attBtn.setClickable(false);
+                updateText();
+            }
         }
 
-        updateText();
+
     }
     public void loadLevelStats() throws JSONException {
         JSONObject gameData = new JSONObject(loadJSON());
@@ -591,11 +601,7 @@ public class LevelOne extends AppCompatActivity {
             enemyNameText.setText("You have defeated " + enemyName +"!!");
             enemyDead = true;
             goldReward();
-            if(bossCount == 5) {
-                endGame();
-            } else {
-                textJSON.setText(enemyDeadText);
-            }
+            textJSON.setText(enemyDeadText);
         }
 
     }
@@ -690,15 +696,19 @@ public class LevelOne extends AppCompatActivity {
             playerTurn = true;
         } else {
             forwardErr = true;
+            updateText();
         }
 
-        updateText();
+
     }
 
     public void onExit(View view) throws JSONException {
         if (lvlClear) {
             save();
             goToGameActivity();
+        } else if(endGame) {
+            save();
+            goToMainMenu();
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Exit?");
@@ -715,6 +725,10 @@ public class LevelOne extends AppCompatActivity {
             });
             builder.show();
         }
+    }
+    public void goToMainMenu() {
+        Intent intent = new Intent (this, MainActivity.class);
+        startActivity(intent);
     }
     public void goToGameActivity() {
         Intent intent = new Intent (this, GameActivity.class);
@@ -745,8 +759,13 @@ public class LevelOne extends AppCompatActivity {
         }
     }
 
-    public void endGame() {
-        
+    public void endGame() throws JSONException {
+        endGame = true;
+        text1JSON = jo.getString("endText");
+        textJSON.setText(text1JSON);
+        forwardBtn.setClickable(false);
+        attBtn.setClickable(false);
+        ll1.setVisibility(View.INVISIBLE);
     }
 
 }

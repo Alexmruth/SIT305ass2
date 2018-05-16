@@ -135,6 +135,7 @@
     "playerDead": "You have died! Click the exit button to exit level.",
     "text2": " steps to go before the exit!",
     "exitText": "You have reached the exit! Click the exit button to return to main screen.",
+    "endText": "Congratulations! You have defeated Nogard and escaped the mountain! Click the exit button to go back to main menu.",
 
     "stepNumLvl1": 5,
     "stepNumLvl2": 6,
