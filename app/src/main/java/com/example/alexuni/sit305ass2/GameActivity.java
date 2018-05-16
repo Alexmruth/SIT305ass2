@@ -169,41 +169,40 @@ public class GameActivity extends AppCompatActivity {
         updatePlayerText(); // calls method which uses this data and assigns it to TextViews etc.
 
     }
-    // Method updataPlayerText() responsible for assigning values to TextViews and progress bars
+    // Method updatePlayerText() responsible for assigning values to TextViews and progress bars
     public void updatePlayerText() {
         playerStatsText.setText(String.format("ATT: %s-%s", valueOf(attMin), valueOf(attMax)));
         playerStatsText2.setText(String.format("DEF: %s", valueOf(def)));
         playerHealthText.setText(String.format("HEALTH: %s/%s", valueOf(playerHealth), valueOf(playerMaxHealth)));
-        healthBar.setMax(playerMaxHealth);
-        healthBar.setProgress(playerHealth);
-        goldText.setText(valueOf(goldCount));
-        potionsText.setText(valueOf(potionCount));
-        buyHealthText.setText(String.format("Upgrade health (%s Gold)", valueOf(healthUpgradeCost)));
+        healthBar.setMax(playerMaxHealth); //sets max progress bar value to the players max health
+        healthBar.setProgress(playerHealth); //sets progress to value of current player health
+        goldText.setText(valueOf(goldCount)); //current gold count
+        potionsText.setText(valueOf(potionCount)); //current potion count
+        buyHealthText.setText(String.format("Upgrade health (%s Gold)", valueOf(healthUpgradeCost))); //health upgrade text display
     }
-
+    // Method onMenuBtnClick(View v) handles what to do when either the caves button or shop button is clicked
     public void onMenuBtnClick(View v) {
-        if(v.getId() == R.id.button1) {
+        if(v.getId() == R.id.button1) { //Takes player to LevelsActivity
             Intent intent = new Intent(this, LevelsActivity.class);
             startActivity(intent);
         }
-        if(v.getId() == R.id.shopBtn) {
+        if(v.getId() == R.id.shopBtn) { //Takes player to ShopActivity
             Intent intent = new Intent(this, ShopActivity.class);
             startActivity(intent);
         }
     }
-
+    // Method talkHenry() doesn't have many uses yet, other than setting the textJSON to "coming soon"
     public void talkHenry(View v) {
         jc = 1;
 
-        textJSON.setText("Coming soon!");
+        textJSON.setText(R.string.coming_soon);
         try {
-            getText();
+            getText(); //updates text
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-
-
+    
     public void nextDialogue(View view) throws JSONException {
         if (i <= 8 && introText) {
             i++;
