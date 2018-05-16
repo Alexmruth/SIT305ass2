@@ -24,6 +24,8 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Timer;
 
+import static java.lang.String.*;
+
 public class GameActivity extends AppCompatActivity {
 
     boolean introText;
@@ -100,6 +102,43 @@ public class GameActivity extends AppCompatActivity {
         }
 
     }
+
+    /* loadJSON() is responsible for grabbing all content from the specified JSON file and converting
+    it into a string to be used as a JSONObject within the getText() method. */
+    public String loadJSON() {
+        String json = null;
+        try {
+            InputStream file = getAssets().open("dialogue.json");
+            int size = file.available();
+            byte[] buffer = new byte[size];
+            file.read(buffer);
+            file.close();
+            json = new String(buffer, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
+    /* loadGameData() is responsible for grabbing all content from the specified JSON file and converting
+    it into a string to be used as a JSONObject in the loadPlayerData() method. */
+    public String loadGameData() {
+        String json = null;
+        try {
+            InputStream file = getAssets().open("gameData.json");
+            int size = file.available();
+            byte[] buffer = new byte[size];
+            file.read(buffer);
+            file.close();
+            json = new String(buffer, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
     /* Method loadPlayerData() is responsible for grabbing data from both JSON and SharedPreferences files
     and assigning them to values within the activity. Only to be loaded once at beginning of activity
     to avoid resetting any values that have since changed from beginning of actvitiy. */
@@ -107,7 +146,7 @@ public class GameActivity extends AppCompatActivity {
         JSONObject obj = new JSONObject(loadGameData()); // creates a JSONObject using the return value of loadGameData()
         JSONObject jo = obj.getJSONObject("PlayerData");
         /* These values below are primarily used for default or beginner values, which then get written over
-            when it is updated in SharedPreferences */
+        when it is updated in SharedPreferences */
         int baseAttMin = jo.getInt("baseAttMin");
         int baseAttMax = jo.getInt("baseAttMax");
         int baseDef = jo.getInt("baseDefence");
@@ -130,15 +169,16 @@ public class GameActivity extends AppCompatActivity {
         updatePlayerText(); // calls method which uses this data and assigns it to TextViews etc.
 
     }
+    // Method updataPlayerText() responsible for assigning values to TextViews and progress bars
     public void updatePlayerText() {
-        playerStatsText.setText("ATT: " + String.valueOf(attMin) + "-" + String.valueOf(attMax));
-        playerStatsText2.setText( "DEF: " + String.valueOf(def));
-        playerHealthText.setText("HEALTH: " + String.valueOf(playerHealth) + "/" + String.valueOf(playerMaxHealth));
+        playerStatsText.setText(String.format("ATT: %s-%s", valueOf(attMin), valueOf(attMax)));
+        playerStatsText2.setText(String.format("DEF: %s", valueOf(def)));
+        playerHealthText.setText(String.format("HEALTH: %s/%s", valueOf(playerHealth), valueOf(playerMaxHealth)));
         healthBar.setMax(playerMaxHealth);
         healthBar.setProgress(playerHealth);
-        goldText.setText(String.valueOf(goldCount));
-        potionsText.setText(String.valueOf(potionCount));
-        buyHealthText.setText("Upgrade health ("+String.valueOf(healthUpgradeCost)+" Gold)");
+        goldText.setText(valueOf(goldCount));
+        potionsText.setText(valueOf(potionCount));
+        buyHealthText.setText(String.format("Upgrade health (%s Gold)", valueOf(healthUpgradeCost)));
     }
 
     public void onMenuBtnClick(View v) {
@@ -162,40 +202,7 @@ public class GameActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    /* loadJSON() is responsible for grabbing all content from the specified JSON file and converting
-        it into a string to be used as a JSONObject within the getText() method. */
-    public String loadJSON() {
-        String json = null;
-        try {
-            InputStream file = getAssets().open("dialogue.json");
-            int size = file.available();
-            byte[] buffer = new byte[size];
-            file.read(buffer);
-            file.close();
-            json = new String(buffer, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return json;
-    }
-    public String loadGameData() {
-        String json = null;
-        try {
-            InputStream file = getAssets().open("gameData.json");
-            int size = file.available();
-            byte[] buffer = new byte[size];
-            file.read(buffer);
-            file.close();
-            json = new String(buffer, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return json;
-    }
+
 
     public void nextDialogue(View view) throws JSONException {
         if (i <= 8 && introText) {
