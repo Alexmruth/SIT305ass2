@@ -103,7 +103,6 @@ public class LevelOne extends AppCompatActivity {
     int bossCount;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,19 +138,19 @@ public class LevelOne extends AppCompatActivity {
         playerImage.setBackgroundResource(R.drawable.c_archerbones);
 
         //TextViews ------------------------------------------------
-            //Options
+        //Options
         option1Text = findViewById(R.id.option1Text);
         option2Text = findViewById(R.id.option2Text);
-            //Dialogue text
+        //Dialogue text
         nameJSON = findViewById(R.id.nameJSON);
         textJSON = findViewById(R.id.textJSON);
-            //Player text
+        //Player text
         playerNameText = findViewById(R.id.playerNameText);
         playerHealthText = findViewById(R.id.playerHealthText);
         playerStatsText = findViewById(R.id.playerStatsText);
         playerPotionsText = findViewById(R.id.potionText);
         goldText = findViewById(R.id.goldText);
-            //Enemy text
+        //Enemy text
         enemyNameText = findViewById(R.id.enemyNameText);
         enemyHealthText = findViewById(R.id.enemyHealthText);
         enemyStatsText = findViewById(R.id.enemyStatsText);
@@ -193,7 +192,7 @@ public class LevelOne extends AppCompatActivity {
             }
 
         } else {
-            if(currentLevel == 6) {
+            if (currentLevel == 6) {
                 endGame();
             } else {
                 lvlClear = true;
@@ -205,10 +204,11 @@ public class LevelOne extends AppCompatActivity {
 
 
     }
+
     public void loadLevelStats() throws JSONException {
         JSONObject gameData = new JSONObject(loadJSON());
         jo = gameData.getJSONObject("LevelData");
-        if(currentLevel == 1) {
+        if (currentLevel == 1) {
             encounterJSON = gameData.getJSONObject("Encounter1");
             bossCount = 0;  // Boss number
             stepNum = jo.getInt("stepNumLvl1"); // Number of steps for level
@@ -216,7 +216,7 @@ public class LevelOne extends AppCompatActivity {
             goldMin = jo.getInt("goldMin1");
             goldMax = jo.getInt("goldMax1");
         }
-        if(currentLevel == 2) {
+        if (currentLevel == 2) {
             encounterJSON = gameData.getJSONObject("Encounter2");
             bossCount = 1;
             stepNum = jo.getInt("stepNumLvl2");
@@ -224,7 +224,7 @@ public class LevelOne extends AppCompatActivity {
             goldMin = jo.getInt("goldMin2");
             goldMax = jo.getInt("goldMax2");
         }
-        if(currentLevel == 3) {
+        if (currentLevel == 3) {
             encounterJSON = gameData.getJSONObject("Encounter2");
             bossCount = 2;
             stepNum = jo.getInt("stepNumLvl3");
@@ -232,7 +232,7 @@ public class LevelOne extends AppCompatActivity {
             goldMin = jo.getInt("goldMin3");
             goldMax = jo.getInt("goldMax3");
         }
-        if(currentLevel == 4) {
+        if (currentLevel == 4) {
             encounterJSON = gameData.getJSONObject("Encounter2");
             bossCount = 3;
             stepNum = jo.getInt("stepNumLvl4");
@@ -240,7 +240,7 @@ public class LevelOne extends AppCompatActivity {
             goldMin = jo.getInt("goldMin4");
             goldMax = jo.getInt("goldMax4");
         }
-        if(currentLevel == 5) {
+        if (currentLevel == 5) {
             encounterJSON = gameData.getJSONObject("Encounter2");
             bossCount = 4;
             stepNum = jo.getInt("stepNumLvl5");
@@ -248,7 +248,7 @@ public class LevelOne extends AppCompatActivity {
             goldMin = jo.getInt("goldMin5");
             goldMax = jo.getInt("goldMax5");
         }
-        if(currentLevel == 6) {
+        if (currentLevel == 6) {
             encounterJSON = gameData.getJSONObject("Encounter6");
             bossCount = 5;
             stepNum = jo.getInt("stepNumLvl6");
@@ -326,6 +326,7 @@ public class LevelOne extends AppCompatActivity {
         healthBar.setProgress(playerHealth);
 
     }
+
     // getEnemy() is responsible for loading JSON enemy data and assigning it to variables in-game.
     public void getEnemy() throws JSONException {
         JSONObject obj = new JSONObject(loadJSON());
@@ -333,14 +334,14 @@ public class LevelOne extends AppCompatActivity {
         ba = obj.getJSONArray("Bosses");
 
         //Checks how many steps remaining and will make the last encounter a boss fight.
-        if(stepNum >=2) {
+        if (stepNum >= 2) {
             boss = false;
         } else if (stepNum == 1) {
             boss = true;
         }
 
         //Gets random enemy from the array
-        if(!boss) {
+        if (!boss) {
             i = random.nextInt(ja.length());
             jo = ja.getJSONObject(i);
         } else {
@@ -369,6 +370,7 @@ public class LevelOne extends AppCompatActivity {
 
         getEnemyImage();
     }
+
     // getEnemyImage is responsible for assigning an image to an enemy based on their ID
     public void getEnemyImage() {
         switch (enemyID) {
@@ -426,7 +428,7 @@ public class LevelOne extends AppCompatActivity {
     public void getText() throws JSONException {
         JSONObject obj = new JSONObject(loadJSON());
         jo = obj.getJSONObject("LevelData");
-        if(!npcEncounter) {
+        if (!npcEncounter) {
             text1JSON = jo.getString("text1");
             text2JSON = jo.getString("text2");
             exitText = jo.getString("exitText");
@@ -443,6 +445,7 @@ public class LevelOne extends AppCompatActivity {
             text3JSON = d.getString("option2");
         }
     }
+
     public void updateText() {
 
         if (!npcEncounter) {
@@ -459,7 +462,7 @@ public class LevelOne extends AppCompatActivity {
                 forwardErr = false;
             }
 
-        } else if(npcEncounter) {
+        } else if (npcEncounter) {
             ll3.setVisibility(View.INVISIBLE);
             llOptions.setVisibility(View.VISIBLE);
 
@@ -473,10 +476,10 @@ public class LevelOne extends AppCompatActivity {
                 option2Text.setVisibility(View.INVISIBLE);
             }
 
-            if(currentLevel == 1) {
+            if (currentLevel == 1) {
                 textImage.setBackgroundResource(R.drawable.e_troll);
             }
-            if(currentLevel == 2) {
+            if (currentLevel == 2) {
                 textImage.setBackgroundResource(R.drawable.e_rat_minion);
             }
 
@@ -526,8 +529,8 @@ public class LevelOne extends AppCompatActivity {
             }
         }
 
-        if(v.getId() == R.id.option2Btn) {
-            if(currentLevel == 1) {
+        if (v.getId() == R.id.option2Btn) {
+            if (currentLevel == 1) {
                 if (text3JSON.contains("Give")) {
                     stepNum--;
                     npcEncounter = false;
@@ -536,13 +539,13 @@ public class LevelOne extends AppCompatActivity {
                     llOptions.setVisibility(View.INVISIBLE);
                     getEnemy();
                 } else {
-                        e = 2;
+                    e = 2;
                 }
             }
-            if(currentLevel == 2) {
+            if (currentLevel == 2) {
                 boolean goNext = true;
-                if(text3JSON.contains("(Give potion)")) {
-                    if(potions > 0) {
+                if (text3JSON.contains("(Give potion)")) {
+                    if (potions > 0) {
                         potions--;
                         playerPotionsText.setText("x" + String.valueOf(potions));
                         e++;
@@ -558,10 +561,10 @@ public class LevelOne extends AppCompatActivity {
                         toast.show();
                     }
                 }
-                if(goNext)
-                e++;
+                if (goNext)
+                    e++;
             }
-            if(currentLevel == 6) {
+            if (currentLevel == 6) {
 
             }
         }
@@ -578,7 +581,7 @@ public class LevelOne extends AppCompatActivity {
     public void updatePlayer() throws JSONException {
         playerHealthText.setText(String.valueOf(String.valueOf(playerHealth) + "/" + String.valueOf(playerMaxHealth)));
         healthBar.setProgress(playerHealth);
-        if(playerHealth <= 0) {
+        if (playerHealth <= 0) {
             playerDead();
         }
     }
@@ -597,8 +600,8 @@ public class LevelOne extends AppCompatActivity {
         enemyHealthText.setText(String.valueOf(enemyHealth) + "/" + String.valueOf(enemyMaxHealth));
         enemyHealthBar.setProgress(enemyHealth);
 
-        if(enemyHealth <= 0) {
-            enemyNameText.setText("You have defeated " + enemyName +"!!");
+        if (enemyHealth <= 0) {
+            enemyNameText.setText("You have defeated " + enemyName + "!!");
             enemyDead = true;
             goldReward();
             textJSON.setText(enemyDeadText);
@@ -624,9 +627,9 @@ public class LevelOne extends AppCompatActivity {
     //##############################################################################################
 
     public void onAttack(View view) throws JSONException {
-        attValue = (random.nextInt((totalAttMax+1) - (totalAttMin-1)) + totalAttMin) - enemyDef;
+        attValue = (random.nextInt((totalAttMax + 1) - (totalAttMin - 1)) + totalAttMin) - enemyDef;
 
-        if(attValue <= 0) {
+        if (attValue <= 0) {
             attValue = 1;
         }
 
@@ -645,16 +648,16 @@ public class LevelOne extends AppCompatActivity {
     public void enemyResponse() {
         Timer timer = new Timer();
         Random random = new Random();
-        enemyAttack = (random.nextInt((enemyAttMax+1) - (enemyAttMin-1)) + enemyAttMin) - totalDef;
-        if(enemyAttack <= 0) {
+        enemyAttack = (random.nextInt((enemyAttMax + 1) - (enemyAttMin - 1)) + enemyAttMin) - totalDef;
+        if (enemyAttack <= 0) {
             enemyAttack = 1;
         }
 
-        if(!enemyDead && !playerTurn) {
+        if (!enemyDead && !playerTurn) {
             /* A timer and within it is another runnable runOnUIThread to allow for the toast to be
             called, as it can only be called from a UI thread.
              */
-             timer.schedule(new TimerTask() {
+            timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
                     runOnUiThread(new TimerTask() {
@@ -689,7 +692,7 @@ public class LevelOne extends AppCompatActivity {
     }
 
     public void onForward(View view) throws JSONException {
-        if(enemyDead) {
+        if (enemyDead) {
             stepNum--;
             getEncounter();
             enemyDead = false;
@@ -706,7 +709,7 @@ public class LevelOne extends AppCompatActivity {
         if (lvlClear) {
             save();
             goToGameActivity();
-        } else if(endGame) {
+        } else if (endGame) {
             save();
             goToMainMenu();
         } else {
@@ -726,12 +729,14 @@ public class LevelOne extends AppCompatActivity {
             builder.show();
         }
     }
+
     public void goToMainMenu() {
-        Intent intent = new Intent (this, MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
     public void goToGameActivity() {
-        Intent intent = new Intent (this, GameActivity.class);
+        Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);
     }
 
@@ -751,7 +756,7 @@ public class LevelOne extends AppCompatActivity {
             playerHealth = playerHealth + 50;
             potions--;
             playerPotionsText.setText("x" + String.valueOf(potions));
-            if(playerHealth > playerMaxHealth) {
+            if (playerHealth > playerMaxHealth) {
                 playerHealth = playerMaxHealth;
             }
             updatePlayer();
