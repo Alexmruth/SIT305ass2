@@ -53,6 +53,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
         editor.commit(); // commits changes to shared prefs file
+        if(v.getId() == R.id.aboutBtn) {
+            Intent intent = new Intent (this, AboutActivity.class);
+            startActivity(intent);
+        }
     }
     // Method startNewGame() responsible for triggering a new game state and loading the GameActivity.
     public void startNewGame() {

@@ -2,4 +2,14 @@
     <string name="app_name">SIT305ass2</string>
     <string name="title_activity_game">GameActivity</string>
     <string name="coming_soon">Coming soon!</string>
+    <string name="credits">Legal \n‘e_dragon_minion’, ‘e_dragon_minion2’, ‘e_dragon_minion3’, ‘eb_drgon_boss’
+        by Stephen “Redshrike” Challener available at: https://opengameart.org/content/rpg-enemies-11-dragons
+        under Creative Commons CC BY 3.0. \nCredit to: Stephen "Redshrike" Challener, MrBeast, Surt, Blarumyrran,
+        Sharm, Zabin \n ‘eb_demon_boss’, ‘eb_mage_boss’, ‘eb_medua_boss’, ‘eb_troll_boss’ by Redshrike available at:
+        https://opengameart.org/content/6-more-rpg-enemies under Creative Commons CC BY 3.0 \nCredit to: Stephen
+        Challener (Redshrike, Blarumyrran and LordNeo, hosted by OpenGameArt.org \n ‘e_eye’, ’e_skeleton’, ‘e_spider’,
+        ‘e_troll’ by Redshrike available at: https://opengameart.org/content/10-basic-rpg-enemies under Creative
+        Commons CC BY 3.0 \nCredit to: Stephen "Redshrike" Challener, hosted by OpenGameArt.org \n
+        ‘e_rat_minion’, ‘e_rat_minion2’, ‘eb_rat_boss’ by MrBeast and Redshrike available at: https://opengameart.org/content/rat-men-rpg-enemies
+        under Creative Commons CC BY 3.0 \nCredit to: MrBeast and Redshrike</string>
 </resources>
