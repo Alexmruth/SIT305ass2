@@ -59,7 +59,7 @@ public class LevelOne extends AppCompatActivity {
     boolean forwardErr;
     boolean boss = false;
     boolean npcEncounter = false;
-    boolean endGame = true;
+    boolean endGame = false;
 
     Random random;
 
