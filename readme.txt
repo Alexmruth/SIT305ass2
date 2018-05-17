@@ -1,5 +1,21 @@
 Alex Ruth SID: 216106075
 
+APP TITLE: Cave Crawler
+PLATFORM: Android
+GITHUB: https://github.com/Alexmruth/SIT305ass2
+
+OVERVIEW: You play as an adventurer who has crashed his plane on a mysterious mountain. You must escape the mountain through a series of caves. Defeat hoards of enemies and buy upgrades along the way to help you reach the end!
+
+MAJOR FEATURES:
+Battle enemies:
+- Battle random enemies and kill them before they kill you! Use health potions to stay alive.
+Buy upgrades/weapons:
+-Buy weapons and equip them to increase your attack output or increase you maximum health.
+Random encounters:
+- Come across an NPC on each level and have the ability to have conversation with them.
+Save player data:
+- Save player progress as you g0o along so you don’t have to start all over, or start new game and wipe current progress.
+———————————————————————————————————————————————————————————————————————
 Compile instructions:
 - Software: Android Studio
 - Emulation: Run app (Shift +F10)
