@@ -1,0 +1,10 @@
+There is an explorer by the name of Archer Bones whose plane has crashed during an expedition 
+in a mountainous region and he is the only survivor. Mr. Bones is then greeted by a farmer who 
+brings him into their remote village. Mr. Bones learns that the only way to leave the mountain 
+is to defeat Nogard the Dragon, who guards the only exit.
+
+Core Features:
+•	Traverse through a series of caves.
+•	Pick up gold which is spent on buying items to make Mr. Bones stronger.
+•	Defeat monsters that stand in the way of your goals.
+•	Interact with NPC's.

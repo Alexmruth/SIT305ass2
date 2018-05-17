@@ -1,10 +1,11 @@
-Alex Ruth SID: 216106075
+﻿Alex Ruth SID: 216106075
 
 APP TITLE: Cave Crawler
 PLATFORM: Android
 GITHUB: https://github.com/Alexmruth/SIT305ass2
 
-OVERVIEW: You play as an adventurer who has crashed his plane on a mysterious mountain. You must escape the mountain through a series of caves. Defeat hoards of enemies and buy upgrades along the way to help you reach the end!
+OVERVIEW: You play as an adventurer who has crashed his plane on a mysterious mountain. You must escape the mountain 
+through a series of caves. Defeat hoards of enemies and buy upgrades along the way to help you reach the end!
 
 MAJOR FEATURES:
 Battle enemies:

@@ -26,6 +26,8 @@ import java.util.Timer;
 
 import static java.lang.String.*;
 
+/*GameActivity is loaded either when the new game or continue game button is clicks on the MainActivity.
+It is used mainly as a directory within the game for the player to go to different activities. */
 public class GameActivity extends AppCompatActivity {
 
     boolean introText;

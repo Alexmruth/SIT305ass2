@@ -33,6 +33,8 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/* LevelOne is responsible for handling every level, and values within this class change according to
+which level button is clicked in the LevelsActivity */
 public class LevelOne extends AppCompatActivity {
 
     JSONArray ja; //JSON array
@@ -42,11 +44,6 @@ public class LevelOne extends AppCompatActivity {
     JSONObject encounterJSON;
     JSONArray wd; //Weapon data array
     JSONObject weapon;
-    int i = 0; //Counter for JSON object
-    int e; //Counter for encounter dialog
-    int ec; // Counter for encounter
-    int ID = 0;
-    double lvlDifficulty;
 
     LinearLayout ll1, ll3, llOptions;
 
@@ -62,45 +59,23 @@ public class LevelOne extends AppCompatActivity {
     boolean endGame = false;
 
     Random random;
-
     ProgressBar healthBar, enemyHealthBar;
-
     String textName, playerName, enemyName, text1JSON, text2JSON, text3JSON, exitText, enemyDeadText, forwardErrText;
-
-    TextView nameJSON, textJSON;
-
-    TextView option1Text, option2Text;
-
+    TextView nameJSON, textJSON, option1Text, option2Text;
     TextView playerNameText, playerHealthText, playerStatsText, playerPotionsText, goldText;
     TextView enemyNameText, enemyHealthText, enemyStatsText;
-
     ImageView playerImage, enemyImage, textImage;
-
-    Button forwardBtn, backBtn, option1Btn, option2Btn;
-    Button attBtn;
+    Button forwardBtn, backBtn, option1Btn, option2Btn, attBtn;
 
     int currentLevel = LevelsActivity.currentLevel;
-
     int playerHealth, playerMaxHealth, potions;
-    int wepEquipped, weaponAttMin, weaponAttMax;
-    int baseAttMin, baseAttMax, totalAttMin, totalAttMax;
-    int baseDef;
-    int totalDef;
-
-    //
-    int enemyID;
-    int attValue;
-
-    int enemyHealth, enemyMaxHealth, enemyAttack, enemyAttMin, enemyAttMax, enemyDef;
-
-    int goldCount;
-    int goldMin, goldMax;
-
-
-    int image;
-    int stepNum;
-
-    int bossCount;
+    int weaponAttMin, weaponAttMax, baseAttMin, baseAttMax, totalAttMin, totalAttMax, baseDef, totalDef;
+    int enemyID, attValue, enemyHealth, enemyMaxHealth, enemyAttack, enemyAttMin, enemyAttMax, enemyDef;
+    int goldCount, goldMin, goldMax;
+    int i = 0; //Counter for JSON object
+    int e; //Counter for encounter dialog
+    double lvlDifficulty;
+    int stepNum, bossCount;
 
 
     @Override
@@ -158,8 +133,6 @@ public class LevelOne extends AppCompatActivity {
         //Misc -----------------------------------------------------
         random = new Random();
         //----------------------------------------------------------
-
-
         //Essentially starts the level, loads player stats, gets encounter and gets text
         try {
             loadLevelStats();
@@ -173,14 +146,14 @@ public class LevelOne extends AppCompatActivity {
 
     // getEncounter() is responsible for handling what to show and when during the course of completing the level
     public void getEncounter() throws JSONException {
-
+        //Changes when npc encounter shows according to level
         if (currentLevel == 1 && stepNum == 3) npcEncounter = true;
         if (currentLevel == 2 && stepNum == 4) npcEncounter = true;
         if (currentLevel == 3 && stepNum == 4) npcEncounter = true;
         if (currentLevel == 4 && stepNum == 5) npcEncounter = true;
         if (currentLevel == 5 && stepNum == 3) npcEncounter = true;
         if (currentLevel == 6 && stepNum == 2) npcEncounter = true;
-
+        //If stepNum is more than or equal to 1, grab enemy, if less than 1, end the level
         if (stepNum >= 1) {
             if (!npcEncounter) {
                 getEnemy();
@@ -190,7 +163,6 @@ public class LevelOne extends AppCompatActivity {
                 getNPC();
                 updateText();
             }
-
         } else {
             if (currentLevel == 6) {
                 endGame();
@@ -201,10 +173,9 @@ public class LevelOne extends AppCompatActivity {
                 updateText();
             }
         }
-
-
     }
-
+    /*Method loadLevelStats() is responsible for loading the level stats based on what the current level is.
+    Sets what encounter, boss, step count, difficulty, and gold dropped from enemies grabbed from JSON file */
     public void loadLevelStats() throws JSONException {
         JSONObject gameData = new JSONObject(loadJSON());
         jo = gameData.getJSONObject("LevelData");
@@ -259,7 +230,7 @@ public class LevelOne extends AppCompatActivity {
     }
 
     /* loadJSON() is responsible for grabbing all content from the specified JSON file and converting
-    it into a string to be used as a JSONObject. */
+    it into a string to be used as a JSONObject across various methods, such as loadStats(). */
     public String loadJSON() {
         String json = null;
         try {
@@ -282,17 +253,17 @@ public class LevelOne extends AppCompatActivity {
         JSONObject gameData = new JSONObject(loadJSON());
         pd = gameData.getJSONObject("PlayerData");
         wd = gameData.getJSONArray("Weapons");
-
         playerName = pd.getString("name");
-
-        // Default values from JSON
+        /* These values below are primarily used for default or beginner values, which then get written over
+        when it is updated in SharedPreferences */
         int baseAttMin1 = pd.getInt("baseAttMin");
         int baseAttMax1 = pd.getInt("baseAttMax");
         int baseDef1 = pd.getInt("baseDefence");
         int baseHealth = pd.getInt("baseHealth");
         int basePotions = pd.getInt("basePotions");
         int baseGold = pd.getInt("baseGold");
-        // Saved values from Shared Preferences
+        //------------------------------------------------------------------------------------------
+        // These values below are grabbed from the SharedPreferences file, and use the JSON values as defaults
         playerMaxHealth = prefs.getInt("playerMaxHealth", baseHealth);
         goldCount = prefs.getInt("gold", baseGold);
         potions = prefs.getInt("potions", basePotions);
@@ -302,20 +273,15 @@ public class LevelOne extends AppCompatActivity {
         baseDef = prefs.getInt("def", baseDef1);
         int weapEquipped = prefs.getInt("weapEquipped", 0);
         weapon = wd.getJSONObject(weapEquipped);
-
         weaponAttMin = weapon.getInt("attMin");
         weaponAttMax = weapon.getInt("attMax");
-
         totalAttMin = weaponAttMin + baseAttMin1;
         totalAttMax = weaponAttMax + baseAttMax1;
 
         editor.putInt("attMin", totalAttMin);
         editor.putInt("attMax", totalAttMax);
         editor.commit();
-
-
         totalDef = baseDef;
-
         // Assigning variables to widgets
         playerNameText.setText(playerName);
         playerStatsText.setText("ATT: " + String.valueOf(totalAttMin) + "-" + String.valueOf(totalAttMax) + " DEF: " + String.valueOf(baseDef));
@@ -324,10 +290,10 @@ public class LevelOne extends AppCompatActivity {
         goldText.setText(String.valueOf(goldCount));
         healthBar.setMax(playerMaxHealth);
         healthBar.setProgress(playerHealth);
-
     }
 
-    // getEnemy() is responsible for loading JSON enemy data and assigning it to variables in-game.
+    /* getEnemy() is responsible for loading JSON enemy data and assigning it to variables in-game.
+    It checks if it needs to load a boss enemy, as well as calling getEnemyImage() to load enemy image */
     public void getEnemy() throws JSONException {
         JSONObject obj = new JSONObject(loadJSON());
         ja = obj.getJSONArray("Enemies");
@@ -339,7 +305,6 @@ public class LevelOne extends AppCompatActivity {
         } else if (stepNum == 1) {
             boss = true;
         }
-
         //Gets random enemy from the array
         if (!boss) {
             i = random.nextInt(ja.length());
@@ -349,7 +314,6 @@ public class LevelOne extends AppCompatActivity {
             jo = ba.getJSONObject(i);
             boss = false;
         }
-
         enemyID = jo.getInt("ID");
         enemyName = jo.getString("name");
         double enemyHealthDbl = Math.round(jo.getDouble("health") * lvlDifficulty);
@@ -371,7 +335,8 @@ public class LevelOne extends AppCompatActivity {
         getEnemyImage();
     }
 
-    // getEnemyImage is responsible for assigning an image to an enemy based on their ID
+    // getEnemyImage is responsible for assigning an image to an enemy based on their ID. It is called by getEnemy().
+    //Uses enemy ID to assign an image to the enemyImage ImageView.
     public void getEnemyImage() {
         switch (enemyID) {
             case 0:
@@ -424,7 +389,8 @@ public class LevelOne extends AppCompatActivity {
                 break;
         }
     }
-
+    /*The method getText() is used to load dialogue which will then be used in the updateText() method.
+    It is called by getEncounter() and others to update text when values are changed.*/
     public void getText() throws JSONException {
         JSONObject obj = new JSONObject(loadJSON());
         jo = obj.getJSONObject("LevelData");
@@ -447,7 +413,6 @@ public class LevelOne extends AppCompatActivity {
     }
 
     public void updateText() {
-
         if (!npcEncounter) {
             textImage.setBackgroundResource(R.drawable.c_henryvillager);
             nameJSON.setText(textName);
@@ -461,32 +426,25 @@ public class LevelOne extends AppCompatActivity {
                 textJSON.setText(forwardErrText);
                 forwardErr = false;
             }
-
         } else if (npcEncounter) {
             ll3.setVisibility(View.INVISIBLE);
             llOptions.setVisibility(View.VISIBLE);
-
             if (text2JSON.contains("Null")) {
                 option1Btn.setVisibility(View.INVISIBLE);
                 option1Text.setVisibility(View.INVISIBLE);
             }
-
             if (text3JSON.contains("Null")) {
                 option2Btn.setVisibility(View.INVISIBLE);
                 option2Text.setVisibility(View.INVISIBLE);
             }
-
             if (currentLevel == 1) {
                 textImage.setBackgroundResource(R.drawable.e_troll);
             }
             if (currentLevel == 2) {
                 textImage.setBackgroundResource(R.drawable.e_rat_minion);
             }
-
-
             option1Text.setText(text2JSON);
             option2Text.setText(text3JSON);
-
             nameJSON.setText(textName);
             textJSON.setText(text1JSON);
             enemyNameText.setText(enemyName);
