@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,7 +26,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_weight="0.5"
         android:background="@color/lightColour"
         android:orientation="vertical">
@@ -36,33 +34,30 @@
             android:id="@+id/newGameBtn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_alignParentTop="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:onClick="onClick"
-            android:text="New Game" />
+            android:text="@string/new_game" />
 
         <Button
             android:id="@+id/continueBtn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_alignParentTop="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:onClick="onClick"
-            android:text="Continue" />
+            android:text="@string/continue1" />
 
         <Button
             android:id="@+id/aboutBtn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_alignParentTop="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="20dp"
@@ -70,7 +65,7 @@
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:onClick="onClick"
-            android:text="About" />
+            android:text="@string/about" />
     </LinearLayout>
 
 

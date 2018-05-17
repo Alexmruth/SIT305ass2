@@ -31,7 +31,7 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_weight="0"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:gravity="center"
                 android:textColor="@color/black" />
 
@@ -41,7 +41,7 @@
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:contentDescription="Player Image" />
+                android:contentDescription="@string/player_image" />
 
             <TextView
                 android:id="@+id/playerStatsText"
@@ -50,7 +50,7 @@
                 android:layout_weight="1"
                 android:gravity="center|top"
                 android:paddingTop="10dp"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="@color/black" />
 
             <TextView
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:gravity="center|bottom"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="@color/black" />
 
             <ProgressBar
@@ -87,7 +87,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_weight="0"
                 android:gravity="center"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="@color/black" />
 
             <ImageView
@@ -104,7 +104,7 @@
                 android:layout_weight="1"
                 android:gravity="center|top"
                 android:paddingTop="10dp"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="@color/black" />
 
             <TextView
@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:gravity="center|bottom"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="@color/black" />
 
             <ProgressBar
@@ -148,7 +148,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10sp"
                 android:layout_weight="6"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginStart="10sp">
 
                 <TextView
                     android:id="@+id/nameJSON"
@@ -157,7 +158,7 @@
                     android:layout_marginTop="10sp"
                     android:layout_weight="1"
                     android:textColor="@color/black"
-                    android:textSize="20dp"/>
+                    android:textSize="20sp"/>
 
                 <ImageView
                     android:id="@+id/textImage"
@@ -177,7 +178,7 @@
                 android:layout_marginTop="10sp"
                 android:layout_weight="4"
                 android:textColor="@color/black"
-                android:textSize="20dp"/>
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/nextBtn"
@@ -185,7 +186,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="7"
-                android:text="Next"
+                android:text="@string/next"
                 android:onClick="onNext"/>
         </LinearLayout>
     </RelativeLayout>
@@ -207,7 +208,7 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Option 1"
+                    android:text="@string/option_1"
                     android:id="@+id/option1Btn"
                     android:onClick="onOption"/>
                 <TextView
@@ -222,7 +223,7 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Option 2"
+                    android:text="@string/option_2"
                     android:onClick="onOption"
                     android:id="@+id/option2Btn"/>
                 <TextView
@@ -254,7 +255,7 @@
                     android:layout_height="89dp"
                     android:layout_gravity="center"
                     android:onClick="onForward"
-                    android:text="Forward" />
+                    android:text="@string/forward" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -267,7 +268,7 @@
                     android:layout_width="136dp"
                     android:layout_height="89dp"
                     android:onClick="onExit"
-                    android:text="Exit"
+                    android:text="@string/exit"
                     android:layout_gravity="center"/>
 
                 <TextView
@@ -288,7 +289,7 @@
                     android:layout_width="136dp"
                     android:layout_height="89dp"
                     android:onClick="onAttack"
-                    android:text="Attack" />
+                    android:text="@string/attack" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -300,7 +301,7 @@
                         android:layout_width="136dp"
                         android:layout_height="89dp"
                         android:onClick="onHeal"
-                        android:text="Heal" />
+                        android:text="@string/heal" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -313,7 +314,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:textColor="@color/black"
-                        android:textSize="20dp"/>
+                        android:textSize="20sp"/>
 
                 </LinearLayout>
                 <LinearLayout
@@ -332,7 +333,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:textColor="@color/black"
-                        android:textSize="20dp"/>
+                        android:textSize="20sp"/>
                 </LinearLayout>
             </LinearLayout>
 

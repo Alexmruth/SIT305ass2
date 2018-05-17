@@ -14,4 +14,33 @@
         under Creative Commons CC BY 3.0 \nCredit to: MrBeast and Redshrike</string>
     <string name="equip">Equip</string>
     <string name="equipped">Equipped</string>
+    <string name="henry_the_villager">Henry the Villager</string>
+    <string name="shop">Shop</string>
+    <string name="caves">Caves</string>
+    <string name="quit">Quit</string>
+    <string name="talk_to_henry">Talk to Henry</string>
+    <string name="full_heal_20_gold">Full heal (20 gold)</string>
+    <string name="buy_potion_15_gold">Buy potion (15 gold)</string>
+    <string name="player_stats">PLAYER STATS</string>
+    <string name="player_image">Player Image</string>
+    <string name="option_1">Option 1</string>
+    <string name="option_2">Option 2</string>
+    <string name="forward">Forward</string>
+    <string name="exit">Exit</string>
+    <string name="attack">Attack</string>
+    <string name="heal">Heal</string>
+    <string name="level_1">Level 1</string>
+    <string name="level_2">Level 2</string>
+    <string name="level_3">Level 3</string>
+    <string name="level_4">Level 4</string>
+    <string name="level_5">Level 5</string>
+    <string name="level_6">Level 6</string>
+    <string name="new_game">New Game</string>
+    <string name="continue1">Continue</string>
+    <string name="about">About</string>
+    <string name="name">Name</string>
+    <string name="price">Price</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="created_by_alex_ruth">CREATED BY ALEX RUTH</string>
 </resources>

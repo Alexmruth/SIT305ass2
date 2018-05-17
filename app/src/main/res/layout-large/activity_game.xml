@@ -48,7 +48,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="4"
                     android:onClick="talkHenry"
-                    android:text="Talk to Henry" />
+                    android:text="@string/talk_to_henry" />
 
             </LinearLayout>
 
@@ -156,7 +156,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10sp"
                 android:layout_weight="6"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginStart="10sp">
 
                 <TextView
                     android:id="@+id/nameJSON"
@@ -192,7 +193,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="7"
                 android:onClick="nextDialogue"
-                android:text="Next" />
+                android:text="@string/next" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -229,7 +230,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="53dp"
                         android:gravity="center_vertical"
-                        android:text="Full heal (20 gold)"
+                        android:text="@string/full_heal_20_gold"
                         android:textColor="@color/black" />
                 </LinearLayout>
                 <LinearLayout
@@ -247,7 +248,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="Buy potion (15 gold)"
+                        android:text="@string/buy_potion_15_gold"
                         android:textColor="@color/black" />
                 </LinearLayout>
                 <LinearLayout
@@ -286,7 +287,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="PLAYER STATS"
+                    android:text="@string/player_stats"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 
@@ -318,7 +319,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10sp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:layout_marginEnd="10sp" />
 
 
                 <LinearLayout

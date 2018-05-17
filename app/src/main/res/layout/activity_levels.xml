@@ -28,7 +28,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="lvlHandler"
-                android:text="Level 1"
+                android:text="@string/level_1"
                 android:visibility="visible" />
 
             <Button
@@ -37,7 +37,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="lvlHandler"
-                android:text="Level 2"
+                android:text="@string/level_2"
                 android:visibility="visible" />
 
             <Button
@@ -46,7 +46,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="lvlHandler"
-                android:text="Level 3"
+                android:text="@string/level_3"
                 android:visibility="visible" />
 
 
@@ -63,7 +63,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="lvlHandler"
-                android:text="Level 4"
+                android:text="@string/level_4"
                 android:visibility="visible" />
 
             <Button
@@ -72,7 +72,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="lvlHandler"
-                android:text="Level 5"
+                android:text="@string/level_5"
                 android:visibility="visible" />
 
             <Button
@@ -81,7 +81,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="lvlHandler"
-                android:text="Level 6"
+                android:text="@string/level_6"
                 android:visibility="visible" />
 
         </TableRow>
@@ -113,6 +113,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10sp"
+                android:layout_marginStart="10sp"
                 android:layout_marginTop="10sp"
                 android:layout_weight="3"
                 android:textColor="@color/black" />
@@ -123,8 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="5"
-                android:onClick="nextDialogue"
-                android:text="Next" />
+                android:text="@string/next" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -139,7 +139,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:onClick="onBack"
-            android:text="Back" />
+            android:text="@string/back" />
 
     </RelativeLayout>
 </LinearLayout>

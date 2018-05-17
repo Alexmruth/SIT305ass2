@@ -33,6 +33,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
+
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
@@ -46,9 +47,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="4"
-                    android:textSize="10dp"
                     android:onClick="talkHenry"
-                    android:text="Talk to Henry" />
+                    android:text="@string/talk_to_henry"
+                    android:textSize="11dp" />
 
             </LinearLayout>
 
@@ -63,6 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:baselineAligned="false"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -70,6 +72,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
+
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -85,7 +88,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="4"
                     android:onClick="onMenuBtnClick"
-                    android:text="Shop" />
+                    android:text="@string/shop" />
 
             </LinearLayout>
 
@@ -102,7 +105,8 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_weight="3"
-                    android:background="@drawable/cave" />
+                    android:background="@drawable/cave"
+                    tools:ignore="NestedWeights" />
 
                 <Button
                     android:id="@+id/button1"
@@ -110,7 +114,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="4"
                     android:onClick="onMenuBtnClick"
-                    android:text="Caves" />
+                    android:text="@string/caves" />
             </LinearLayout>
 
             <LinearLayout
@@ -118,19 +122,21 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
+
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_weight="3"
-                    android:scaleType="fitXY" />
+                    android:scaleType="fitXY"
+                    tools:ignore="NestedWeights" />
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="4"
-                    android:text="Quit"
-                    android:onClick="onQuit"/>
+                    android:onClick="onQuit"
+                    android:text="@string/quit" />
 
             </LinearLayout>
 
@@ -154,6 +160,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10sp"
+                android:layout_marginStart="10sp"
                 android:layout_weight="6"
                 android:orientation="vertical">
 
@@ -163,8 +170,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="10sp"
                     android:layout_weight="3"
-                    android:textSize="10sp"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="10sp" />
 
                 <ImageView
                     android:id="@+id/textImage"
@@ -191,9 +198,9 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="7"
-                android:textSize="11dp"
                 android:onClick="nextDialogue"
-                android:text="Next" />
+                android:text="@string/next"
+                android:textSize="11dp" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -230,9 +237,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="Full heal (20 gold)"
+                        android:text="@string/full_heal_20_gold"
                         android:textColor="@color/black" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -248,9 +256,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="Buy potion (15 gold)"
+                        android:text="@string/buy_potion_15_gold"
                         android:textColor="@color/black" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -263,19 +272,12 @@
                         android:onClick="buyHealth" />
 
                     <TextView
+                        android:id="@+id/upgradeHealthText"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:id="@+id/upgradeHealthText"
                         android:textColor="@color/black" />
                 </LinearLayout>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-
-                </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -287,7 +289,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="PLAYER STATS"
+                    android:text="@string/player_stats"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 
@@ -297,7 +299,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/black"
-                    android:textSize="11dp"/>
+                    android:textSize="11dp" />
 
                 <TextView
                     android:id="@+id/playerStatsText2"
@@ -305,7 +307,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/black"
-                    android:textSize="11dp"/>
+                    android:textSize="11dp" />
 
                 <TextView
                     android:id="@+id/playerHealthText"
@@ -314,7 +316,7 @@
                     android:layout_weight="1"
                     android:gravity="center_horizontal|bottom"
                     android:textColor="@color/black"
-                    android:textSize="11dp"/>
+                    android:textSize="11dp" />
 
                 <ProgressBar
                     android:id="@+id/homeHealthBar"
