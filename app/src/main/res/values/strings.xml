@@ -12,4 +12,6 @@
         Commons CC BY 3.0 \nCredit to: Stephen "Redshrike" Challener, hosted by OpenGameArt.org \n
         ‘e_rat_minion’, ‘e_rat_minion2’, ‘eb_rat_boss’ by MrBeast and Redshrike available at: https://opengameart.org/content/rat-men-rpg-enemies
         under Creative Commons CC BY 3.0 \nCredit to: MrBeast and Redshrike</string>
+    <string name="equip">Equip</string>
+    <string name="equipped">Equipped</string>
 </resources>

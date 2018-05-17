@@ -8,7 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
+/* The MainActivity class is main menu page where the user can choose to start a new game or continue
+a current one. It appears on startup of app*/
 public class MainActivity extends AppCompatActivity {
     Button newGameBtn, continueBtn;
     SharedPreferences prefs;
@@ -26,8 +27,7 @@ public class MainActivity extends AppCompatActivity {
         editor = prefs.edit();
     }
 
-    // Method onClick() is called when either newGameBtn or continueBtn is clicked.
-    // Method signature: Public void as it is publicly accessible and returns no value. (View v) grabs the view clicked
+    // Method onClick() is called when either newGameBtn or continueBtn is clicked. (View v) grabs the view clicked
     public void onClick(View v) {
         //If newGameBtn is clicked, this code executes
         if (v.getId() == R.id.newGameBtn) {

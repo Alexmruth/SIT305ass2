@@ -3,19 +3,11 @@ package com.example.alexuni.sit305ass2;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,13 +18,13 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.HashMap;
 
+/* The class ShopActivity is responsible for displaying shop items to purchase, as well as already
+purchased items where the player can equip and unequip items */
 public class ShopActivity extends AppCompatActivity {
 
     JSONArray wd;
-    JSONObject c, jo;
+    JSONObject c;
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
 
@@ -40,7 +32,7 @@ public class ShopActivity extends AppCompatActivity {
     TextView shopName1, shopName2, shopName3, shopName4, shopName5, shopName6, shopName7;
     TextView shopPrice1, shopPrice2, shopPrice3, shopPrice4, shopPrice5, shopPrice6, shopPrice7;
     Button buyBtn1, buyBtn2, buyBtn3, buyBtn4, buyBtn5, buyBtn6, buyBtn7;
-    boolean item1Purchased, item2Purchased, item3Purchased, item4Purchased, item5Purchased, item6Purchased, item7Purchased;
+    boolean item2Purchased, item3Purchased, item4Purchased, item5Purchased, item6Purchased, item7Purchased;
     TextView goldText;
 
     String btn1Text, btn2Text, btn3Text, btn4Text, btn5Text, btn6Text, btn7Text;
@@ -121,6 +113,8 @@ public class ShopActivity extends AppCompatActivity {
 
     }
 
+    /* loadJSON() is responsible for grabbing all content from the specified JSON file and converting
+        it into a string to be used as a JSONObject across various methods, such as getItem(). */
     public String loadJSON() {
         String json = null;
         try {
@@ -138,6 +132,8 @@ public class ShopActivity extends AppCompatActivity {
         return json;
     }
 
+    /* The method getItem() is responsible for grabbing item ID, name and price from an array based on
+    the value of i. This method is called by loadItems() to loop through each item. */
     public void getItem() throws JSONException {
         JSONObject gameData = new JSONObject(loadJSON());
         // Getting JSON Array node
@@ -151,6 +147,8 @@ public class ShopActivity extends AppCompatActivity {
 
     }
 
+    /* The method loadItems() is responsible for looping through each line in the JSON array, grab
+    the data and assign it to the given TextView. */
     public void loadItems() throws JSONException {
         i = 0;
         getItem();
@@ -182,6 +180,8 @@ public class ShopActivity extends AppCompatActivity {
         shopName7.setText(name);
         shopPrice7.setText(String.valueOf(price));
     }
+
+    //loadImages() sets each ImageView to a set weapon image
     public void loadImages() {
         shopImage2.setBackgroundResource(R.drawable.sword001);
         shopImage3.setBackgroundResource(R.drawable.sword002);
@@ -190,81 +190,90 @@ public class ShopActivity extends AppCompatActivity {
         shopImage6.setBackgroundResource(R.drawable.sword005);
         shopImage7.setBackgroundResource(R.drawable.sword006);
     }
+
+    /*The methods below btnText1Value() all the way to btnText7Value() are responsible for handing
+    the button text, based on if that item is either purchased, equipped or unequipped.
+     */
     public void btnText1Value() {
-        if(weapEquipped != 0 ) {
-            btn1Text = "Equip";
+        if (weapEquipped != 0) {
+            btn1Text = getString(R.string.equip);
         } else {
-            btn1Text = "Equipped";
+            btn1Text = getString(R.string.equipped);
         }
         buyBtn1.setText(btn1Text);
     }
 
     public void btnText2Value() {
-        if(item2Purchased) {
-            if(weapEquipped != 1 ) {
-                btn2Text = "Equip";
+        if (item2Purchased) {
+            if (weapEquipped != 1) {
+                btn2Text = getString(R.string.equip);
             } else {
-                btn2Text = "Equipped";
+                btn2Text = getString(R.string.equipped);
             }
         } else {
             btn2Text = "Buy";
         }
         buyBtn2.setText(btn2Text);
     }
+
     public void btnText3Value() {
-        if(item3Purchased) {
-            if(weapEquipped != 2 ) {
-                btn3Text = "Equip";
+        if (item3Purchased) {
+            if (weapEquipped != 2) {
+                btn3Text = getString(R.string.equip);
             } else {
-                btn3Text = "Equipped";
+                btn3Text = getString(R.string.equipped);
             }
         } else {
             btn3Text = "Buy";
         }
         buyBtn3.setText(btn3Text);
     }
+
     public void btnText4Value() {
-        if(item4Purchased) {
-            if(weapEquipped != 3 ) {
-                btn4Text = "Equip";
+        if (item4Purchased) {
+            if (weapEquipped != 3) {
+                btn4Text = getString(R.string.equip);
             } else {
-                btn4Text = "Equipped";
+                btn4Text = getString(R.string.equipped);
             }
         } else {
             btn4Text = "Buy";
         }
         buyBtn4.setText(btn4Text);
     }
+
     public void btnText5Value() {
-        if(item5Purchased) {
-            if(weapEquipped != 4 ) {
-                btn5Text = "Equip";
+        if (item5Purchased) {
+            if (weapEquipped != 4) {
+                btn5Text = getString(R.string.equip);
             } else {
-                btn5Text = "Equipped";
+                btn5Text = getString(R.string.equipped);
             }
         } else {
             btn5Text = "Buy";
         }
         buyBtn5.setText(btn5Text);
     }
+
     public void btnText6Value() {
-        if(item6Purchased) {
-            if(weapEquipped != 5 ) {
-                btn6Text = "Equip";
+        if (item6Purchased) {
+            if (weapEquipped != 5) {
+                btn6Text = getString(R.string.equip);
             } else {
-                btn6Text = "Equipped";
+                btn6Text = getString(R.string.equipped);
             }
         } else {
             btn6Text = "Buy";
         }
         buyBtn6.setText(btn6Text);
     }
+
     public void btnText7Value() {
-        if(item7Purchased) {
-            if(weapEquipped != 6 ) {
-                btn7Text = "Equip";
+        if (item7Purchased) {
+            if (weapEquipped != 6) {
+                btn7Text = getString(R.string.equip);
             } else {
-                btn7Text = "Equipped";
+                btn7Text = getString(R.string.equipped);
             }
         } else {
             btn7Text = "Buy";
@@ -272,6 +281,7 @@ public class ShopActivity extends AppCompatActivity {
         buyBtn7.setText(btn7Text);
     }
 
+    //Loads all the above buttons
     public void loadButtons() {
         btnText1Value();
         btnText2Value();
@@ -282,17 +292,19 @@ public class ShopActivity extends AppCompatActivity {
         btnText7Value();
     }
 
+    /* buyHandler() method grabs the button clicked through View v and performs an action based on
+    the text displayed on the button.*/
     public void buyHandler(View v) throws JSONException {
-        if(v.getId() == R.id.buyBtn1) {
-            if(btn1Text.contains("Equip")) {
+        if (v.getId() == R.id.buyBtn1) {
+            if (btn1Text.contains("Equip")) {
                 weapEquipped = 0;
             }
         }
-        if(v.getId() == R.id.buyBtn2) {
+        if (v.getId() == R.id.buyBtn2) {
             c = wd.getJSONObject(1);
             price = c.getInt("price");
-            if(btn2Text.contains("Buy")) {
-                if(goldCount >= price) {
+            if (btn2Text.contains("Buy")) {
+                if (goldCount >= price) {
                     goldCount = goldCount - price;
                     item2Purchased = true;
                     editor.putBoolean("item2Purchased", true);
@@ -301,15 +313,15 @@ public class ShopActivity extends AppCompatActivity {
                 }
                 weapEquipped = 1;
             }
-            if(btn2Text.contains("Equip")) {
+            if (btn2Text.contains("Equip")) {
                 weapEquipped = 1;
             }
         }
-        if(v.getId() == R.id.buyBtn3) {
+        if (v.getId() == R.id.buyBtn3) {
             c = wd.getJSONObject(2);
             price = c.getInt("price");
-            if(btn3Text.contains("Buy")) {
-                if(goldCount >= price) {
+            if (btn3Text.contains("Buy")) {
+                if (goldCount >= price) {
                     goldCount = goldCount - price;
                     item3Purchased = true;
                     editor.putBoolean("item3Purchased", true);
@@ -318,15 +330,15 @@ public class ShopActivity extends AppCompatActivity {
                 }
                 weapEquipped = 2;
             }
-            if(btn3Text.contains("Equip")) {
+            if (btn3Text.contains("Equip")) {
                 weapEquipped = 2;
             }
         }
-        if(v.getId() == R.id.buyBtn4) {
+        if (v.getId() == R.id.buyBtn4) {
             c = wd.getJSONObject(3);
             price = c.getInt("price");
-            if(btn4Text.contains("Buy")) {
-                if(goldCount >= price) {
+            if (btn4Text.contains("Buy")) {
+                if (goldCount >= price) {
                     goldCount = goldCount - price;
                     item4Purchased = true;
                     editor.putBoolean("item4Purchased", true);
@@ -335,15 +347,15 @@ public class ShopActivity extends AppCompatActivity {
                 }
                 weapEquipped = 3;
             }
-            if(btn3Text.contains("Equip")) {
+            if (btn3Text.contains("Equip")) {
                 weapEquipped = 3;
             }
         }
-        if(v.getId() == R.id.buyBtn5) {
+        if (v.getId() == R.id.buyBtn5) {
             c = wd.getJSONObject(4);
             price = c.getInt("price");
-            if(btn5Text.contains("Buy")) {
-                if(goldCount >= price) {
+            if (btn5Text.contains("Buy")) {
+                if (goldCount >= price) {
                     goldCount = goldCount - price;
                     item5Purchased = true;
                     editor.putBoolean("item5Purchased", true);
@@ -352,15 +364,15 @@ public class ShopActivity extends AppCompatActivity {
                 }
                 weapEquipped = 4;
             }
-            if(btn3Text.contains("Equip")) {
+            if (btn3Text.contains("Equip")) {
                 weapEquipped = 4;
             }
         }
-        if(v.getId() == R.id.buyBtn6) {
+        if (v.getId() == R.id.buyBtn6) {
             c = wd.getJSONObject(5);
             price = c.getInt("price");
-            if(btn6Text.contains("Buy")) {
-                if(goldCount >= price) {
+            if (btn6Text.contains("Buy")) {
+                if (goldCount >= price) {
                     goldCount = goldCount - price;
                     item6Purchased = true;
                     editor.putBoolean("item6Purchased", true);
@@ -369,15 +381,15 @@ public class ShopActivity extends AppCompatActivity {
                 }
                 weapEquipped = 5;
             }
-            if(btn3Text.contains("Equip")) {
+            if (btn3Text.contains("Equip")) {
                 weapEquipped = 5;
             }
         }
-        if(v.getId() == R.id.buyBtn7) {
+        if (v.getId() == R.id.buyBtn7) {
             c = wd.getJSONObject(6);
             price = c.getInt("price");
-            if(btn7Text.contains("Buy")) {
-                if(goldCount >= price) {
+            if (btn7Text.contains("Buy")) {
+                if (goldCount >= price) {
                     goldCount = goldCount - price;
                     item7Purchased = true;
                     editor.putBoolean("item7Purchased", true);
@@ -386,7 +398,7 @@ public class ShopActivity extends AppCompatActivity {
                 }
                 weapEquipped = 6;
             }
-            if(btn3Text.contains("Equip")) {
+            if (btn3Text.contains("Equip")) {
                 weapEquipped = 6;
             }
         }
@@ -396,8 +408,9 @@ public class ShopActivity extends AppCompatActivity {
         editor.putInt("weapEquipped", weapEquipped);
         editor.commit();
         save();
-
     }
+
+    //Saves player data and updates attack values based on weapon, called by buyHandler().
     public void save() throws JSONException {
         JSONObject obj = new JSONObject(loadJSON());
         JSONObject jo = obj.getJSONObject("PlayerData");
@@ -417,6 +430,7 @@ public class ShopActivity extends AppCompatActivity {
         editor.commit();
     }
 
+    //Displays error message when player has insufficient gold to purchase item
     public void showToast() {
         Context context = getApplicationContext();
         CharSequence text;

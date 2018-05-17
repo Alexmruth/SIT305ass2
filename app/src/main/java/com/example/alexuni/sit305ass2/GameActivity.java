@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,9 +22,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.Timer;
 
-import static java.lang.String.*;
+import static java.lang.String.valueOf;
 
 /*GameActivity is loaded either when the new game or continue game button is clicks on the MainActivity.
 It is used mainly as a directory within the game for the player to go to different activities. */
@@ -67,15 +66,15 @@ public class GameActivity extends AppCompatActivity {
         //Images ---------------------------------------------------
         textImage = findViewById(R.id.textImage);
         //TextViews ------------------------------------------------
-            //Player stats text
+        //Player stats text
         playerStatsText = findViewById(R.id.playerStatsText);
         playerStatsText2 = findViewById(R.id.playerStatsText2);
         playerHealthText = findViewById(R.id.playerHealthText);
         potionsText = findViewById(R.id.homePotionText);
         goldText = findViewById(R.id.homeGoldText);
-            //Upgrades text
+        //Upgrades text
         buyHealthText = findViewById(R.id.upgradeHealthText);
-            //Dialogue text
+        //Dialogue text
         textJSON = findViewById(R.id.textJSON);
         nameJSON = findViewById(R.id.nameJSON);
         //----------------------------------------------------------
@@ -119,6 +118,7 @@ public class GameActivity extends AppCompatActivity {
         }
         return json;
     }
+
     /* loadGameData() is responsible for grabbing all content from the specified JSON file and converting
     it into a string to be used as a JSONObject in the loadPlayerData() method. */
     public String loadGameData() {
@@ -137,6 +137,7 @@ public class GameActivity extends AppCompatActivity {
         }
         return json;
     }
+
     /* Method loadPlayerData() is responsible for grabbing data from both JSON and SharedPreferences files
     and assigning them to values within the activity. Only to be loaded once at beginning of activity
     to avoid resetting any values that have since changed from beginning of actvitiy. */
@@ -165,8 +166,8 @@ public class GameActivity extends AppCompatActivity {
         def = prefs.getInt("def", baseDef);
         //------------------------------------------------------------------------------------------
         updatePlayerText(); // calls method which uses this data and assigns it to TextViews etc.
-
     }
+
     // Method updatePlayerText() responsible for assigning values to TextViews and progress bars
     public void updatePlayerText() {
         playerStatsText.setText(String.format("ATT: %s-%s", valueOf(attMin), valueOf(attMax)));
@@ -178,26 +179,26 @@ public class GameActivity extends AppCompatActivity {
         potionsText.setText(valueOf(potionCount)); //current potion count
         buyHealthText.setText(String.format("Upgrade health (%s Gold)", valueOf(healthUpgradeCost))); //health upgrade text display
     }
+
     // Method onMenuBtnClick(View v) handles what to do when either the caves button or shop button is clicked
     public void onMenuBtnClick(View v) {
-        if(v.getId() == R.id.button1) { //Takes player to LevelsActivity
+        if (v.getId() == R.id.button1) { //Takes player to LevelsActivity
             Intent intent = new Intent(this, LevelsActivity.class);
             startActivity(intent);
         }
-        if(v.getId() == R.id.shopBtn) { //Takes player to ShopActivity
+        if (v.getId() == R.id.shopBtn) { //Takes player to ShopActivity
             Intent intent = new Intent(this, ShopActivity.class);
             startActivity(intent);
         }
     }
+
     // The getText() method is used to grab text from JSON objects/arrays based on specific events or values
     public void getText() throws JSONException {
-
         JSONObject obj = new JSONObject(loadJSON()); //defines JSONObject as the result of loadJSON method
         ja = obj.getJSONArray("IntroText");
-
-        if(jc == 0) {
+        if (jc == 0) {
             o = ja.getJSONObject(i);
-        } else if(jc ==1) {
+        } else if (jc == 1) {
             o = obj.getJSONObject("HenryText");
         }
         charName = o.getString("character");
@@ -207,14 +208,14 @@ public class GameActivity extends AppCompatActivity {
             nameJSON.setText(charName);
             textJSON.setText(dialogue);
             //Selects image based on what dialogue is being shown
-            if(o.getString("character").equals("Henry the Villager")) { //Henry the villager character image
+            if (o.getString("character").equals("Henry the Villager")) { //Henry the villager character image
                 textImage.setBackgroundResource(R.drawable.c_henryvillager);
             } else if (o.getString("character").equals("Archer Bones (you)")) { //Player image
                 textImage.setBackgroundResource(R.drawable.c_archerbones);
             }
         }
-
     }
+
     // nextDialogue() method is called by clicking the next button
     public void nextDialogue(View view) throws JSONException {
         if (i <= 8 && introText) { //Grabs the next line of the JSON array each time the button is clicked
@@ -231,15 +232,15 @@ public class GameActivity extends AppCompatActivity {
             textImage.setBackground(null);
         }
         //Makes LinearLayout section 1 and 3 visible
-        if(LLcount == 1){
+        if (LLcount == 1) {
             LL1.setVisibility(View.VISIBLE);
             LL3.setVisibility(View.VISIBLE);
         }
     }
+
     // Method talkHenry() doesn't have many uses yet, other than setting the textJSON to "coming soon"
     public void talkHenry(View v) {
         jc = 1;
-
         textJSON.setText(R.string.coming_soon);
         try {
             getText(); //updates text
@@ -247,6 +248,7 @@ public class GameActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     /* The fullHeal() method is called when the ImageButton for full heal is clicked. It is responsible
     for fully restoring player health */
     public void fullHeal(View v) {
@@ -262,6 +264,7 @@ public class GameActivity extends AppCompatActivity {
             showToast(); //else, will call showToast().
         }
     }
+
     // The showToast() method is called to display a toast which notifies the user that they have insufficient gold
     public void showToast() {
         Context context = getApplicationContext();
@@ -272,6 +275,7 @@ public class GameActivity extends AppCompatActivity {
         toast = Toast.makeText(context, text, duration);
         toast.show(); //displays toast
     }
+
     // The buyPotion() method is called when clicking on the buy potion ImageButton. It is responsible for buying potions.
     public void buyPotion(View view) {
         if (goldCount >= 15) { //Checks if user has enough gold
@@ -286,10 +290,11 @@ public class GameActivity extends AppCompatActivity {
             showToast();
         }
     }
+
     /* The buyHealth() method is called when the user clicks on the buy health ImageButton. It is
     responsible for increasing the maximum player health */
     public void buyHealth(View view) {
-        if(goldCount >= healthUpgradeCost) { //Checks if user has enough gold to purchase upgrade
+        if (goldCount >= healthUpgradeCost) { //Checks if user has enough gold to purchase upgrade
             goldCount = goldCount - healthUpgradeCost; //Deducts cost
             playerMaxHealth = playerMaxHealth + healthUpgrade; //Adds the health upgrade to the players max health
             healthUpgradeCost = healthUpgradeCost * 2; //Increase the cost of the upgrade
@@ -301,6 +306,7 @@ public class GameActivity extends AppCompatActivity {
             updatePlayerText(); //Update activity with the new data
         }
     }
+
     /* The onQuit() method is called by clicking on the exit button in the activity, and takes the user
     back to the home screen */
     public void onQuit(View v) {
