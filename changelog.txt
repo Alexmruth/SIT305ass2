@@ -1,15 +1,19 @@
 20/03/18 - 
 - Created game and home activity.
 - UI implementations.
+~ Making good progress in relation to my first milestone of finishing basic UI and functionality.
 26/03/18 - 
 - Functional buttons on home screen.
 - Beginner stages of functional JSON.
+~ Mostly completed all aspects of first milestone on time.
 27/03/18 - 
 - Continued progress on JSON.
+~ Slow but steady content implementation.
 30/03/18 - 
 - Creating switch cases to handle what text to display when.
 - Working JSON statement to load JSON content.
 - beginning to expand content on JSON file.
+~ Adding lots of content, doing okay in time with milestone.
 07/04/18 -
 - Fixed crash issue when loading game activity.
 09/04/18 - 
@@ -18,6 +22,7 @@
 11/04/18 -
 - Working function which calls JSON and appends to text view depending on variables.
 - A 'next' button that loads the next set of text.
+~ Significant progress on 'must have' features.
 12/04/18 - 
 - Removed table view for game activity.
 13/04/18 - 
@@ -25,10 +30,11 @@
 - Added levels activity to accomodate for levels directory.
 - Expanded on dialogue.json.
 - Updated readme.
+~ Image assets uploaded later than intended by milestones.
 14/04/18 - 
 - Completed introduction conversation.
 - Development on text switch statement.
-- GUI development and improvements.
+- UI development and improvements.
 15/04/18 - 
 - Created LevelOne activity and enemies.json file.
 - UI development.
@@ -37,6 +43,7 @@
 - Enemy and player data updated according to attacks.
 - Step forward feature and corresponding text updated.
 - Working on health bar and spawn chances.
+~ Basis for battle mechanic major feature added, slow progress so far
 17/04/18 - 
 - Made JSON file structure and reading data from it far more efficient.
 - Removed switch statement to handle dialogue.
@@ -45,6 +52,7 @@
 - Created getToast method to handle toast text upon dealing/receiving damage.
 - Changed enemy attack complexity.
 - Neatened code.
+~ Lots of development on must have features, may have them done by deadline
 20/04/18 - 
 - Progression on battle mechanics and JSON files.
 21/04/18 - 
@@ -64,6 +72,7 @@
 - Game saves user gold upon exiting level at the end.
 - If user tries to exit before level is finished, a pop up warns the user their progress will not be saved.
 - Added more values to Shared Prefs.
+~ By now I have completed most features within the deadline
 11/05/18 -
 - JSON data progression.
 - Multi level development using mostly the same code for each level.
